@@ -28,6 +28,6 @@ app.use(require("./routes/auth/register"));
 app.use(require("./routes/auth/login"));
 
 //? usuarios
-app.use(require("./routes/users"));
+app.use(require("./routes/users/users"));
 
 //! RECUERDEN SEPARAR ESTAS RUTAS POR MÓDULO, PONGANLE EL COMENTARIO PARA EL MÓDULO Y DESPUES LAS RUTAS
