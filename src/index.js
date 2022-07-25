@@ -23,3 +23,4 @@ app.listen(app.get("port"), () => {
 app.use(require("./routes/initialPage"));
 
 app.use(require("./routes/users"));
+app.use(require("./routes/auth/register"));
