@@ -18,6 +18,7 @@ router.post("/auth/login", async (req, res) => {
             res.json({
               status: "Login exitoso",
               statusCode: 200,
+              userId: userRegistered[0].id,
               token: token,
             });
           }
