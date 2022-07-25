@@ -24,3 +24,4 @@ app.use(require("./routes/initialPage"));
 
 app.use(require("./routes/users"));
 app.use(require("./routes/auth/register"));
+app.use(require("./routes/auth/login"));
