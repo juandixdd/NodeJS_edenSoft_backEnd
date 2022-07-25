@@ -20,8 +20,14 @@ app.listen(app.get("port"), () => {
 }); //poner en el puerto 3000
 
 //estas son las rutas para hacer uso de cada una de las tablas
+//? Página inicial
 app.use(require("./routes/initialPage"));
 
-app.use(require("./routes/users"));
+//? Autentificación
 app.use(require("./routes/auth/register"));
 app.use(require("./routes/auth/login"));
+
+//? usuarios
+app.use(require("./routes/users"));
+
+//! RECUERDEN SEPARAR ESTAS RUTAS POR MÓDULO, PONGANLE EL COMENTARIO PARA EL MÓDULO Y DESPUES LAS RUTAS
