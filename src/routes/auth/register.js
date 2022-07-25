@@ -43,7 +43,26 @@ router.post("/register", (req, res) => {
           });
         } else {
           //* Si no hay usuarios registrados con el id, lo deja crear
-          createUser();
+          const { email } = req.body;
+          mySqlConnection.query(
+            "SELECT * FROM users WHERE email = ?",
+            [email],
+            (err, rows, fields) => {
+              if (!err) {
+                if (rows.length >= 1) {
+                  res.json({
+                    status: "Ya hay un usuario registrado con ese email",
+                    statusCode: 403,
+                  });
+                } else {
+                  //* Si no hay usuarios registrados con el email, lo deja crear
+                  createUser();
+                }
+              } else {
+                console.log(err);
+              }
+            }
+          );
         }
       } else {
         console.log(err);
