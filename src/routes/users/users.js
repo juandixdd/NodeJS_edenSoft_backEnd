@@ -65,7 +65,7 @@ router.post("/users", (req, res) => {
       if (!err) {
         if (rows.length >= 1) {
           res.json({
-            status: "Ya hay un usuario registrado con ese id",
+            status: "Ya hay un usuario registrado con esa cédula",
             statusCode: 403,
           });
         } else {
