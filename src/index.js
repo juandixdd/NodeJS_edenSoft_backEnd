@@ -15,8 +15,10 @@ app.use(
 );
 
 app.listen(app.get("port"), () => {
-  console.log("*****************************************");
-  console.log("Servidor establecido en el puerto:", app.get("port"));
+  console.log("")
+  console.log("")
+  console.log("*****************************************************");
+  console.log("*   🖥️  Servidor establecido en el puerto:", app.get("port") , "🖥️   *");
 }); //poner en el puerto 3000
 
 //estas son las rutas para hacer uso de cada una de las tablas

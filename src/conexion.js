@@ -10,10 +10,15 @@ const mySqlConnection = mysql.createConnection({
 mySqlConnection.connect(function (err) {
   if (err) {
     console.log(err);
-    console.log("Error de conexión a la base de datos");
+    console.log("*************************************************");
+    console.log("*   🔴 Error de conexión a la base de datos 🔴  *");
+    console.log("*  Asegúrese de tener Xampp o MySQL encendidos  *");
+    console.log("*************************************************");
     return;
   } else {
-    console.log("Conexión a la base de datos establecida");
+    console.log("")
+    console.log("*   🟢 Conexión a la base de datos establecida 🟢   *");
+    console.log("*****************************************************");
   }
 });
 
