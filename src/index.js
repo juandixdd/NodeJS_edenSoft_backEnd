@@ -32,4 +32,7 @@ app.use(require("./routes/auth/login"));
 //? usuarios
 app.use(require("./routes/users/users"));
 
+//? productos
+app.use(require("./routes/productos/productos/productos"))
+
 //! RECUERDEN SEPARAR ESTAS RUTAS POR MÓDULO, PONGANLE EL COMENTARIO PARA EL MÓDULO Y DESPUES LAS RUTAS
