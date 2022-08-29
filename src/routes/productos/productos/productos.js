@@ -4,7 +4,9 @@ const mySqlConnection = require("../../../conexion");
 
 //? Traer todos los productos =====================================================================================
 router.get("/productos", (req, res) => {
-  mySqlConnection.query("SELECT * FROM productos", (err, rows, fields) => {
+  const query =
+    "select p.*, c.nombre as 'nombre_categoria' from productos p join categorias c on c.id = p.categoria ";
+  mySqlConnection.query(query, (err, rows, fields) => {
     if (!err) {
       res.send(rows);
     } else {
