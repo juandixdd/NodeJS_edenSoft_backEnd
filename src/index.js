@@ -35,4 +35,7 @@ app.use(require("./routes/users/users"));
 //? productos
 app.use(require("./routes/productos/productos/productos"))
 
+//? categorias
+app.use(require("./routes/productos/categorias/categorias"))
+
 //! RECUERDEN SEPARAR ESTAS RUTAS POR MÓDULO, PONGANLE EL COMENTARIO PARA EL MÓDULO Y DESPUES LAS RUTAS
