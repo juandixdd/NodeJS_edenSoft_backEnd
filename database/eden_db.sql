@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-07-2022 a las 12:13:17
+-- Tiempo de generación: 29-08-2022 a las 20:39:53
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -20,6 +20,49 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `eden_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categorias`
+--
+
+CREATE TABLE `categorias` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(300) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
+(3, 'Bebidas', 1),
+(4, 'Pan', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productos`
+--
+
+CREATE TABLE `productos` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `precio` float NOT NULL,
+  `categoria` int(11) NOT NULL,
+  `imagen` varchar(1000) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `nombre`, `precio`, `categoria`, `imagen`, `estado`) VALUES
+(12, 'Pan de leche', 300, 4, 'https://www.recetasderechupete.com/wp-content/uploads/2020/04/Pan-de-leche-japon%C3%A9s.jpg', 1),
+(14, 'Coca Cola', 2000, 3, 'https://coca-colafemsa.com/wp-content/uploads/2019/11/2.png', 1);
 
 -- --------------------------------------------------------
 
@@ -42,19 +85,45 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `adress`, `phone`) VALUES
-(111, 'Juanito', 'Alimaña', 'vegano@gmail.com', '', 'calle 13', '123321'),
-(222, 'Pedro', 'Navaja', 'vegano@gmail.com', '111', 'calle 13', '123321'),
-(333, 'Josesito', 'Sin Huevos', 'vegano@gmail.com', '', 'calle 13', '123321');
+(11111, 'JuanDi', 'Arteaga', 'email@email.com', '$2b$10$tjL6FGceaaKIoPk.zU5xNe6nGaKhncNQ4gNT9EBsQzRM5TQen0eBS', '123123', '123123123');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
