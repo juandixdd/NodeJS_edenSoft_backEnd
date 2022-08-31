@@ -18,8 +18,9 @@ router.get("/productos", (req, res) => {
 //? Traer a un producto por id =====================================================================================
 router.get("/productos/:id", (req, res) => {
   const { id } = req.params;
+  query = "SELECT p.*, c.nombre as 'nombre_categoria' FROM productos p join categorias c on c.id = p.categoria WHERE p.id = ?"
   mySqlConnection.query(
-    "SELECT * FROM productos WHERE id = ?",
+    query,
     [id],
     (err, rows, fields) => {
       if (!err) {

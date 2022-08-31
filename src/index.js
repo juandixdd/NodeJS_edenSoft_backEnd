@@ -31,6 +31,7 @@ app.use(require("./routes/auth/login"));
 
 //? Configuracion
 app.use(require("./routes/configuracion/permisos/permisos"));
+app.use(require("./routes/configuracion/roles/roles"));
 
 //? usuarios
 app.use(require("./routes/users/users"));
