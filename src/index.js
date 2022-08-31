@@ -29,6 +29,9 @@ app.use(require("./routes/initialPage"));
 app.use(require("./routes/auth/register"));
 app.use(require("./routes/auth/login"));
 
+//? Configuracion
+app.use(require("./routes/configuracion/permisos/permisos"));
+
 //? usuarios
 app.use(require("./routes/users/users"));
 
