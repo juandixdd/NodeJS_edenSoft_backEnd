@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 31, 2022 at 04:59 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.19
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 01-09-2022 a las 19:40:57
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `eden_db`
+-- Base de datos: `eden_db`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categorias`
+-- Estructura de tabla para la tabla `categorias`
 --
 
 CREATE TABLE `categorias` (
@@ -34,7 +34,7 @@ CREATE TABLE `categorias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `categorias`
+-- Volcado de datos para la tabla `categorias`
 --
 
 INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
@@ -44,7 +44,31 @@ INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permisos`
+-- Estructura de tabla para la tabla `cotizacion`
+--
+
+CREATE TABLE `cotizacion` (
+  `id_cotizacion` int(11) NOT NULL,
+  `id_cliente_documento` int(11) NOT NULL,
+  `precio_total` float NOT NULL,
+  `fecha_registro` date NOT NULL,
+  `fecha_entrega` date NOT NULL,
+  `estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cotizacion`
+--
+
+INSERT INTO `cotizacion` (`id_cotizacion`, `id_cliente_documento`, `precio_total`, `fecha_registro`, `fecha_entrega`, `estado`) VALUES
+(100, 11111, 100000, '0000-00-00', '0000-00-00', 1),
+(101, 11111, 20000, '2022-08-30', '2022-09-01', 1),
+(102, 22222, 20000, '2022-08-30', '2022-09-01', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `permisos`
 --
 
 CREATE TABLE `permisos` (
@@ -53,7 +77,7 @@ CREATE TABLE `permisos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `permisos`
+-- Volcado de datos para la tabla `permisos`
 --
 
 INSERT INTO `permisos` (`id`, `nombre`) VALUES
@@ -62,7 +86,7 @@ INSERT INTO `permisos` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productos`
+-- Estructura de tabla para la tabla `productos`
 --
 
 CREATE TABLE `productos` (
@@ -75,7 +99,7 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `productos`
+-- Volcado de datos para la tabla `productos`
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `precio`, `categoria`, `imagen`, `estado`) VALUES
@@ -85,7 +109,26 @@ INSERT INTO `productos` (`id`, `nombre`, `precio`, `categoria`, `imagen`, `estad
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `producto_cotizacion`
+--
+
+CREATE TABLE `producto_cotizacion` (
+  `id_producto_cotizacion` int(11) NOT NULL,
+  `id_cotizacion` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `producto_cotizacion`
+--
+
+INSERT INTO `producto_cotizacion` (`id_producto_cotizacion`, `id_cotizacion`, `id_producto`) VALUES
+(2, 102, 14);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
 --
 
 CREATE TABLE `users` (
@@ -100,58 +143,70 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `users`
+-- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `adress`, `phone`, `rol`) VALUES
 (11111, 'JuanDi', 'Arteaga', 'email@email.com', '$2b$10$tjL6FGceaaKIoPk.zU5xNe6nGaKhncNQ4gNT9EBsQzRM5TQen0eBS', '123123', '123123123', 0);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `categorias`
+-- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `permisos`
+-- Indices de la tabla `cotizacion`
+--
+ALTER TABLE `cotizacion`
+  ADD PRIMARY KEY (`id_cotizacion`);
+
+--
+-- Indices de la tabla `permisos`
 --
 ALTER TABLE `permisos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `productos`
+-- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indices de la tabla `producto_cotizacion`
+--
+ALTER TABLE `producto_cotizacion`
+  ADD PRIMARY KEY (`id_producto_cotizacion`);
+
+--
+-- Indices de la tabla `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `categorias`
+-- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `permisos`
+-- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `productos`
+-- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;

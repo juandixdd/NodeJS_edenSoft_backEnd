@@ -44,4 +44,8 @@ app.use(require("./routes/productos/productos/productos"))
 //? categorias
 app.use(require("./routes/productos/categorias/categorias"))
 
+//? cotizacion
+app.use(require("./routes/cotizacion/cotizacion/cotizacion"))
+app.use(require("./routes/cotizacion/producto_cotizacion/producto_cotizacion"))
+
 //! RECUERDEN SEPARAR ESTAS RUTAS POR MÓDULO, PONGANLE EL COMENTARIO PARA EL MÓDULO Y DESPUES LAS RUTAS
