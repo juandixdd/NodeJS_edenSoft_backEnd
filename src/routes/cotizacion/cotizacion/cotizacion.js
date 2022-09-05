@@ -51,7 +51,7 @@ router.post("/cotizacion", (req, res) => {
       ],
       (err, rows, fields) => {
         if (!err) {
-          res.json({ status: "Cotizacion creada", statusCode: 200 });
+          res.json({ status: "Cotizacion creada", statusCode: 200 }); 
         } else {
           console.log(err);
         }

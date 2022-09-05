@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-09-2022 a las 19:40:57
+-- Tiempo de generación: 05-09-2022 a las 13:48:29
 -- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -56,15 +56,6 @@ CREATE TABLE `cotizacion` (
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `cotizacion`
---
-
-INSERT INTO `cotizacion` (`id_cotizacion`, `id_cliente_documento`, `precio_total`, `fecha_registro`, `fecha_entrega`, `estado`) VALUES
-(100, 11111, 100000, '0000-00-00', '0000-00-00', 1),
-(101, 11111, 20000, '2022-08-30', '2022-09-01', 1),
-(102, 22222, 20000, '2022-08-30', '2022-09-01', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -109,21 +100,40 @@ INSERT INTO `productos` (`id`, `nombre`, `precio`, `categoria`, `imagen`, `estad
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `producto_cotizacion`
+-- Estructura de tabla para la tabla `roles`
 --
 
-CREATE TABLE `producto_cotizacion` (
-  `id_producto_cotizacion` int(11) NOT NULL,
-  `id_cotizacion` int(11) NOT NULL,
-  `id_producto` int(11) NOT NULL
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(300) NOT NULL,
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `producto_cotizacion`
+-- Volcado de datos para la tabla `roles`
 --
 
-INSERT INTO `producto_cotizacion` (`id_producto_cotizacion`, `id_cotizacion`, `id_producto`) VALUES
-(2, 102, 14);
+INSERT INTO `roles` (`id`, `nombre`, `estado`) VALUES
+(1, 'admin', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rol_permisos`
+--
+
+CREATE TABLE `rol_permisos` (
+  `id` int(11) NOT NULL,
+  `id_rol` int(11) NOT NULL,
+  `id_permiso` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `rol_permisos`
+--
+
+INSERT INTO `rol_permisos` (`id`, `id_rol`, `id_permiso`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -178,10 +188,16 @@ ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `producto_cotizacion`
+-- Indices de la tabla `roles`
 --
-ALTER TABLE `producto_cotizacion`
-  ADD PRIMARY KEY (`id_producto_cotizacion`);
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `rol_permisos`
+--
+ALTER TABLE `rol_permisos`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `users`
@@ -210,6 +226,18 @@ ALTER TABLE `permisos`
 --
 ALTER TABLE `productos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de la tabla `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `rol_permisos`
+--
+ALTER TABLE `rol_permisos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
