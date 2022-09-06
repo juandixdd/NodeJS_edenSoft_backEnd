@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-09-2022 a las 13:48:29
+-- Tiempo de generación: 06-09-2022 a las 19:10:07
 -- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.29
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -64,15 +64,19 @@ CREATE TABLE `cotizacion` (
 
 CREATE TABLE `permisos` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(300) NOT NULL
+  `nombre` varchar(300) NOT NULL,
+  `modulo` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `permisos`
 --
 
-INSERT INTO `permisos` (`id`, `nombre`) VALUES
-(2, 'Editar Usuario');
+INSERT INTO `permisos` (`id`, `nombre`, `modulo`) VALUES
+(2, 'Editar Usuario', 'Usuarios'),
+(3, 'Crear Usuario', 'Usuarios'),
+(4, 'Crear venta', 'Ventas'),
+(5, 'Editar pedido', 'Pedidos');
 
 -- --------------------------------------------------------
 
@@ -114,7 +118,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `nombre`, `estado`) VALUES
-(1, 'admin', 1);
+(1, 'admin', 1),
+(3, 'cliente', 1),
+(4, 'secretaria', 1);
 
 -- --------------------------------------------------------
 
@@ -133,7 +139,11 @@ CREATE TABLE `rol_permisos` (
 --
 
 INSERT INTO `rol_permisos` (`id`, `id_rol`, `id_permiso`) VALUES
-(1, 1, 1);
+(1, 1, 2),
+(2, 4, 4),
+(3, 3, 5),
+(4, 3, 4),
+(5, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -219,7 +229,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -231,13 +241,13 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `rol_permisos`
 --
 ALTER TABLE `rol_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
