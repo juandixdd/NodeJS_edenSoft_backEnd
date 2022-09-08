@@ -34,10 +34,10 @@ router.get("/permisos/:id", (req, res) => {
 router.post("/permisos", (req, res) => {
   //* Se define función para creación del permisos
   function createPermisos() {
-    const { nombre } = req.body;
+    const { nombre, modulo } = req.body;
     mySqlConnection.query(
-      "INSERT INTO permisos (nombre) VALUES (?)",
-      [nombre],
+      "INSERT INTO permisos (nombre, modulo) VALUES (?,?)",
+      [nombre, modulo],
       (err, rows, fields) => {
         if (!err) {
           res.json({ status: "Permiso creado", statusCode: 200 });
@@ -53,11 +53,11 @@ router.post("/permisos", (req, res) => {
 
 //?Editar un producto =====================================================================================
 router.put("/permisos/:id", (req, res) => {
-  const { nombre } = req.body;
+  const { nombre,modulo } = req.body;
   const { id } = req.params;
   mySqlConnection.query(
-    "UPDATE permisos SET nombre = ?  WHERE id = ?",
-    [nombre, id],
+    "UPDATE permisos SET nombre = ?, modulo = ?  WHERE id = ?",
+    [nombre,modulo, id],
     (err, rows, fields) => {
       if (!err) {
         res.json({ status: "Permiso actualizado" });

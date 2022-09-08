@@ -33,7 +33,7 @@ router.post("/roles", (req, res) => {
   function createRol() {
     const { nombre, estado } = req.body;
     mySqlConnection.query(
-      "INSERT INTO roles (nombre,estado) VALUES (?,?)",
+      "INSERT INTO roles (nombre,estado) VALUES (?,1)",
       [nombre, estado],
       (err, rows, fields) => {
         if (!err) {
