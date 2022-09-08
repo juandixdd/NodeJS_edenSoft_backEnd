@@ -37,7 +37,11 @@ router.post("/roles", (req, res) => {
       [nombre, estado],
       (err, rows, fields) => {
         if (!err) {
-          res.json({ status: "rol creado", statusCode: 200 });
+          res.json({
+            status: "rol creado",
+            statusCode: 200,
+            idRol: rows.insertId
+          });
         } else {
           console.log(err);
         }
