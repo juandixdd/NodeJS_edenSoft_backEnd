@@ -86,4 +86,22 @@ router.delete("/productos/:id", (req, res) => {
   );
 });
 
+
+//? Traer todos los en un objeto =====================================================================================
+router.get("/productos/object/:id", (req, res) => {
+  const { id } = req.params;
+  query = "SELECT p.*, c.nombre as 'nombre_categoria' FROM productos p join categorias c on c.id = p.categoria WHERE p.id = ?"
+  mySqlConnection.query(
+    query,
+    [id],
+    (err, rows, fields) => {
+      if (!err) {
+        res.send(rows[0]);
+      } else {
+        console.log(err);
+      }
+    }
+  );
+});
+
 module.exports = router;
