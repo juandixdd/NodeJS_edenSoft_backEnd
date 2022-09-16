@@ -15,7 +15,7 @@ router.get("/rol-permisos", (req, res) => {
     });
   });
 
-  //? Traer a un permisos por id =====================================================================================
+  //? Traer a un rol_permisos por id =====================================================================================
 router.get("/rol-permisos/:id", (req, res) => {
     const { id } = req.params;
     mySqlConnection.query(
@@ -31,7 +31,7 @@ router.get("/rol-permisos/:id", (req, res) => {
     );
   });
 
-  //? Crear un permiso ============================================================================
+  //? Crear un rol_permiso ============================================================================
 router.post("/rol-permisos", (req, res) => {
     //* Se define función para creación del rol_permisos
     function createRolPermisos() {
@@ -69,7 +69,7 @@ router.put("/rol-permisos/:id", (req, res) => {
     );
   });
 
-  //?Eliminar un Permiso =====================================================================================
+  //?Eliminar un rol_Permiso =====================================================================================
 router.delete("/rol-permisos/:id", (req, res) => {
     const { id } = req.params;
     mySqlConnection.query(
