@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-09-2022 a las 19:10:07
+-- Tiempo de generación: 16-09-2022 a las 19:10:01
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -44,17 +44,67 @@ INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cotizacion`
+-- Estructura de tabla para la tabla `detalle_pedido`
 --
 
-CREATE TABLE `cotizacion` (
-  `id_cotizacion` int(11) NOT NULL,
-  `id_cliente_documento` int(11) NOT NULL,
-  `precio_total` float NOT NULL,
-  `fecha_registro` date NOT NULL,
-  `fecha_entrega` date NOT NULL,
-  `estado` tinyint(1) NOT NULL
+CREATE TABLE `detalle_pedido` (
+  `id_detalle_pedido` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `id_pedido` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio_unitario` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `detalle_pedido`
+--
+
+INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `cantidad`, `precio_unitario`) VALUES
+(1, 12, 1, 4, 2000),
+(2, 12, 20, 5, 300),
+(3, 14, 20, 5, 2000);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `id_pedido` int(11) NOT NULL,
+  `id_usuario_documento` int(11) NOT NULL,
+  `tipo` varchar(100) NOT NULL,
+  `fecha_registro` date NOT NULL,
+  `precio_total` float NOT NULL,
+  `estado` int(11) NOT NULL,
+  `fecha_entrega` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`id_pedido`, `id_usuario_documento`, `tipo`, `fecha_registro`, `precio_total`, `estado`, `fecha_entrega`) VALUES
+(1, 11111, 'cotizacion', '2022-09-16', 20000, 1, '2022-09-17'),
+(2, 11111, 'Cotizacion', '2022-09-16', 1500, 1, '2022-09-17'),
+(3, 11111, 'Cotizacion', '2022-09-16', 2000, 1, '2022-09-17'),
+(4, 11111, 'Cotizacion', '2022-09-16', 3500, 1, '2022-09-17'),
+(5, 11111, 'Cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(6, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(7, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(8, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(9, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(10, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(11, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(12, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(13, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(14, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(15, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(16, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(17, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(18, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(19, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(20, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17');
 
 -- --------------------------------------------------------
 
@@ -180,10 +230,16 @@ ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `cotizacion`
+-- Indices de la tabla `detalle_pedido`
 --
-ALTER TABLE `cotizacion`
-  ADD PRIMARY KEY (`id_cotizacion`);
+ALTER TABLE `detalle_pedido`
+  ADD PRIMARY KEY (`id_detalle_pedido`);
+
+--
+-- Indices de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id_pedido`);
 
 --
 -- Indices de la tabla `permisos`
@@ -224,6 +280,18 @@ ALTER TABLE `users`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_pedido`
+--
+ALTER TABLE `detalle_pedido`
+  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`

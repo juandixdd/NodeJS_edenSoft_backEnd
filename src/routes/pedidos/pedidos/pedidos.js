@@ -42,7 +42,7 @@ router.post("/pedidos", (req, res) => {
         [id_usuario_documento, tipo, fecha_registro, precio_total, estado, fecha_entrega],
         (err, rows, fields) => {
           if (!err) {
-            res.json({ status: "pedido creado", statusCode: 200 });
+            res.json({ status: "pedido creado", statusCode: 200, pedidoId: rows.insertId });
           } else {
             console.log(err);
           }
