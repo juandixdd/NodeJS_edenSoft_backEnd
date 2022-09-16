@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-09-2022 a las 19:10:01
+-- Tiempo de generación: 17-09-2022 a las 00:28:53
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -39,7 +39,9 @@ CREATE TABLE `categorias` (
 
 INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
 (3, 'Bebidas', 1),
-(4, 'Pan', 1);
+(4, 'Pan', 1),
+(5, 'Arepas', 0),
+(6, 'Parva', 0);
 
 -- --------------------------------------------------------
 
@@ -62,7 +64,55 @@ CREATE TABLE `detalle_pedido` (
 INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `cantidad`, `precio_unitario`) VALUES
 (1, 12, 1, 4, 2000),
 (2, 12, 20, 5, 300),
-(3, 14, 20, 5, 2000);
+(3, 14, 20, 5, 2000),
+(4, 14, 21, 5, 2000),
+(5, 12, 21, 4, 300),
+(6, 14, 22, 5, 2000),
+(7, 12, 22, 5, 300),
+(8, 14, 26, 5, 2000),
+(9, 12, 26, 5, 300),
+(10, 14, 27, 5, 2000),
+(11, 12, 27, 5, 300),
+(12, 14, 28, 5, 2000),
+(13, 12, 28, 5, 300),
+(14, 14, 29, 5, 2000),
+(15, 12, 29, 5, 300),
+(16, 14, 30, 5, 2000),
+(17, 12, 30, 5, 300),
+(18, 14, 31, 5, 2000),
+(19, 12, 31, 5, 300),
+(20, 14, 32, 5, 2000),
+(21, 12, 32, 5, 300),
+(22, 14, 33, 5, 2000),
+(23, 12, 33, 5, 300),
+(24, 14, 34, 5, 2000),
+(25, 12, 34, 5, 300),
+(26, 14, 35, 5, 2000),
+(27, 12, 35, 5, 300),
+(28, 14, 36, 5, 2000),
+(29, 12, 36, 5, 300),
+(30, 14, 37, 5, 2000),
+(31, 12, 37, 5, 300),
+(32, 14, 38, 5, 2000),
+(33, 12, 38, 4, 300),
+(34, 14, 39, 5, 2000),
+(35, 12, 39, 4, 300),
+(36, 14, 40, 5, 2000),
+(37, 12, 40, 4, 300),
+(38, 14, 41, 5, 2000),
+(39, 12, 41, 4, 300),
+(40, 14, 42, 5, 2000),
+(41, 12, 42, 4, 300),
+(42, 14, 43, 5, 2000),
+(43, 12, 43, 4, 300),
+(44, 14, 44, 5, 2000),
+(45, 12, 44, 8, 300),
+(46, 14, 45, 5, 2000),
+(47, 12, 45, 8, 300),
+(48, 14, 46, 5, 2000),
+(49, 12, 46, 8, 300),
+(50, 14, 47, 5, 2000),
+(51, 12, 47, 8, 300);
 
 -- --------------------------------------------------------
 
@@ -104,7 +154,34 @@ INSERT INTO `pedidos` (`id_pedido`, `id_usuario_documento`, `tipo`, `fecha_regis
 (17, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
 (18, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
 (19, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(20, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17');
+(20, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(21, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
+(22, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
+(23, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(24, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(25, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(26, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(27, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(28, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(29, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(30, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(31, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(32, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(33, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(34, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(35, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(36, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(37, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
+(38, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
+(39, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
+(40, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
+(41, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
+(42, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
+(43, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
+(44, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
+(45, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
+(46, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
+(47, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17');
 
 -- --------------------------------------------------------
 
@@ -148,8 +225,10 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `precio`, `categoria`, `imagen`, `estado`) VALUES
-(12, 'Pan de leche', 300, 4, 'https://www.recetasderechupete.com/wp-content/uploads/2020/04/Pan-de-leche-japon%C3%A9s.jpg', 1),
-(14, 'Coca Cola', 2000, 3, 'https://coca-colafemsa.com/wp-content/uploads/2019/11/2.png', 1);
+(12, 'Pan de leche', 300, 4, 'https://cdn-icons-png.flaticon.com/512/883/883561.png', 1),
+(14, 'Coca Cola', 2000, 3, 'https://cdn-icons-png.flaticon.com/512/2405/2405447.png', 1),
+(15, 'Arepa de huevo', 3500, 5, 'https://cdn-icons-png.flaticon.com/512/6724/6724574.png', 1),
+(16, 'Buñuelos', 1000, 6, 'https://cdn-icons-png.flaticon.com/512/6313/6313568.png', 1);
 
 -- --------------------------------------------------------
 
@@ -279,19 +358,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -303,7 +382,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
