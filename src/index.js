@@ -51,5 +51,7 @@ app.use(require("./routes/pedidos/detalle_pedido/detalle_pedido"))
 //? Clientes informativos
 app.use(require("./routes/ventas/clientes_informativos/clientes_informativos"))
 
+//? Ventas locales
+app.use(require("./routes/ventas/venta_local/venta_local"))
 
 //! RECUERDEN SEPARAR ESTAS RUTAS POR MÓDULO, PONGANLE EL COMENTARIO PARA EL MÓDULO Y DESPUES LAS RUTAS
