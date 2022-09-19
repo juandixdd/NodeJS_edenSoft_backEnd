@@ -22,7 +22,14 @@ router.get("/users/:id", (req, res) => {
     [id],
     (err, rows, fields) => {
       if (!err) {
-        res.send(rows);
+        if (rows.length > 0) {
+          res.send(rows);
+        } else {
+          res.send({
+            status: 400,
+            message: "No se ha encontrado el usuario",
+          });
+        }
       } else {
         console.log(err);
       }
