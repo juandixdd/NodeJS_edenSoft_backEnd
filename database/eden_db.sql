@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-09-2022 a las 00:28:53
+-- Tiempo de generación: 19-09-2022 a las 23:12:45
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -42,6 +42,30 @@ INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
 (4, 'Pan', 1),
 (5, 'Arepas', 0),
 (6, 'Parva', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clientes_informativos`
+--
+
+CREATE TABLE `clientes_informativos` (
+  `id_cliente_documento` int(11) NOT NULL,
+  `nombre` varchar(300) NOT NULL,
+  `apellido` varchar(300) NOT NULL,
+  `telefono` int(11) NOT NULL,
+  `id_usuario_documento` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `clientes_informativos`
+--
+
+INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido`, `telefono`, `id_usuario_documento`) VALUES
+(111, 'Juan', 'Arteaga', 1111, NULL),
+(222, 'Jhon', 'Dhoe', 11111111, NULL),
+(333, 'Jhon', 'Dhoe', 11111111, NULL),
+(444, 'Jhon', 'Dhoe', 11111111, 999);
 
 -- --------------------------------------------------------
 
@@ -112,7 +136,22 @@ INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `
 (48, 14, 46, 5, 2000),
 (49, 12, 46, 8, 300),
 (50, 14, 47, 5, 2000),
-(51, 12, 47, 8, 300);
+(51, 12, 47, 8, 300),
+(52, 14, 48, 10, 2000);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_venta`
+--
+
+CREATE TABLE `detalle_venta` (
+  `id_detalle_venta` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `id_venta` int(11) NOT NULL,
+  `Cantidad` int(11) NOT NULL,
+  `precio_unitario` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -181,7 +220,8 @@ INSERT INTO `pedidos` (`id_pedido`, `id_usuario_documento`, `tipo`, `fecha_regis
 (44, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
 (45, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
 (46, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
-(47, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17');
+(47, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
+(48, 11111, 'cotizacion', '2022-09-17', 20000, 1, '2022-09-17');
 
 -- --------------------------------------------------------
 
@@ -298,6 +338,27 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `adress`, `phone`, `rol`) VALUES
 (11111, 'JuanDi', 'Arteaga', 'email@email.com', '$2b$10$tjL6FGceaaKIoPk.zU5xNe6nGaKhncNQ4gNT9EBsQzRM5TQen0eBS', '123123', '123123123', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `venta_local`
+--
+
+CREATE TABLE `venta_local` (
+  `id_venta` int(11) NOT NULL,
+  `id_cliente_documento` int(11) NOT NULL,
+  `fecha_registro` date NOT NULL,
+  `precio_total` float NOT NULL,
+  `estado` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `venta_local`
+--
+
+INSERT INTO `venta_local` (`id_venta`, `id_cliente_documento`, `fecha_registro`, `precio_total`, `estado`) VALUES
+(1, 444, '2022-09-19', 200000, 'Activo');
+
 --
 -- Índices para tablas volcadas
 --
@@ -309,10 +370,22 @@ ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `clientes_informativos`
+--
+ALTER TABLE `clientes_informativos`
+  ADD PRIMARY KEY (`id_cliente_documento`);
+
+--
 -- Indices de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
   ADD PRIMARY KEY (`id_detalle_pedido`);
+
+--
+-- Indices de la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  ADD PRIMARY KEY (`id_detalle_venta`);
 
 --
 -- Indices de la tabla `pedidos`
@@ -351,6 +424,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `venta_local`
+--
+ALTER TABLE `venta_local`
+  ADD PRIMARY KEY (`id_venta`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -361,16 +440,28 @@ ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `clientes_informativos`
+--
+ALTER TABLE `clientes_informativos`
+  MODIFY `id_cliente_documento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=445;
+
+--
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -395,6 +486,12 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `rol_permisos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `venta_local`
+--
+ALTER TABLE `venta_local`
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
