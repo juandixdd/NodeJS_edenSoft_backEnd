@@ -48,4 +48,8 @@ app.use(require("./routes/productos/categorias/categorias"))
 app.use(require("./routes/pedidos/pedidos/pedidos"))
 app.use(require("./routes/pedidos/detalle_pedido/detalle_pedido"))
 
+//? Clientes informativos
+app.use(require("./routes/ventas/clientes_informativos/clientes_informativos"))
+
+
 //! RECUERDEN SEPARAR ESTAS RUTAS POR MÓDULO, PONGANLE EL COMENTARIO PARA EL MÓDULO Y DESPUES LAS RUTAS
