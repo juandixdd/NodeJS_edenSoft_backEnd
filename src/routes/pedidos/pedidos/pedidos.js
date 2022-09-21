@@ -27,6 +27,34 @@ router.get("/pedidos/:id", (req, res) => {
   });
 });
 
+//? Traer cotizaciones =====================================================================================
+router.get("/cotizaciones", (req, res) => {
+  const { id } = req.params;
+  query = "select * from pedidos where tipo = 'cotizacion' ";
+  mySqlConnection.query(query, [id], (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    } else {
+      console.log(err);
+    }
+  });
+});
+
+//? traer cotizacion por id =====================================================================================
+router.get("/cotizaciones/:id", (req, res) => {
+  const { id } = req.params;
+  (query =
+    "select p.*, dp.id_pedido as 'id_detalle', dp.id_producto, pr.nombre, dp.cantidad, dp.precio_unitario  from pedidos p join detalle_pedido dp on dp.id_pedido = p.id_pedido join productos pr on pr.id = dp.id_producto where tipo = 'cotizacion' and dp.id_pedido = ?"),
+    [id],
+    mySqlConnection.query(query, [id], (err, rows, fields) => {
+      if (!err) {
+        res.send(rows);
+      } else {
+        console.log(err);
+      }
+    });
+});
+
 //? Crear un pedido ============================================================================
 router.post("/pedidos", (req, res) => {
   //* Se define función para creación del usuario
