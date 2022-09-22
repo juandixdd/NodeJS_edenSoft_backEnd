@@ -50,7 +50,7 @@ router.post("/categoria", (req, res) => {
   createProduct();
 });
 
-//?Editar un producto =====================================================================================
+//?Editar un categoria =====================================================================================
 router.put("/categoria/:id", (req, res) => {
   const { nombre, estado } = req.body;
   const { id } = req.params;
@@ -67,7 +67,7 @@ router.put("/categoria/:id", (req, res) => {
   );
 });
 
-//?Eliminar un Producto =====================================================================================
+//?Eliminar un categoria =====================================================================================
 router.delete("/categoria/:id", (req, res) => {
   const { id } = req.params;
   mySqlConnection.query(
