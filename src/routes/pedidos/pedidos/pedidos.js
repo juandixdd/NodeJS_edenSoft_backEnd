@@ -4,7 +4,7 @@ const mySqlConnection = require("../../../conexion");
 
 //? Traer todos los pedidos =====================================================================================
 router.get("/pedidos", (req, res) => {
-  const query = "select * from pedidos";
+  const query = "select * from pedidos where tipo = 'pedido' order by fecha_registro desc";
   mySqlConnection.query(query, (err, rows, fields) => {
     if (!err) {
       res.send(rows);
@@ -17,7 +17,8 @@ router.get("/pedidos", (req, res) => {
 //? Traer a un pedido por id =====================================================================================
 router.get("/pedidos/:id", (req, res) => {
   const { id } = req.params;
-  query = "select * from pedidos WHERE id_pedido = ?";
+  (query = "select p.*, dp.id_pedido as 'id_detalle', dp.id_producto, pr.nombre, dp.cantidad, dp.precio_unitario  from pedidos p join detalle_pedido dp on dp.id_pedido = p.id_pedido join productos pr on pr.id = dp.id_producto where tipo = 'pedido' and dp.id_pedido = ?"),
+  [id],
   mySqlConnection.query(query, [id], (err, rows, fields) => {
     if (!err) {
       res.send(rows);
@@ -30,7 +31,8 @@ router.get("/pedidos/:id", (req, res) => {
 //? Traer cotizaciones =====================================================================================
 router.get("/cotizaciones", (req, res) => {
   const { id } = req.params;
-  query = "select * from pedidos where tipo = 'cotizacion' ";
+  query =
+    "select * from pedidos where tipo = 'cotizacion' order by fecha_registro desc";
   mySqlConnection.query(query, [id], (err, rows, fields) => {
     if (!err) {
       res.send(rows);
