@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-09-2022 a las 23:12:45
+-- Tiempo de generación: 23-09-2022 a las 18:58:21
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -137,7 +137,16 @@ INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `
 (49, 12, 46, 8, 300),
 (50, 14, 47, 5, 2000),
 (51, 12, 47, 8, 300),
-(52, 14, 48, 10, 2000);
+(52, 14, 48, 10, 2000),
+(53, 12, 49, 5, 300),
+(54, 15, 49, 1, 3500),
+(55, 14, 49, 5, 2000),
+(56, 12, 50, 5, 300),
+(57, 14, 50, 5, 2000),
+(58, 15, 50, 1, 3500),
+(59, 16, 51, 1, 1000),
+(60, 12, 51, 1, 300),
+(61, 15, 51, 1, 3500);
 
 -- --------------------------------------------------------
 
@@ -221,7 +230,10 @@ INSERT INTO `pedidos` (`id_pedido`, `id_usuario_documento`, `tipo`, `fecha_regis
 (45, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
 (46, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
 (47, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
-(48, 11111, 'cotizacion', '2022-09-17', 20000, 1, '2022-09-17');
+(48, 11111, 'cotizacion', '2022-09-17', 20000, 1, '2022-09-17'),
+(49, 12345, 'cotizacion', '2022-09-23', 15000, 1, '2022-09-17'),
+(50, 12345, 'cotizacion', '2022-09-23', 15000, 1, '2022-09-17'),
+(51, 12345, 'cotizacion', '2022-09-23', 4800, 1, '2022-09-17');
 
 -- --------------------------------------------------------
 
@@ -336,7 +348,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `adress`, `phone`, `rol`) VALUES
-(11111, 'JuanDi', 'Arteaga', 'email@email.com', '$2b$10$tjL6FGceaaKIoPk.zU5xNe6nGaKhncNQ4gNT9EBsQzRM5TQen0eBS', '123123', '123123123', 0);
+(11111, 'JuanDi', 'Arteaga', 'email@email.com', '$2b$10$tjL6FGceaaKIoPk.zU5xNe6nGaKhncNQ4gNT9EBsQzRM5TQen0eBS', '123123', '123123123', 0),
+(12345, 'lore', 'efet', 'lore@email.com', '$2b$10$XWV99GtPBJ9b9dMkQIBvHubbSx9xzm27usQHcDxDvMeQ7Cc/ff0Gm', '123', '123', 0);
 
 -- --------------------------------------------------------
 
@@ -449,7 +462,7 @@ ALTER TABLE `clientes_informativos`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
@@ -461,7 +474,7 @@ ALTER TABLE `detalle_venta`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`

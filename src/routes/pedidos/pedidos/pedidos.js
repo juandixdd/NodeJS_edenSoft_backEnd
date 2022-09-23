@@ -4,7 +4,8 @@ const mySqlConnection = require("../../../conexion");
 
 //? Traer todos los pedidos =====================================================================================
 router.get("/pedidos", (req, res) => {
-  const query = "select * from pedidos where tipo = 'pedido' order by fecha_registro desc";
+  const query =
+    "select * from pedidos where tipo = 'pedido' order by fecha_registro desc";
   mySqlConnection.query(query, (err, rows, fields) => {
     if (!err) {
       res.send(rows);
@@ -17,22 +18,23 @@ router.get("/pedidos", (req, res) => {
 //? Traer a un pedido por id =====================================================================================
 router.get("/pedidos/:id", (req, res) => {
   const { id } = req.params;
-  (query = "select p.*, dp.id_pedido as 'id_detalle', dp.id_producto, pr.nombre, dp.cantidad, dp.precio_unitario  from pedidos p join detalle_pedido dp on dp.id_pedido = p.id_pedido join productos pr on pr.id = dp.id_producto where tipo = 'pedido' and dp.id_pedido = ?"),
-  [id],
-  mySqlConnection.query(query, [id], (err, rows, fields) => {
-    if (!err) {
-      res.send(rows);
-    } else {
-      console.log(err);
-    }
-  });
+  (query =
+    "select p.*, dp.id_pedido as 'id_detalle', dp.id_producto, pr.nombre, dp.cantidad, dp.precio_unitario  from pedidos p join detalle_pedido dp on dp.id_pedido = p.id_pedido join productos pr on pr.id = dp.id_producto where tipo = 'pedido' and dp.id_pedido = ?"),
+    [id],
+    mySqlConnection.query(query, [id], (err, rows, fields) => {
+      if (!err) {
+        res.send(rows);
+      } else {
+        console.log(err);
+      }
+    });
 });
 
 //? Traer cotizaciones =====================================================================================
 router.get("/cotizaciones", (req, res) => {
   const { id } = req.params;
   query =
-    "select * from pedidos where tipo = 'cotizacion' order by fecha_registro desc";
+    "select p.*, concat(u.name,' ', u.last_name) as 'Nombre_usuario' from pedidos p join users u on u.id = p.id_usuario_documento  where tipo = 'cotizacion' order by fecha_registro desc";
   mySqlConnection.query(query, [id], (err, rows, fields) => {
     if (!err) {
       res.send(rows);
@@ -42,13 +44,58 @@ router.get("/cotizaciones", (req, res) => {
   });
 });
 
-//? traer cotizacion por id =====================================================================================
+//? Traer cotizacionesbyid =====================================================================================
+router.get("/cotizaciones/usuario/:id", (req, res) => {
+  const { id } = req.params;
+  query =
+    "select p.*, concat(u.name,' ', u.last_name) as 'Nombre_usuario' from pedidos p join users u on u.id = p.id_usuario_documento where tipo = 'cotizacion' and id_usuario_documento = ? order by fecha_registro desc",
+    [id],
+  mySqlConnection.query(query, [id], (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    } else {
+      console.log(err);
+    }
+  });
+});
+
+//? traer cotizacion por id con los productos =====================================================================================
 router.get("/cotizaciones/:id", (req, res) => {
   const { id } = req.params;
   (query =
-    "select p.*, dp.id_pedido as 'id_detalle', dp.id_producto, pr.nombre, dp.cantidad, dp.precio_unitario  from pedidos p join detalle_pedido dp on dp.id_pedido = p.id_pedido join productos pr on pr.id = dp.id_producto where tipo = 'cotizacion' and dp.id_pedido = ?"),
+    "select p.*, dp.id_pedido as 'id_detalle', dp.id_producto, pr.nombre, dp.cantidad, dp.precio_unitario, concat(u.name, ' ', u.last_name) as 'Nombre_usuario' from pedidos p join detalle_pedido dp on dp.id_pedido = p.id_pedido join productos pr on pr.id = dp.id_producto join users u on u.id = p.id_usuario_documento where tipo = 'cotizacion' and dp.id_pedido = ?"),
     [id],
     mySqlConnection.query(query, [id], (err, rows, fields) => {
+      if (!err) {
+        res.send(rows);
+      } else {
+        console.log(err);
+      }
+    });
+});
+
+//? traer cotizacion por id con la info =====================================================================================
+router.get("/cotizaciones/info/:id", (req, res) => {
+  const { id } = req.params;
+  (query =
+    "select p.*,  concat(u.name, ' ', u.last_name) as 'Nombre_usuario' from pedidos p join users u on u.id = p.id_usuario_documento where id_pedido = ?"),
+    [id],
+    mySqlConnection.query(query, [id], (err, rows, fields) => {
+      if (!err) {
+        res.send(rows);
+      } else {
+        console.log(err);
+      }
+    });
+});
+
+//? anular una cotizacion =====================================================================================
+router.put("/cotizaciones/anular/:id", (req, res) => {
+  const { id } = req.params;
+  const { estado } = req.body;
+  (query =
+    "UPDATE pedidos SET estado = ? WHERE id_pedido = ?"),
+    mySqlConnection.query(query, [estado, id], (err, rows, fields) => {
       if (!err) {
         res.send(rows);
       } else {
