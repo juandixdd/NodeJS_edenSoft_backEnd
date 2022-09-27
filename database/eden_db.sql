@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 23-09-2022 a las 18:58:21
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Host: 127.0.0.1
+-- Generation Time: Sep 27, 2022 at 06:01 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `eden_db`
+-- Database: `eden_db`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categorias`
+-- Table structure for table `categorias`
 --
 
 CREATE TABLE `categorias` (
@@ -34,7 +34,7 @@ CREATE TABLE `categorias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `categorias`
+-- Dumping data for table `categorias`
 --
 
 INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `clientes_informativos`
+-- Table structure for table `clientes_informativos`
 --
 
 CREATE TABLE `clientes_informativos` (
@@ -58,7 +58,7 @@ CREATE TABLE `clientes_informativos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `clientes_informativos`
+-- Dumping data for table `clientes_informativos`
 --
 
 INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido`, `telefono`, `id_usuario_documento`) VALUES
@@ -70,7 +70,7 @@ INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detalle_pedido`
+-- Table structure for table `detalle_pedido`
 --
 
 CREATE TABLE `detalle_pedido` (
@@ -82,7 +82,7 @@ CREATE TABLE `detalle_pedido` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `detalle_pedido`
+-- Dumping data for table `detalle_pedido`
 --
 
 INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `cantidad`, `precio_unitario`) VALUES
@@ -138,20 +138,14 @@ INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `
 (50, 14, 47, 5, 2000),
 (51, 12, 47, 8, 300),
 (52, 14, 48, 10, 2000),
-(53, 12, 49, 5, 300),
-(54, 15, 49, 1, 3500),
-(55, 14, 49, 5, 2000),
-(56, 12, 50, 5, 300),
-(57, 14, 50, 5, 2000),
-(58, 15, 50, 1, 3500),
-(59, 16, 51, 1, 1000),
-(60, 12, 51, 1, 300),
-(61, 15, 51, 1, 3500);
+(53, 15, 49, 20, 3500),
+(54, 16, 49, 5, 1000),
+(55, 14, 49, 77, 2000);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detalle_venta`
+-- Table structure for table `detalle_venta`
 --
 
 CREATE TABLE `detalle_venta` (
@@ -165,7 +159,7 @@ CREATE TABLE `detalle_venta` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pedidos`
+-- Table structure for table `pedidos`
 --
 
 CREATE TABLE `pedidos` (
@@ -179,7 +173,7 @@ CREATE TABLE `pedidos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `pedidos`
+-- Dumping data for table `pedidos`
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `id_usuario_documento`, `tipo`, `fecha_registro`, `precio_total`, `estado`, `fecha_entrega`) VALUES
@@ -231,14 +225,12 @@ INSERT INTO `pedidos` (`id_pedido`, `id_usuario_documento`, `tipo`, `fecha_regis
 (46, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
 (47, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
 (48, 11111, 'cotizacion', '2022-09-17', 20000, 1, '2022-09-17'),
-(49, 12345, 'cotizacion', '2022-09-23', 15000, 1, '2022-09-17'),
-(50, 12345, 'cotizacion', '2022-09-23', 15000, 1, '2022-09-17'),
-(51, 12345, 'cotizacion', '2022-09-23', 4800, 1, '2022-09-17');
+(49, 11111, 'cotizacion', '2022-09-20', 229000, 1, '2022-09-17');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `permisos`
+-- Table structure for table `permisos`
 --
 
 CREATE TABLE `permisos` (
@@ -248,19 +240,21 @@ CREATE TABLE `permisos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `permisos`
+-- Dumping data for table `permisos`
 --
 
 INSERT INTO `permisos` (`id`, `nombre`, `modulo`) VALUES
 (2, 'Editar Usuario', 'Usuarios'),
 (3, 'Crear Usuario', 'Usuarios'),
 (4, 'Crear venta', 'Ventas'),
-(5, 'Editar pedido', 'Pedidos');
+(5, 'Editar pedido', 'Pedidos'),
+(6, 'Crear Pedido', 'Pedidos'),
+(8, 'Editar Venta', 'Ventas');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Table structure for table `productos`
 --
 
 CREATE TABLE `productos` (
@@ -273,7 +267,7 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `productos`
+-- Dumping data for table `productos`
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `precio`, `categoria`, `imagen`, `estado`) VALUES
@@ -285,7 +279,7 @@ INSERT INTO `productos` (`id`, `nombre`, `precio`, `categoria`, `imagen`, `estad
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -295,18 +289,19 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `nombre`, `estado`) VALUES
 (1, 'admin', 1),
 (3, 'cliente', 1),
-(4, 'secretaria', 1);
+(4, 'secretaria', 1),
+(5, 'dvzdv', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rol_permisos`
+-- Table structure for table `rol_permisos`
 --
 
 CREATE TABLE `rol_permisos` (
@@ -316,7 +311,7 @@ CREATE TABLE `rol_permisos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `rol_permisos`
+-- Dumping data for table `rol_permisos`
 --
 
 INSERT INTO `rol_permisos` (`id`, `id_rol`, `id_permiso`) VALUES
@@ -329,7 +324,7 @@ INSERT INTO `rol_permisos` (`id`, `id_rol`, `id_permiso`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -338,23 +333,23 @@ CREATE TABLE `users` (
   `last_name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `adress` varchar(100) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `rol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `adress`, `phone`, `rol`) VALUES
-(11111, 'JuanDi', 'Arteaga', 'email@email.com', '$2b$10$tjL6FGceaaKIoPk.zU5xNe6nGaKhncNQ4gNT9EBsQzRM5TQen0eBS', '123123', '123123123', 0),
-(12345, 'lore', 'efet', 'lore@email.com', '$2b$10$XWV99GtPBJ9b9dMkQIBvHubbSx9xzm27usQHcDxDvMeQ7Cc/ff0Gm', '123', '123', 0);
+INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `phone`, `rol`) VALUES
+(11111, 'JuanDi', 'Arteaga', 'email@email.com', '12345', '123123123', 3),
+(123213, 'Josegm', 'perro', 'jojo@gg.com', '$2b$10$ELHtaENJ5V2ndzk3a6j/eu3pGXCnXMhcMvFV8piuA3RfaAdi7H7Oq', '3321123', 3),
+(123321, 'daniel', 'peñita', 'jdps106@hotmail.com', '$2b$10$W6TF0IH.0X1bMrb35TCHtugHIBjMEnBG6jXbTAoB4Tolr1NeApLSe', '4445565', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `venta_local`
+-- Table structure for table `venta_local`
 --
 
 CREATE TABLE `venta_local` (
@@ -366,142 +361,142 @@ CREATE TABLE `venta_local` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `venta_local`
+-- Dumping data for table `venta_local`
 --
 
 INSERT INTO `venta_local` (`id_venta`, `id_cliente_documento`, `fecha_registro`, `precio_total`, `estado`) VALUES
 (1, 444, '2022-09-19', 200000, 'Activo');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `categorias`
+-- Indexes for table `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `clientes_informativos`
+-- Indexes for table `clientes_informativos`
 --
 ALTER TABLE `clientes_informativos`
   ADD PRIMARY KEY (`id_cliente_documento`);
 
 --
--- Indices de la tabla `detalle_pedido`
+-- Indexes for table `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
   ADD PRIMARY KEY (`id_detalle_pedido`);
 
 --
--- Indices de la tabla `detalle_venta`
+-- Indexes for table `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
   ADD PRIMARY KEY (`id_detalle_venta`);
 
 --
--- Indices de la tabla `pedidos`
+-- Indexes for table `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id_pedido`);
 
 --
--- Indices de la tabla `permisos`
+-- Indexes for table `permisos`
 --
 ALTER TABLE `permisos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `productos`
+-- Indexes for table `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `rol_permisos`
+-- Indexes for table `rol_permisos`
 --
 ALTER TABLE `rol_permisos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `venta_local`
+-- Indexes for table `venta_local`
 --
 ALTER TABLE `venta_local`
   ADD PRIMARY KEY (`id_venta`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `categorias`
+-- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `clientes_informativos`
+-- AUTO_INCREMENT for table `clientes_informativos`
 --
 ALTER TABLE `clientes_informativos`
   MODIFY `id_cliente_documento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=445;
 
 --
--- AUTO_INCREMENT de la tabla `detalle_pedido`
+-- AUTO_INCREMENT for table `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
--- AUTO_INCREMENT de la tabla `detalle_venta`
+-- AUTO_INCREMENT for table `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
   MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `pedidos`
+-- AUTO_INCREMENT for table `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
--- AUTO_INCREMENT de la tabla `permisos`
+-- AUTO_INCREMENT for table `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `productos`
+-- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT de la tabla `roles`
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `rol_permisos`
+-- AUTO_INCREMENT for table `rol_permisos`
 --
 ALTER TABLE `rol_permisos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `venta_local`
+-- AUTO_INCREMENT for table `venta_local`
 --
 ALTER TABLE `venta_local`
   MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
