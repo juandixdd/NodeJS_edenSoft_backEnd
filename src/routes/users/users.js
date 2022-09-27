@@ -5,7 +5,7 @@ const bcryptjs = require("bcrypt");
 
 //? Traer todos los usuarios =====================================================================================
 router.get("/users", (req, res) => {
-  mySqlConnection.query("SELECT * FROM users", (err, rows, fields) => {
+  mySqlConnection.query("select * from users", (err, rows, fields) => {
     if (!err) {
       res.send(rows);
     } else {
@@ -41,17 +41,17 @@ router.get("/users/:id", (req, res) => {
 router.post("/users", (req, res) => {
   //* Se define función para creación del usuario
   function createUser() {
-    const { id, name, last_name, email, password, adress, phone } = req.body;
+    const { id, name, last_name, email, password, phone, rol } = req.body;
     mySqlConnection.query(
-      "INSERT INTO users (id,name,last_name,email,password,adress,phone) VALUES (?,?,?,?,?,?,?)",
+      "INSERT INTO users (id,name,last_name,email,password,phone,rol) VALUES (?,?,?,?,?,?,?)",
       [
         id,
         name,
         last_name,
         email,
         bcryptjs.hashSync(password, 10),
-        adress,
         phone,
+        rol,
       ],
       (err, rows, fields) => {
         if (!err) {
@@ -107,11 +107,11 @@ router.post("/users", (req, res) => {
 
 //?Editar un usuario =====================================================================================
 router.put("/users/:id", (req, res) => {
-  const { name, last_name, email, password, adress, phone } = req.body;
+  const { name, last_name, email, password, phone, rol } = req.body;
   const { id } = req.params;
   mySqlConnection.query(
-    "UPDATE users SET name = ?, last_name = ?, email = ?, password = ?, adress = ?, phone = ? WHERE id = ?",
-    [name, last_name, email, password, adress, phone, id],
+    "UPDATE users SET name = ?, last_name = ?, email = ?, password = ?, phone = ?, rol=? WHERE id = ?",
+    [name, last_name, email, password, phone, rol, id],
     (err, rows, fields) => {
       if (!err) {
         res.json({ status: "Usuario actualizado" });
