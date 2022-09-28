@@ -9,14 +9,13 @@ router.post("/register", (req, res) => {
   function createUser() {
     const { id, name, last_name, email, password, adress, phone } = req.body;
     mySqlConnection.query(
-      "INSERT INTO users (id,name,last_name,email,password,adress,phone) VALUES (?,?,?,?,?,?,?)",
+      "INSERT INTO users (id,name,last_name,email,password,phone) VALUES (?,?,?,?,?,?)",
       [
         id,
         name,
         last_name,
         email,
         bcryptjs.hashSync(password, 10),
-        adress,
         phone,
       ],
       (err, rows, fields) => {

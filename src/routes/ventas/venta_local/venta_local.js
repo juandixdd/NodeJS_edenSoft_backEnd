@@ -29,6 +29,21 @@ router.get("/venta-local/:id", (req, res) => {
   );
 });
 
+//? Get all venta local Data
+router.get("/venta-local-all-data/:id", (req, res) => {
+  const { id } = req.params;
+  let query =
+    "select dv.*,p.nombre as 'product_name', p.precio as 'product_price',vl.*,ci.*from detalle_venta dv join productos p on p.id = dv.id_producto  join venta_local vl on vl.id_venta = dv.id_venta join clientes_informativos ci on ci.id_cliente_documento = vl.id_cliente_documento where vl.id_venta = ?";
+  mySqlConnection.query(query, [id], (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    } else {
+      console.log(err);
+    }
+  });
+});
+
+//? Create data
 router.post("/venta-local", (req, res) => {
   const { id_cliente_documento, fecha_registro, precio_total, estado } =
     req.body;
@@ -37,7 +52,11 @@ router.post("/venta-local", (req, res) => {
     [id_cliente_documento, fecha_registro, precio_total, estado],
     (err, rows, fields) => {
       if (!err) {
-        res.json({ status: 200, message: "Cliente creado con éxito" });
+        res.json({
+          status: 200,
+          message: "Venta creada con éxito",
+          data: rows,
+        });
       } else {
         console.log(err);
       }

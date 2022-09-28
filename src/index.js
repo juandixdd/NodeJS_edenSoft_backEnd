@@ -49,9 +49,10 @@ app.use(require("./routes/pedidos/pedidos/pedidos"))
 app.use(require("./routes/pedidos/detalle_pedido/detalle_pedido"))
 
 //? Clientes informativos
-app.use(require("./routes/ventas/clientes_informativos/clientes_informativos"))
+app.use(require("./routes/ventas/clientes_informativos/clientes_informativos"));
 
 //? Ventas locales
-app.use(require("./routes/ventas/venta_local/venta_local"))
+app.use(require("./routes/ventas/venta_local/venta_local"));
+app.use(require("./routes/ventas/venta_local/detalle_venta"));
 
 //! RECUERDEN SEPARAR ESTAS RUTAS POR MÓDULO, PONGANLE EL COMENTARIO PARA EL MÓDULO Y DESPUES LAS RUTAS
