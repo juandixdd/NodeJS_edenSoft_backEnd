@@ -79,28 +79,4 @@ router.post("/clientes-informativos", (req, res) => {
   }
 });
 
-/*
-//?Editar un categoria =====================================================================================
-router.put("/clientes-informativos/:id", (req, res) => {
-  const {
-    id_cliente_documento,
-    nombre,
-    apellido,
-    telefono,
-    id_usuario_documento,
-  } = req.body;
-  const { id } = req.params;
-  mySqlConnection.query(
-    "UPDATE categorias SET id_cliente_documento = ?, nombre = ?, apellido = ?, telefono = ?, id_usuario_documento = ? WHERE id = ?",
-    [id_cliente_documento, nombre, apellido, telefono, id_usuario_documento, id],
-    (err, rows, fields) => {
-      if (!err) {
-        res.json({ status: "cliente informativo actualizado" });
-      } else {
-        console.log(err);
-      }
-    }
-  );
-});
-*/
 module.exports = router;
