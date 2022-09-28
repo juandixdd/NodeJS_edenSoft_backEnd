@@ -5,7 +5,7 @@ const bcryptjs = require("bcrypt");
 
 //? Traer todos los usuarios =====================================================================================
 router.get("/users", (req, res) => {
-  mySqlConnection.query("select * from users", (err, rows, fields) => {
+  mySqlConnection.query("select u.*, r.nombre as 'Nombre_rol' from users u join roles r on r.id = u.rol ", (err, rows, fields) => {
     if (!err) {
       res.send(rows);
     } else {
@@ -107,11 +107,11 @@ router.post("/users", (req, res) => {
 
 //?Editar un usuario =====================================================================================
 router.put("/users/:id", (req, res) => {
-  const { name, last_name, email, password, phone, rol } = req.body;
+  const { name, last_name, email, phone, rol } = req.body;
   const { id } = req.params;
   mySqlConnection.query(
-    "UPDATE users SET name = ?, last_name = ?, email = ?, password = ?, phone = ?, rol=? WHERE id = ?",
-    [name, last_name, email, password, phone, rol, id],
+    "UPDATE users SET name = ?, last_name = ?, email = ?, phone = ?, rol=? WHERE id = ?",
+    [name, last_name, email, phone, rol, id],
     (err, rows, fields) => {
       if (!err) {
         res.json({ status: "Usuario actualizado" });
