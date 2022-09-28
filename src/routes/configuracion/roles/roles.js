@@ -18,7 +18,7 @@ router.get("/roles", (req, res) => {
 //? Traer a un rol por id =====================================================================================
 router.get("/roles/:id", (req, res) => {
   const { id } = req.params;
-  query = "SELECT * FROM roles WHERE id = ?";
+  query = "select r.id, r.nombre as 'rol', r.estado, group_concat(p.nombre separator ', ')  as 'permiso' from roles r  join rol_permisos rp on r.id = rp.id_rol  join permisos p on p.id = rp.id_permiso where r.id =? group by rol ";
   mySqlConnection.query(query, [id], (err, rows, fields) => {
     if (!err) {
       res.send(rows);

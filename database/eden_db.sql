@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-09-2022 a las 03:39:41
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Tiempo de generación: 28-09-2022 a las 18:42:49
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -80,6 +80,7 @@ INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido
 (7777, 'test7', 'test7', 7777, NULL),
 (8888, 'test8', 'test8', 8888, NULL),
 (9999, 'test9', 'test9', 9999, NULL),
+(1112221, 'jose', 'loraes', 233322345, NULL),
 (8888888, 'Prueba', 'xddd', 123123, NULL),
 (2147483647, 'Cliente', 'Nuevo', 123123, NULL);
 
@@ -188,7 +189,8 @@ INSERT INTO `detalle_venta` (`id_detalle_venta`, `id_producto`, `id_venta`, `can
 (15, 16, 13, 200, 1000),
 (16, 12, 13, 200, 300),
 (17, 14, 14, 300, 2000),
-(18, 16, 14, 300, 1000);
+(18, 16, 14, 300, 1000),
+(19, 15, 15, 44, 3500);
 
 -- --------------------------------------------------------
 
@@ -278,7 +280,7 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`id`, `nombre`, `modulo`) VALUES
-(2, 'Editar Usuario', 'Usuarios'),
+(2, 'Editar Cocacola', 'Usuarios'),
 (3, 'Crear Usuario', 'Usuarios'),
 (4, 'Crear venta', 'Ventas'),
 (5, 'Editar pedido', 'Pedidos'),
@@ -330,7 +332,8 @@ INSERT INTO `roles` (`id`, `nombre`, `estado`) VALUES
 (1, 'admin', 1),
 (3, 'cliente', 1),
 (4, 'secretaria', 1),
-(5, 'dvzdv', 1);
+(5, 'dvzdv', 1),
+(6, 'otroRol', 1);
 
 -- --------------------------------------------------------
 
@@ -353,7 +356,12 @@ INSERT INTO `rol_permisos` (`id`, `id_rol`, `id_permiso`) VALUES
 (2, 4, 4),
 (3, 3, 5),
 (4, 3, 4),
-(5, 4, 2);
+(5, 4, 2),
+(6, 6, 3),
+(7, 6, 4),
+(8, 6, 8),
+(9, 6, 6),
+(10, 6, 5);
 
 -- --------------------------------------------------------
 
@@ -368,7 +376,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `phone` varchar(15) NOT NULL,
-  `rol` int(11) NOT NULL
+  `rol` int(11) NOT NULL DEFAULT 3
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -376,9 +384,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `phone`, `rol`) VALUES
-(999, 'JuanDi', 'Arteaga', 'juandi@email.com', '$2b$10$tjcfi7NPcZm.t/nUf5nAV.imBx8vmp9/Uz.Euqbx0Kbmc9Y./69w.', '123', 0),
-(123213, 'Josegm', 'perro', 'jojo@gg.com', '$2b$10$ELHtaENJ5V2ndzk3a6j/eu3pGXCnXMhcMvFV8piuA3RfaAdi7H7Oq', '3321123', 3),
-(123321, 'daniel', 'peñita', 'jdps106@hotmail.com', '$2b$10$W6TF0IH.0X1bMrb35TCHtugHIBjMEnBG6jXbTAoB4Tolr1NeApLSe', '4445565', 0);
+(999, 'JuanDi', 'Arteaga', 'juandi@email.com', '$2b$10$tjcfi7NPcZm.t/nUf5nAV.imBx8vmp9/Uz.Euqbx0Kbmc9Y./69w.', '123', 1),
+(123321, 'daniel', 'peñita', 'jdps106@hotmail.com', '$2b$10$W6TF0IH.0X1bMrb35TCHtugHIBjMEnBG6jXbTAoB4Tolr1NeApLSe', '4445565', 3);
 
 -- --------------------------------------------------------
 
@@ -403,7 +410,8 @@ INSERT INTO `venta_local` (`id_venta`, `id_cliente_documento`, `fecha_registro`,
 (11, 2147483647, '2022-09-28', 1300000, 1),
 (12, 888, '2022-09-28', 480000, 1),
 (13, 8888888, '2022-09-28', 660000, 1),
-(14, 777, '2022-09-28', 900000, 1);
+(14, 777, '2022-09-28', 900000, 1),
+(15, 1112221, '2022-09-28', 154000, 1);
 
 --
 -- Índices para tablas volcadas
@@ -501,7 +509,7 @@ ALTER TABLE `detalle_pedido`
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
@@ -525,19 +533,19 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `rol_permisos`
 --
 ALTER TABLE `rol_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `venta_local`
 --
 ALTER TABLE `venta_local`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
