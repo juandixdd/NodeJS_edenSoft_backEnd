@@ -55,11 +55,11 @@ router.post("/productos", (req, res) => {
 
 //?Editar un producto =====================================================================================
 router.put("/productos/:id", (req, res) => {
-  const { nombre, precio, categoria, imagen, estado } = req.body;
+  const { nombre, precio, categoria, imagen } = req.body;
   const { id } = req.params;
   mySqlConnection.query(
-    "UPDATE productos SET nombre = ?, precio = ?, categoria = ?, imagen = ?, estado = ? WHERE id = ?",
-    [nombre, precio, categoria, imagen, estado, id],
+    "UPDATE productos SET nombre = ?, precio = ?, categoria = ?, imagen = ? WHERE id = ?",
+    [nombre, precio, categoria, imagen,  id],
     (err, rows, fields) => {
       if (!err) {
         res.json({ status: "Producto actualizado" });

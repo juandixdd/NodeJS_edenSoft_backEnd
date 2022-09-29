@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-09-2022 a las 18:42:49
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 8.0.12
+-- Tiempo de generación: 29-09-2022 a las 02:45:28
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -157,7 +157,9 @@ INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `
 (52, 14, 48, 10, 2000),
 (53, 15, 49, 20, 3500),
 (54, 16, 49, 5, 1000),
-(55, 14, 49, 77, 2000);
+(55, 14, 49, 77, 2000),
+(56, 16, 54, 20, 1000),
+(57, 15, 54, 5, 3500);
 
 -- --------------------------------------------------------
 
@@ -261,7 +263,12 @@ INSERT INTO `pedidos` (`id_pedido`, `id_usuario_documento`, `tipo`, `fecha_regis
 (46, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
 (47, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
 (48, 11111, 'cotizacion', '2022-09-17', 20000, 1, '2022-09-17'),
-(49, 11111, 'cotizacion', '2022-09-20', 229000, 1, '2022-09-17');
+(49, 11111, 'cotizacion', '2022-09-20', 229000, 1, '2022-09-17'),
+(50, 1122, 'pedido', '2022-09-29', 37500, 1, '2022-09-29'),
+(51, 1122, 'pedido', '2022-09-29', 37500, 1, '2022-10-30'),
+(52, 1122, 'pedido', '2022-09-29', 37500, 1, '2022-09-30'),
+(53, 1122, 'pedido', '2022-09-29', 37500, 1, '2022-09-30'),
+(54, 1122, 'pedido', '2022-09-29', 37500, 1, '2022-09-30');
 
 -- --------------------------------------------------------
 
@@ -385,6 +392,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `phone`, `rol`) VALUES
 (999, 'JuanDi', 'Arteaga', 'juandi@email.com', '$2b$10$tjcfi7NPcZm.t/nUf5nAV.imBx8vmp9/Uz.Euqbx0Kbmc9Y./69w.', '123', 1),
+(1122, 'carlos', 'gonzalez', 'carlos@email.com', '$2b$10$xWZemZwYF6mfv8c6yOqvjuhM1gOfXUJx9oLsfmKRzHH069DsnvZMq', '1478', 3),
 (123321, 'daniel', 'peñita', 'jdps106@hotmail.com', '$2b$10$W6TF0IH.0X1bMrb35TCHtugHIBjMEnBG6jXbTAoB4Tolr1NeApLSe', '4445565', 3);
 
 -- --------------------------------------------------------
@@ -503,7 +511,7 @@ ALTER TABLE `clientes_informativos`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
@@ -515,7 +523,7 @@ ALTER TABLE `detalle_venta`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -527,7 +535,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
