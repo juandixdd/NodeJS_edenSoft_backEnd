@@ -79,4 +79,50 @@ router.post("/clientes-informativos", (req, res) => {
   }
 });
 
+router.post("/clientes-informativos", (req, res) => {
+  //* Se define función para creación del cliente
+  function createCliente() {
+    const { id_cliente_documento, nombre, apellido, telefono, id_usuario_documento} = req.body;
+    mySqlConnection.query(
+      "INSERT INTO clientes_informativos (id_cliente_documento,nombre,apellido,telefono, id_usuario_documento) VALUES (?,?,?,?,?)",
+      [
+        id_cliente_documento,
+        nombre,
+        apellido,
+        telefono,
+        id_usuario_documento,
+      ],
+      (err, rows, fields) => {
+        if (!err) {
+          res.json({ status: "Cliente creado", statusCode: 200 });
+        } else {
+          console.log(err);
+        }
+      }
+    );
+  }
+});
+
+//?Editar un cliente =====================================================================================
+router.put("/clientes-informativos/:id_cliente_documento", (req, res) => {
+  const {  nombre, apellido, telefono} = req.body;
+  const { id_cliente_documento } = req.params;
+  mySqlConnection.query(
+    "UPDATE clientes_informativos SET nombre = ?, apellido = ?, telefono = ? WHERE id_cliente_documento = ?",
+    [
+      nombre,
+      apellido,
+      telefono,
+      id_cliente_documento,
+    ],
+    (err, rows, fields) => {
+      if (!err) {
+        res.json({ status: "Cliente actualizado" });
+      } else {
+        console.log(err);
+      }
+    }
+  );
+});
+
 module.exports = router;
