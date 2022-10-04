@@ -36,7 +36,7 @@ app.use(require("./routes/configuracion/roles/roles"));
 
 
 //? usuarios
-app.use(require("./routes/users/users"));
+app.use(require("./routes/usuarios/usuario"));
 
 //? productos
 app.use(require("./routes/productos/productos/productos"))
