@@ -5,69 +5,45 @@ const bcryptjs = require("bcrypt");
 
 //? Crear un usuario =====================================================================================
 router.post("/register", (req, res) => {
-  //* Se define función para creación del usuario
-  function createUser() {
-    const { id, name, last_name, email, password, adress, phone } = req.body;
-    mySqlConnection.query(
-      "INSERT INTO users (id,name,last_name,email,password,phone) VALUES (?,?,?,?,?,?)",
-      [
-        id,
-        name,
-        last_name,
-        email,
-        bcryptjs.hashSync(password, 10),
-        phone,
-      ],
-      (err, rows, fields) => {
-        if (!err) {
-          res.json({ status: "Usuario creado", statusCode: 200 });
-        } else {
-          console.log(err);
-        }
-      }
-    );
-  }
-
-  //* Validación para ver si el id existe en la base de datos
-  const { id } = req.body;
+  //* Si no hay usuarios registrados con el id, lo deja crear
+  const { correo } = req.body;
   mySqlConnection.query(
-    "SELECT * FROM users WHERE id = ?",
-    [id],
+    "SELECT * FROM usuario WHERE correo = ?",
+    [correo],
     (err, rows, fields) => {
       if (!err) {
         if (rows.length >= 1) {
           res.json({
-            status: "Ya hay un usuario registrado con ese id",
+            status: "Ya hay un usuario registrado con ese correo",
             statusCode: 403,
           });
         } else {
-          //* Si no hay usuarios registrados con el id, lo deja crear
-          const { email } = req.body;
-          mySqlConnection.query(
-            "SELECT * FROM users WHERE email = ?",
-            [email],
-            (err, rows, fields) => {
-              if (!err) {
-                if (rows.length >= 1) {
-                  res.json({
-                    status: "Ya hay un usuario registrado con ese email",
-                    statusCode: 403,
-                  });
-                } else {
-                  //* Si no hay usuarios registrados con el email, lo deja crear
-                  createUser();
-                }
-              } else {
-                console.log(err);
-              }
-            }
-          );
+          //* Si no hay usuarios registrados con el correo, lo deja crear
+          registerUser();
         }
       } else {
         console.log(err);
       }
     }
   );
+
+  const registerUser = () => {
+    const { correo, contrasena, id_cliente_documento } = req.body;
+    const hash = bcryptjs.hashSync(contrasena, 10);
+    const query =
+      "INSERT INTO usuario (correo, contrasena, id_cliente_documento) VALUES (?,?,?)";
+    mySqlConnection.query(
+      query,
+      [correo, hash, id_cliente_documento],
+      (err, rows, fields) => {
+        if (!err) {
+          res.json({ status: 200, message: "Usuario registrado" });
+        } else {
+          console.log(err);
+        }
+      }
+    );
+  };
 });
 
 module.exports = router;

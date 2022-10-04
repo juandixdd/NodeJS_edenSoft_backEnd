@@ -64,4 +64,21 @@ router.post("/venta-local", (req, res) => {
   );
 });
 
+//? Anular una venta
+router.put("/venta-local/:id_venta", (req, res) => {
+  const { estado } = req.body;
+  const { id_venta } = req.params;
+  let query = "UPDATE venta_local SET estado = ? WHERE id_venta = ?";
+  mySqlConnection.query(query, [estado, id_venta], (err, rows, fields) => {
+    if (!err) {
+      res.json({
+        status: 200,
+        message: "Cambió el estado de la venta",
+      });
+    } else {
+      console.log(err);
+    }
+  });
+});
+
 module.exports = router;
