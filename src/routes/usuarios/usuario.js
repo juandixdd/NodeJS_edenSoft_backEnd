@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mySqlConnection = require("../../conexion");
+const bcryptjs = require("bcrypt");
 
 //? Get
 router.get("/usuario", (req, res) => {
@@ -27,6 +28,23 @@ router.get("/usuario/:id", (req, res) => {
       console.log(err);
     }
   });
+});
+
+//? editData
+router.put("/usuario/:id_cliente_documento", (req, res) => {
+  const { correo, contrasena } = req.body;
+  const { id_cliente_documento } = req.params;
+  mySqlConnection.query(
+    "UPDATE usuario SET correo = ?, contrasena = ? WHERE id_cliente_documento = ?",
+    [correo, bcryptjs.hashSync(contrasena, 10), id_cliente_documento],
+    (err, rows, fields) => {
+      if (!err) {
+        res.json({ status: "Usuario actualizado" });
+      } else {
+        console.log(err);
+      }
+    }
+  );
 });
 
 module.exports = router;

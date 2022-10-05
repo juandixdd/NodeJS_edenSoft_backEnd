@@ -63,11 +63,10 @@ router.post("/clientes-informativos", (req, res) => {
       nombre,
       apellido,
       telefono,
-      id_usuario_documento,
     } = req.body;
     mySqlConnection.query(
-      "INSERT INTO clientes_informativos (id_cliente_documento,nombre,apellido,telefono, id_usuario_documento) VALUES (?,?,?,?,?)",
-      [id_cliente_documento, nombre, apellido, telefono, id_usuario_documento],
+      "INSERT INTO clientes_informativos (id_cliente_documento,nombre,apellido,telefono) VALUES (?,?,?,?)",
+      [id_cliente_documento, nombre, apellido, telefono],
       (err, rows, fields) => {
         if (!err) {
           res.json({ status: 200, message: "Cliente creado con éxito" });
@@ -82,15 +81,15 @@ router.post("/clientes-informativos", (req, res) => {
 router.post("/clientes-informativos", (req, res) => {
   //* Se define función para creación del cliente
   function createCliente() {
-    const { id_cliente_documento, nombre, apellido, telefono, id_usuario_documento} = req.body;
+    const { id_cliente_documento, nombre, apellido, telefono} = req.body;
     mySqlConnection.query(
-      "INSERT INTO clientes_informativos (id_cliente_documento,nombre,apellido,telefono, id_usuario_documento) VALUES (?,?,?,?,?)",
+      "INSERT INTO clientes_informativos (id_cliente_documento,nombre,apellido,telefono) VALUES (?,?,?,?)",
       [
         id_cliente_documento,
         nombre,
         apellido,
         telefono,
-        id_usuario_documento,
+        
       ],
       (err, rows, fields) => {
         if (!err) {

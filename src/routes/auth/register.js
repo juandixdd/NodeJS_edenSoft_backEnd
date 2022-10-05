@@ -46,4 +46,29 @@ router.post("/register", (req, res) => {
   };
 });
 
+//? get user by email
+router.get("/register/:email", (req, res) => {
+  const { email } = req.params;
+  mySqlConnection.query(
+    "SELECT * FROM usuario WHERE correo = ?",
+    [email],
+    (err, rows, fields) => {
+      if (!err) {
+        if (rows.length === 0) {
+          res.send({
+            exists: false,
+          });
+        } else {
+          res.send({
+            exists: true,
+            data: rows,
+          });
+        }
+      } else {
+        console.log(err);
+      }
+    }
+  );
+});
+
 module.exports = router;
