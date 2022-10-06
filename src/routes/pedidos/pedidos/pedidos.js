@@ -139,7 +139,11 @@ router.put("/cotizaciones/anular/:id", (req, res) => {
   (query = "UPDATE pedidos SET estado = ? WHERE id_pedido = ?"),
     mySqlConnection.query(query, [estado, id], (err, rows, fields) => {
       if (!err) {
-        res.send(rows);
+        res.json({
+          status:200, 
+          message: "Cambio el estado de la cotizacion",
+          rows:rows
+        });
       } else {
         console.log(err);
       }
