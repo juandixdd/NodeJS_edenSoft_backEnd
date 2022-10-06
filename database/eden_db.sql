@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-09-2022 a las 02:45:28
+-- Tiempo de generación: 06-10-2022 a las 02:45:03
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -53,36 +53,21 @@ CREATE TABLE `clientes_informativos` (
   `id_cliente_documento` int(11) NOT NULL,
   `nombre` varchar(300) NOT NULL,
   `apellido` varchar(300) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `id_usuario_documento` int(11) DEFAULT NULL
+  `telefono` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `clientes_informativos`
 --
 
-INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido`, `telefono`, `id_usuario_documento`) VALUES
-(111, 'Juan', 'Arteaga', 1111, NULL),
-(222, 'Jhon', 'Dhoe', 11111111, NULL),
-(333, 'Jhon', 'Dhoe', 11111111, NULL),
-(444, 'Jhon', 'Dhoe', 11111111, 999),
-(777, 'Veggeta', 'El mejor youtuber', 777, NULL),
-(888, '888', '888', 888, NULL),
-(1010, 'test10', 'test10', 1010, NULL),
-(1111, 'test11', 'test11', 1111, NULL),
-(1212, 'test12', 'test12', 1212, NULL),
-(1313, 'test13', 'test13', 1313, NULL),
-(2222, 'test2', 'test2', 123123, NULL),
-(3333, 'test3', 'test3', 123123, NULL),
-(4444, 'test4', 'test4', 1231231, NULL),
-(5555, 'test5', 'test5', 5555, NULL),
-(6666, 'test6', 'test6', 23123, NULL),
-(7777, 'test7', 'test7', 7777, NULL),
-(8888, 'test8', 'test8', 8888, NULL),
-(9999, 'test9', 'test9', 9999, NULL),
-(1112221, 'jose', 'loraes', 233322345, NULL),
-(8888888, 'Prueba', 'xddd', 123123, NULL),
-(2147483647, 'Cliente', 'Nuevo', 123123, NULL);
+INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido`, `telefono`) VALUES
+(111, 'Cliente', 'Informativo', 1111),
+(222, 'Juanito', 'Alimaña', 3123),
+(333, 'Pedro', 'Navaja', 333),
+(444, 'Otro', 'Usuario', 444),
+(888, 'updated', 'user', 111),
+(999, '999', '999', 999),
+(123123, '12312', '123123', 123123);
 
 -- --------------------------------------------------------
 
@@ -103,63 +88,10 @@ CREATE TABLE `detalle_pedido` (
 --
 
 INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `cantidad`, `precio_unitario`) VALUES
-(1, 12, 1, 4, 2000),
-(2, 12, 20, 5, 300),
-(3, 14, 20, 5, 2000),
-(4, 14, 21, 5, 2000),
-(5, 12, 21, 4, 300),
-(6, 14, 22, 5, 2000),
-(7, 12, 22, 5, 300),
-(8, 14, 26, 5, 2000),
-(9, 12, 26, 5, 300),
-(10, 14, 27, 5, 2000),
-(11, 12, 27, 5, 300),
-(12, 14, 28, 5, 2000),
-(13, 12, 28, 5, 300),
-(14, 14, 29, 5, 2000),
-(15, 12, 29, 5, 300),
-(16, 14, 30, 5, 2000),
-(17, 12, 30, 5, 300),
-(18, 14, 31, 5, 2000),
-(19, 12, 31, 5, 300),
-(20, 14, 32, 5, 2000),
-(21, 12, 32, 5, 300),
-(22, 14, 33, 5, 2000),
-(23, 12, 33, 5, 300),
-(24, 14, 34, 5, 2000),
-(25, 12, 34, 5, 300),
-(26, 14, 35, 5, 2000),
-(27, 12, 35, 5, 300),
-(28, 14, 36, 5, 2000),
-(29, 12, 36, 5, 300),
-(30, 14, 37, 5, 2000),
-(31, 12, 37, 5, 300),
-(32, 14, 38, 5, 2000),
-(33, 12, 38, 4, 300),
-(34, 14, 39, 5, 2000),
-(35, 12, 39, 4, 300),
-(36, 14, 40, 5, 2000),
-(37, 12, 40, 4, 300),
-(38, 14, 41, 5, 2000),
-(39, 12, 41, 4, 300),
-(40, 14, 42, 5, 2000),
-(41, 12, 42, 4, 300),
-(42, 14, 43, 5, 2000),
-(43, 12, 43, 4, 300),
-(44, 14, 44, 5, 2000),
-(45, 12, 44, 8, 300),
-(46, 14, 45, 5, 2000),
-(47, 12, 45, 8, 300),
-(48, 14, 46, 5, 2000),
-(49, 12, 46, 8, 300),
-(50, 14, 47, 5, 2000),
-(51, 12, 47, 8, 300),
-(52, 14, 48, 10, 2000),
-(53, 15, 49, 20, 3500),
-(54, 16, 49, 5, 1000),
-(55, 14, 49, 77, 2000),
-(56, 16, 54, 20, 1000),
-(57, 15, 54, 5, 3500);
+(58, 14, 52, 10, 2000),
+(59, 15, 52, 10, 3500),
+(60, 14, 53, 10, 2000),
+(61, 15, 53, 10, 3500);
 
 -- --------------------------------------------------------
 
@@ -192,7 +124,8 @@ INSERT INTO `detalle_venta` (`id_detalle_venta`, `id_producto`, `id_venta`, `can
 (16, 12, 13, 200, 300),
 (17, 14, 14, 300, 2000),
 (18, 16, 14, 300, 1000),
-(19, 15, 15, 44, 3500);
+(19, 15, 15, 44, 3500),
+(20, 14, 16, 1, 2000);
 
 -- --------------------------------------------------------
 
@@ -202,7 +135,7 @@ INSERT INTO `detalle_venta` (`id_detalle_venta`, `id_producto`, `id_venta`, `can
 
 CREATE TABLE `pedidos` (
   `id_pedido` int(11) NOT NULL,
-  `id_usuario_documento` int(11) NOT NULL,
+  `id_cliente_documento` int(11) NOT NULL,
   `tipo` varchar(100) NOT NULL,
   `fecha_registro` date NOT NULL,
   `precio_total` float NOT NULL,
@@ -214,61 +147,10 @@ CREATE TABLE `pedidos` (
 -- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `pedidos` (`id_pedido`, `id_usuario_documento`, `tipo`, `fecha_registro`, `precio_total`, `estado`, `fecha_entrega`) VALUES
-(1, 11111, 'cotizacion', '2022-09-16', 20000, 1, '2022-09-17'),
-(2, 11111, 'Cotizacion', '2022-09-16', 1500, 1, '2022-09-17'),
-(3, 11111, 'Cotizacion', '2022-09-16', 2000, 1, '2022-09-17'),
-(4, 11111, 'Cotizacion', '2022-09-16', 3500, 1, '2022-09-17'),
-(5, 11111, 'Cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(6, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(7, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(8, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(9, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(10, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(11, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(12, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(13, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(14, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(15, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(16, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(17, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(18, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(19, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(20, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(21, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
-(22, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
-(23, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(24, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(25, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(26, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(27, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(28, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(29, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(30, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(31, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(32, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(33, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(34, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(35, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(36, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(37, 11111, 'cotizacion', '2022-09-16', 11500, 1, '2022-09-17'),
-(38, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
-(39, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
-(40, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
-(41, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
-(42, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
-(43, 11111, 'cotizacion', '2022-09-16', 11200, 1, '2022-09-17'),
-(44, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
-(45, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
-(46, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
-(47, 11111, 'cotizacion', '2022-09-16', 12400, 1, '2022-09-17'),
-(48, 11111, 'cotizacion', '2022-09-17', 20000, 1, '2022-09-17'),
-(49, 11111, 'cotizacion', '2022-09-20', 229000, 1, '2022-09-17'),
-(50, 1122, 'pedido', '2022-09-29', 37500, 1, '2022-09-29'),
-(51, 1122, 'pedido', '2022-09-29', 37500, 1, '2022-10-30'),
-(52, 1122, 'pedido', '2022-09-29', 37500, 1, '2022-09-30'),
-(53, 1122, 'pedido', '2022-09-29', 37500, 1, '2022-09-30'),
-(54, 1122, 'pedido', '2022-09-29', 37500, 1, '2022-09-30');
+INSERT INTO `pedidos` (`id_pedido`, `id_cliente_documento`, `tipo`, `fecha_registro`, `precio_total`, `estado`, `fecha_entrega`) VALUES
+(51, 123123, 'cotizacion', '2022-10-05', 55000, 1, '2022-09-17'),
+(52, 123123, 'cotizacion', '2022-10-05', 55000, 1, '2022-09-17'),
+(53, 123123, 'cotizacion', '2022-10-05', 55000, 1, '2022-09-17');
 
 -- --------------------------------------------------------
 
@@ -373,27 +255,27 @@ INSERT INTO `rol_permisos` (`id`, `id_rol`, `id_permiso`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `users`
+-- Estructura de tabla para la tabla `usuario`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `phone` varchar(15) NOT NULL,
-  `rol` int(11) NOT NULL DEFAULT 3
+CREATE TABLE `usuario` (
+  `id_usuario` int(11) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `contrasena` varchar(100) NOT NULL,
+  `id_cliente_documento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `users`
+-- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `phone`, `rol`) VALUES
-(999, 'JuanDi', 'Arteaga', 'juandi@email.com', '$2b$10$tjcfi7NPcZm.t/nUf5nAV.imBx8vmp9/Uz.Euqbx0Kbmc9Y./69w.', '123', 1),
-(1122, 'carlos', 'gonzalez', 'carlos@email.com', '$2b$10$xWZemZwYF6mfv8c6yOqvjuhM1gOfXUJx9oLsfmKRzHH069DsnvZMq', '1478', 3),
-(123321, 'daniel', 'peñita', 'jdps106@hotmail.com', '$2b$10$W6TF0IH.0X1bMrb35TCHtugHIBjMEnBG6jXbTAoB4Tolr1NeApLSe', '4445565', 3);
+INSERT INTO `usuario` (`id_usuario`, `correo`, `contrasena`, `id_cliente_documento`) VALUES
+(5, 'juan@juan.com', '$2b$10$aGihf4cnIrb4D2CB0lerauC4Hge2fOLx62JWrI68U6wOWhzmUwn2S', 111),
+(6, 'pedro@navaja.com', '$2b$10$3LiAUIg0A7Y9y4yVmtHTcuUUUgvpJvYZcszsiWc.HHzVvunxS5Kzi', 333),
+(7, 'usuario@user.com', '$2b$10$/S.XO3cB75QoUeU8uHsRsehpbEdPG4.Nlo74J8.FshTBNCbe347We', 444),
+(8, 'email@email.com', '$2b$10$y9aD4WpGdfy7A7Kjy3rt6./0DBOLi7F2gPGJF/wkYlRRTVlxVey3.', 123123),
+(9, '999@999.com', '$2b$10$3OKjsjMgksBKsey/3VVxJuBwPoimt5Bp.iCMifuXQqShvL90a29MS', 999),
+(10, 'nuevo@nuevo.com', '$2b$10$3Iwz.VBMHcFMBtkTZRMt6.YQm8DZbZC2mA8huI/84io8mmtz3tmRy', 888);
 
 -- --------------------------------------------------------
 
@@ -417,9 +299,10 @@ INSERT INTO `venta_local` (`id_venta`, `id_cliente_documento`, `fecha_registro`,
 (10, 1313, '2022-09-28', 600000, 1),
 (11, 2147483647, '2022-09-28', 1300000, 1),
 (12, 888, '2022-09-28', 480000, 1),
-(13, 8888888, '2022-09-28', 660000, 1),
-(14, 777, '2022-09-28', 900000, 1),
-(15, 1112221, '2022-09-28', 154000, 1);
+(13, 8888888, '2022-09-28', 660000, 0),
+(14, 777, '2022-09-28', 900000, 0),
+(15, 1112221, '2022-09-28', 154000, 0),
+(16, 123123, '2022-10-04', 2000, 1);
 
 --
 -- Índices para tablas volcadas
@@ -480,10 +363,10 @@ ALTER TABLE `rol_permisos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `users`
+-- Indices de la tabla `usuario`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`);
 
 --
 -- Indices de la tabla `venta_local`
@@ -511,19 +394,19 @@ ALTER TABLE `clientes_informativos`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -535,7 +418,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -550,10 +433,16 @@ ALTER TABLE `rol_permisos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT de la tabla `venta_local`
 --
 ALTER TABLE `venta_local`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
