@@ -83,4 +83,23 @@ router.delete("/categoria/:id", (req, res) => {
   );
 });
 
+
+//? Cambiar estado de un producto =====================================================================================
+router.put("/categoria/cambiarEstado/:id", (req, res) => {
+  const { id } = req.params;
+  const { estado } = req.body;
+  (query = "UPDATE categorias SET estado = ? WHERE id = ?"),
+    mySqlConnection.query(query, [estado, id], (err, rows, fields) => {
+      if (!err) {
+        res.json({
+          status:200, 
+          message: "Cambio el estado de la categoria",
+          rows:rows
+        });
+      } else {
+        console.log(err);
+      }
+    });
+});
+
 module.exports = router;

@@ -104,4 +104,22 @@ router.get("/productos/object/:id", (req, res) => {
   );
 });
 
+
+//? Cambiar estado de un producto =====================================================================================
+router.put("/productos/cambiarEstado/:id", (req, res) => {
+  const { id } = req.params;
+  const { estado } = req.body;
+  (query = "UPDATE productos SET estado = ? WHERE id = ?"),
+    mySqlConnection.query(query, [estado, id], (err, rows, fields) => {
+      if (!err) {
+        res.json({
+          status:200, 
+          message: "Cambio el estado del producto",
+          rows:rows
+        });
+      } else {
+        console.log(err);
+      }
+    });
+});
 module.exports = router;
