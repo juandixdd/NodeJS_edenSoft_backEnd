@@ -37,7 +37,9 @@ router.post("/register", (req, res) => {
       [correo, hash, id_cliente_documento],
       (err, rows, fields) => {
         if (!err) {
-          res.json({ status: 200, message: "Usuario registrado" });
+          res.json({ 
+            status: 200, 
+            message: "Usuario registrado" });
         } else {
           console.log(err);
         }
