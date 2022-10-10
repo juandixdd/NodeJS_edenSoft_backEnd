@@ -6,7 +6,7 @@ const bcryptjs = require("bcrypt");
 //? Get
 router.get("/usuario", (req, res) => {
   const query =
-    "select u.*, ci.*, concat(ci.nombre, ' ', ci.apellido) as 'nombre_completo' from usuario u join clientes_informativos ci on ci.id_cliente_documento = u.id_cliente_documento";
+    "select u.*, ci.*, r.nombre as 'rol', concat(ci.nombre, ' ', ci.apellido) as 'nombre_completo' from usuario u join clientes_informativos ci on ci.id_cliente_documento = u.id_cliente_documento join roles r on r.id = u.id_rol";
   mySqlConnection.query(query, (err, rows, fields) => {
     if (!err) {
       res.send(rows);
