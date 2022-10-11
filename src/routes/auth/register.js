@@ -28,16 +28,18 @@ router.post("/register", (req, res) => {
   );
 
   const registerUser = () => {
-    const { correo, contrasena, id_cliente_documento } = req.body;
+    const { correo, contrasena, id_cliente_documento, id_rol } = req.body;
     const hash = bcryptjs.hashSync(contrasena, 10);
     const query =
-      "INSERT INTO usuario (correo, contrasena, id_cliente_documento) VALUES (?,?,?)";
+      "INSERT INTO usuario (correo, contrasena, id_cliente_documento, id_rol) VALUES (?,?,?,?)";
     mySqlConnection.query(
       query,
-      [correo, hash, id_cliente_documento],
+      [correo, hash, id_cliente_documento, id_rol],
       (err, rows, fields) => {
         if (!err) {
-          res.json({ status: 200, message: "Usuario registrado" });
+          res.json({ 
+            status: 200, 
+            message: "Usuario registrado" });
         } else {
           console.log(err);
         }

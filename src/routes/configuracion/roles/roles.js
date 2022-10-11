@@ -52,16 +52,19 @@ router.post("/roles", (req, res) => {
   createRol();
 });
 
-//?Editar un rol =====================================================================================
-router.put("/roles/:id", (req, res) => {
-  const { nombre, estado } = req.body;
+//?anular un rol =====================================================================================
+router.put("/anula-rol/:id", (req, res) => {
+  const {estado } = req.body;
   const { id } = req.params;
   mySqlConnection.query(
-    "UPDATE roles SET nombre = ?, estado = ? WHERE id = ?",
-    [nombre, estado, id],
+    "UPDATE roles SET estado = ? WHERE id = ?",
+    [estado, id],
     (err, rows, fields) => {
       if (!err) {
-        res.json({ status: "rol actualizado" });
+        res.json({ 
+          status:200, 
+          message:"rol actualizado" 
+        });
       } else {
         console.log(err);
       }
