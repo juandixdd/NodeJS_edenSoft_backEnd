@@ -32,11 +32,11 @@ router.get("/usuario/:id", (req, res) => {
 
 //? editData
 router.put("/usuario/:id_cliente_documento", (req, res) => {
-  const { correo } = req.body;
+  const { id_rol } = req.body;
   const { id_cliente_documento } = req.params;
   mySqlConnection.query(
-    "UPDATE usuario SET correo = ? WHERE id_cliente_documento = ?",
-    [correo, id_cliente_documento],
+    "UPDATE usuario SET id_rol = ? WHERE id_cliente_documento = ?",
+    [id_rol, id_cliente_documento],
     (err, rows, fields) => {
       if (!err) {
         res.json({ status: "Usuario actualizado" });
