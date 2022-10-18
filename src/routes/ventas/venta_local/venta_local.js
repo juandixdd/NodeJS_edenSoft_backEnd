@@ -4,7 +4,7 @@ const mySqlConnection = require("../../../conexion");
 
 //? Get data
 router.get("/venta-local", (req, res) => {
-  mySqlConnection.query("SELECT * FROM venta_local", (err, rows, fields) => {
+  mySqlConnection.query("SELECT * FROM venta_local order by fecha_registro desc", (err, rows, fields) => {
     if (!err) {
       res.send(rows);
     } else {

@@ -55,4 +55,7 @@ app.use(require("./routes/ventas/clientes_informativos/clientes_informativos"));
 app.use(require("./routes/ventas/venta_local/venta_local"));
 app.use(require("./routes/ventas/venta_local/detalle_venta"));
 
+//? Extras
+app.use(require("./routes/extras/abonos"));
+
 //! RECUERDEN SEPARAR ESTAS RUTAS POR MÓDULO, PONGANLE EL COMENTARIO PARA EL MÓDULO Y DESPUES LAS RUTAS

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-10-2022 a las 17:24:30
--- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 8.1.10
+-- Tiempo de generación: 18-10-2022 a las 17:46:53
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `eden_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `abono`
+--
+
+CREATE TABLE `abono` (
+  `id_abono` int(11) NOT NULL,
+  `id_venta_local` int(11) DEFAULT NULL,
+  `id_pedido_local` int(11) DEFAULT NULL,
+  `valor` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `abono`
+--
+
+INSERT INTO `abono` (`id_abono`, `id_venta_local`, `id_pedido_local`, `valor`) VALUES
+(1, 19, NULL, 25000),
+(2, 19, NULL, 25000),
+(3, 25, NULL, 65625),
+(4, 26, NULL, 31250);
 
 -- --------------------------------------------------------
 
@@ -70,8 +93,15 @@ INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido
 (999, 'Josesito', 'Vegano', 310002022),
 (7789, 'test', 'test', 3321225),
 (123123, 'Ricardo', '3333221', 123123),
+(546345, '12312343', '356354', 53445),
+(5234234, '123', '123', 123),
+(7869987, '13123123', '1231', 123123),
+(8675342, '13212', '234234', 2353465),
 (10366954, 'juan Atonio', 'Correa', 4566658),
+(12412312, '123123', '12323123', 123123),
 (45654898, 'test', 'test', 3321225),
+(63456345, '12312', '23423', 23423),
+(65356768, '123123', '2343', 3431),
 (123215556, 'Daniela ', 'Rojas', 2147483647),
 (123222111, 'qweqw', 'qweqwe', 332122),
 (125146841, 'Ediccson', 'Quiroz', 45613216),
@@ -116,20 +146,6 @@ INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detalle_pedido_local`
---
-
-CREATE TABLE `detalle_pedido_local` (
-  `id_detalle_pedido_local` int(11) NOT NULL,
-  `id_producto` int(11) NOT NULL,
-  `id_pedido_local` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `precio_unitario` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `detalle_venta`
 --
 
@@ -161,7 +177,18 @@ INSERT INTO `detalle_venta` (`id_detalle_venta`, `id_producto`, `id_venta`, `can
 (19, 15, 15, 44, 3500),
 (20, 14, 16, 1, 2000),
 (21, 16, 17, 44, 1000),
-(22, 15, 17, 22, 3500);
+(22, 15, 17, 22, 3500),
+(23, 15, 18, 22, 3500),
+(24, 15, 19, 22, 3500),
+(25, 17, 19, 32, 2500),
+(26, 16, 20, 20, 1000),
+(27, 16, 21, 25, 1000),
+(28, 15, 22, 25, 3500),
+(29, 15, 23, 34, 3500),
+(30, 17, 24, 123, 2500),
+(31, 17, 25, 35, 2500),
+(32, 17, 26, 25, 2500),
+(33, 16, 27, 4534, 1000);
 
 -- --------------------------------------------------------
 
@@ -190,28 +217,13 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente_documento`, `tipo`, `fecha_regis
 (54, 125146841, 'cotizacion', '2022-10-10', 36500, 1, '2022-09-17'),
 (55, 125146841, 'cotizacion', '2022-10-10', 33000, 1, '2022-09-17'),
 (56, 125146841, 'pedido', '2022-10-10', 33000, 0, '2022-10-31'),
-(57, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
+(57, 125146841, 'pedido', '2022-10-10', 33000, 0, '2022-10-31'),
 (58, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
 (59, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
 (60, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
 (61, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
 (62, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
 (63, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pedido_local`
---
-
-CREATE TABLE `pedido_local` (
-  `id_pedido_local` int(11) NOT NULL,
-  `id_cliente_documento` int(11) NOT NULL,
-  `fecha_registro` date NOT NULL,
-  `fecha_entrega` date NOT NULL,
-  `precio_total` float NOT NULL,
-  `estado` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -359,26 +371,43 @@ CREATE TABLE `venta_local` (
   `id_cliente_documento` int(11) NOT NULL,
   `fecha_registro` date NOT NULL,
   `precio_total` float NOT NULL,
-  `estado` int(11) NOT NULL
+  `estado` int(11) NOT NULL,
+  `pagado` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `venta_local`
 --
 
-INSERT INTO `venta_local` (`id_venta`, `id_cliente_documento`, `fecha_registro`, `precio_total`, `estado`) VALUES
-(10, 1313, '2022-09-28', 600000, 1),
-(11, 2147483647, '2022-09-28', 1300000, 1),
-(12, 888, '2022-09-28', 480000, 1),
-(13, 8888888, '2022-09-28', 660000, 1),
-(14, 777, '2022-09-28', 900000, 1),
-(15, 1112221, '2022-09-28', 154000, 1),
-(16, 123123, '2022-10-04', 2000, 1),
-(17, 223, '2022-10-10', 121000, 1);
+INSERT INTO `venta_local` (`id_venta`, `id_cliente_documento`, `fecha_registro`, `precio_total`, `estado`, `pagado`) VALUES
+(10, 1313, '2022-09-28', 600000, 1, 1),
+(11, 2147483647, '2022-09-28', 1300000, 1, 1),
+(12, 888, '2022-09-28', 480000, 1, 1),
+(13, 8888888, '2022-09-28', 660000, 1, 1),
+(14, 777, '2022-09-28', 900000, 1, 1),
+(15, 1112221, '2022-09-28', 154000, 1, 1),
+(16, 123123, '2022-10-04', 2000, 0, 1),
+(17, 223, '2022-10-10', 121000, 0, 1),
+(18, 111, '2022-10-13', 77000, 0, 1),
+(19, 111, '2022-10-13', 157000, 0, 1),
+(20, 5234234, '2022-10-18', 20000, 1, 1),
+(21, 12412312, '2022-10-18', 25000, 1, 1),
+(22, 7869987, '2022-10-18', 87500, 1, 1),
+(23, 546345, '2022-10-18', 119000, 1, 1),
+(24, 65356768, '2022-10-18', 307500, 1, 1),
+(25, 8675342, '2022-10-18', 87500, 1, 1),
+(26, 111, '2022-10-18', 62500, 1, 1),
+(27, 63456345, '2022-10-18', 4534000, 1, 1);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `abono`
+--
+ALTER TABLE `abono`
+  ADD PRIMARY KEY (`id_abono`);
 
 --
 -- Indices de la tabla `categorias`
@@ -399,12 +428,6 @@ ALTER TABLE `detalle_pedido`
   ADD PRIMARY KEY (`id_detalle_pedido`);
 
 --
--- Indices de la tabla `detalle_pedido_local`
---
-ALTER TABLE `detalle_pedido_local`
-  ADD PRIMARY KEY (`id_detalle_pedido_local`);
-
---
 -- Indices de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
@@ -415,12 +438,6 @@ ALTER TABLE `detalle_venta`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id_pedido`);
-
---
--- Indices de la tabla `pedido_local`
---
-ALTER TABLE `pedido_local`
-  ADD PRIMARY KEY (`id_pedido_local`);
 
 --
 -- Indices de la tabla `permisos`
@@ -463,6 +480,12 @@ ALTER TABLE `venta_local`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `abono`
+--
+ALTER TABLE `abono`
+  MODIFY `id_abono` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
@@ -481,28 +504,16 @@ ALTER TABLE `detalle_pedido`
   MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
--- AUTO_INCREMENT de la tabla `detalle_pedido_local`
---
-ALTER TABLE `detalle_pedido_local`
-  MODIFY `id_detalle_pedido_local` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
   MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
-
---
--- AUTO_INCREMENT de la tabla `pedido_local`
---
-ALTER TABLE `pedido_local`
-  MODIFY `id_pedido_local` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -538,7 +549,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `venta_local`
 --
 ALTER TABLE `venta_local`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
