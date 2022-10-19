@@ -82,3 +82,17 @@ router.put("/venta-local/:id_venta", (req, res) => {
 });
 
 module.exports = router;
+
+/*
+select
+	dv.*,
+	p.nombre as 'producto',
+	sum(dv.cantidad) as cantidad_ventas
+from
+	detalle_venta dv
+join productos p on
+	p.id = dv.id_producto
+group by
+	dv.id_producto
+	
+*/
