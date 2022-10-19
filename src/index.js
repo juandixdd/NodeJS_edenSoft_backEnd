@@ -25,6 +25,9 @@ app.listen(app.get("port"), () => {
 //? Página inicial
 app.use(require("./routes/initialPage"));
 
+//?dashboard
+app.use(require("./routes/dashboard/dashboard"));
+
 //? Autentificación
 app.use(require("./routes/auth/register"));
 app.use(require("./routes/auth/login"));
