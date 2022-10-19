@@ -85,14 +85,15 @@ module.exports = router;
 
 /*
 select
-	dv.*,
+	dp.*,
 	p.nombre as 'producto',
-	sum(dv.cantidad) as cantidad_ventas
+	sum(dp.cantidad) as cantidad_ventas
 from
-	detalle_venta dv
+	detalle_pedido dp 
 join productos p on
-	p.id = dv.id_producto
+	p.id = dp.id_producto
 group by
-	dv.id_producto
+	dp.id_producto
+order by cantidad_ventas desc 
 	
 */
