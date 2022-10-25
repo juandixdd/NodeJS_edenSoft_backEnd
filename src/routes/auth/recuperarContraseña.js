@@ -7,7 +7,7 @@ const nodemailer = require("nodemailer");
 
 //Creamos el objeto de transporte
 router.post("/send-mail", (req, res) => {
-  const {mensaje,toSend} = req.body;
+  const { mensaje, toSend } = req.body;
   let transporter = nodemailer.createTransport({
     service: "outlook",
     auth: {
@@ -16,8 +16,8 @@ router.post("/send-mail", (req, res) => {
     },
   });
 
-  let subject= "Restaura Tu Contrasena Bueñueleria El Eden"
-  let html=`<!DOCTYPE html>
+  let subject = "Restaura Tu Contrasena Bueñueleria El Eden";
+  let html = `<!DOCTYPE html>
   <html lang="en">
     <head>
       <meta charset="UTF-8" />
@@ -58,12 +58,16 @@ router.post("/send-mail", (req, res) => {
           margin: 1rem;
           text-align: center;
         }
+        .tittle{
+          color: green;
+          background-color: red;
+        }
       </style>
       <header>
-        <div class="row tittle">
+        <div class="row">
           <div class="col-12">
             <img class="img" src="https://i.pinimg.com/originals/c8/dc/5d/c8dc5d395e2a742e42892bbdaad53f22.jpg" alt="" />
-            <h1>Eden.soft</h1>
+            <h1 class="tittle">Eden.soft</h1>
           </div>
         </div>   
       </header>
@@ -99,7 +103,7 @@ router.post("/send-mail", (req, res) => {
       ></script>
     </body>
   </html> 
-  `
+  `;
 
   let mailOptions = {
     from: "jdps1006@hotmail.com",
@@ -111,8 +115,16 @@ router.post("/send-mail", (req, res) => {
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
+      res.send({
+        status: 403,
+        message: "No se envió el email",
+      });
     } else {
       console.log("Email enviado: " + info.response);
+      res.send({
+        status: 200,
+        message: "Email enviado con exito",
+      });
     }
   });
 });
