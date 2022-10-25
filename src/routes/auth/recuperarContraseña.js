@@ -19,90 +19,101 @@ router.post("/send-mail", (req, res) => {
   let subject = "Restaura Tu Contrasena Bueñueleria El Eden";
   let html = `<!DOCTYPE html>
   <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <!-- CSS only -->
-      <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-        crossorigin="anonymous"
-      />
-      <title>Document</title>
-    </head>
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <body>
       <style>
-        .tittle {
-          justify-content: end;
-          text-align: center;
-          background-color: #1187ab;
-          color: whitesmoke;
-          padding: 2rem;
-        }
-        .footer {
-          margin-top: 5rem;
-          background-color: rgb(63, 63, 63);
-          color: aliceblue;
-        }
+          p, a, h1, h2, h3, h4, h5, h6 {font-family: 'Roboto', sans-serif !important;}
+          h1{ font-size: 30px !important;}
+          h2{ font-size: 25px !important;}
+          h3{ font-size: 18px !important;}
+          h4{ font-size: 16px !important;}
+          p, a{font-size: 15px !important;}
   
-        .img {
-          width: 10%;
-          height: auto;
-          border-radius: 50%;
-        }
-  
-        .section1 {
-          margin: 1rem;
-          text-align: center;
-        }
-        .tittle{
-          color: green;
-          background-color: red;
-        }
+          .claseBoton{
+              width: 30%;
+                  background-color: #1187ab;
+                  color: black; 
+                  padding: 16px 32px;
+                  text-align: center;
+                  text-decoration: none;
+                  font-weight: bold;
+                  display: inline-block;
+                  font-size: 16px;
+                  margin: 4px 2px;
+                  transition-duration: 0.4s;
+                  cursor: pointer;
+            border-radius: 10px
+          }
+          .claseBoton:hover{
+              background-color: #000000;
+              color: #ffffff;
+          }
+          .imag{
+              width: 20px;
+              height: 20px;
+          }
+          .contA{
+              margin: 0px 5px 0 5px;
+          }
+          .afooter{
+              color: #ffffff !important; 
+              text-decoration: none;
+              font-size: 13px !important;
+          }
       </style>
-      <header>
-        <div class="row">
-          <div class="col-12">
-            <img class="img" src="https://i.pinimg.com/originals/c8/dc/5d/c8dc5d395e2a742e42892bbdaad53f22.jpg" alt="" />
-            <h1 class="tittle">Eden.soft</h1>
+  </head>
+  <body>
+      <div style="width: 100%; background-color: #e3e3e3;">
+          <div style="padding: 20px 10px 20px 10px;">
+              <!-- Imagen inicial -->
+              <div style="background-color: #0e0e0e; padding: 10px 0px 10px 0px; width: 100%; text-align: center;">
+                  <img src="https://i.pinimg.com/originals/c8/dc/5d/c8dc5d395e2a742e42892bbdaad53f22.jpg" alt="" style="width: 200px; height: 60px;">
+              </div>
+              <!-- Imagen inicial -->
+  
+              <!-- Contenido principal -->
+              <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
+                  <h1>¿Olvidase tu contraseña de Eden.Soft? 😱</h1>
+                  <p>!No te preocupes¡ este es un correo de verificación, para recuperar tu contraseña presiona el botón.
+                  </p>
+  
+                 
+                  <p style="margin-bottom: 50px;"><i>Atentamente:</i><br>Equipo Eden.Soft</p>
+  
+                  <!-- Botón -->
+                  <a class="claseBoton">Recuperar contraseña</a>
+              </div>
+              <!-- Contenido principal -->
+  
+              <!-- Footer -->
+              <div style="background-color: #282828; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                  
+  
+                  <h4>Soporte</h4>
+                  <p style="font-size: 13px; padding: 0px 20px 0px 20px;">
+                      Comunícate con nosotros por los siguientes medios:<br>
+                      Correo: <a class="afooter" href="mailto:proyectos@pretwor.com">correo@correo.com</a><br>
+                      Whatsapp: <a class="afooter" href="https://wa.me/573224294332">+57 322 429 4332</a><br>
+                  </p>
+                  <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                      © 2022 Eden.Soft, todos los derechos reservados.
+                  </p>
+              </div>
+              <!-- Footer -->
+  
+  
+  
           </div>
-        </div>   
-      </header>
-      <section>
-        <div class="row justify-content-center section1">
-          <div class="col-12">
-            <p class="mt-3">
-              Nos informaste que no se te olvido la contraseña y no puedes
-              ingresar a nuestra plataforma 😭, Presiona en el siguiente boton y
-              crea una nueva contraseña.
-            </p>
-            <button class="btn btn-dark">PRESIONA AQUI</button>
-          </div>
-        </div>
-      </section>
-      <footer class="footer p-2 ">
-        <div class="row justify-content-center">
-          <div class="col-auto">
-          </div>
-          <div class="col-auto">
-            <p>CONTACTANOS:</p>
-            <p>‣Correo: soporte.eden.soft@gmail.com</p>
-            <p>‣Telefono: 3333333</p>
-            <p>‣Celular: 33332323323</p>
-          </div>
-        </div>
-      </footer>
-      <!-- JavaScript Bundle with Popper -->
-      <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-        crossorigin="anonymous"
-      ></script>
-    </body>
-  </html> 
+      </div>
+  </body>
+  </html>
+  
+  
+  
+  
   `;
 
   let mailOptions = {
