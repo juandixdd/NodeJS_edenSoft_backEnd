@@ -31,6 +31,7 @@ app.use(require("./routes/dashboard/dashboard"));
 //? Autentificación
 app.use(require("./routes/auth/register"));
 app.use(require("./routes/auth/login"));
+app.use(require("./routes/auth/recuperarContraseña"))
 
 //? Configuracion
 app.use(require("./routes/configuracion/permisos/permisos"));
