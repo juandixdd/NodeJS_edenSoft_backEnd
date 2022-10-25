@@ -4,13 +4,16 @@ const mySqlConnection = require("../../../conexion");
 
 //? Get data
 router.get("/venta-local", (req, res) => {
-  mySqlConnection.query("SELECT * FROM venta_local order by fecha_registro desc", (err, rows, fields) => {
-    if (!err) {
-      res.send(rows);
-    } else {
-      console.log(err);
+  mySqlConnection.query(
+    "select *, concat(if(estado = 0, 'Inactivo', 'Activo'), ', ', if(pagado = 0, 'Sin pagar', 'Pago')) as 'estado_data' from venta_local order by fecha_registro desc",
+    (err, rows, fields) => {
+      if (!err) {
+        res.send(rows);
+      } else {
+        console.log(err);
+      }
     }
-  });
+  );
 });
 
 //? Get data by ID
@@ -45,11 +48,11 @@ router.get("/venta-local-all-data/:id", (req, res) => {
 
 //? Create data
 router.post("/venta-local", (req, res) => {
-  const { id_cliente_documento, fecha_registro, precio_total, estado } =
+  const { id_cliente_documento, fecha_registro, precio_total, estado, pagado } =
     req.body;
   mySqlConnection.query(
-    "INSERT INTO venta_local (id_cliente_documento,fecha_registro,precio_total,estado) VALUES (?,?,?,?)",
-    [id_cliente_documento, fecha_registro, precio_total, estado],
+    "INSERT INTO venta_local (id_cliente_documento,fecha_registro,precio_total,estado, pagado) VALUES (?,?,?,?,?)",
+    [id_cliente_documento, fecha_registro, precio_total, estado, pagado],
     (err, rows, fields) => {
       if (!err) {
         res.json({
@@ -57,6 +60,23 @@ router.post("/venta-local", (req, res) => {
           message: "Venta creada con éxito",
           data: rows,
         });
+      } else {
+        console.log(err);
+      }
+    }
+  );
+});
+
+//? editData
+router.put("/venta-local/:id_venta", (req, res) => {
+  const { id_venta } = req.params;
+  const { pagado } = req.body;
+  mySqlConnection.query(
+    "UPDATE venta_local SET pagado = ? WHERE id_venta = ?",
+    [pagado, id_venta],
+    (err, rows, fields) => {
+      if (!err) {
+        res.json({ status: "venta actualizada" });
       } else {
         console.log(err);
       }
@@ -82,5 +102,3 @@ router.put("/venta-local/:id_venta", (req, res) => {
 });
 
 module.exports = router;
-
-
