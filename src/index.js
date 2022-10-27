@@ -52,6 +52,10 @@ app.use(require("./routes/productos/categorias/categorias"))
 app.use(require("./routes/pedidos/pedidos/pedidos"))
 app.use(require("./routes/pedidos/detalle_pedido/detalle_pedido"))
 
+//? pedidos  locales
+app.use(require("./routes/pedidos/pedido_local/pedido_local"));
+app.use(require("./routes/pedidos/pedido_local/detalle_pedido_local"));
+
 //? Clientes informativos
 app.use(require("./routes/ventas/clientes_informativos/clientes_informativos"));
 
