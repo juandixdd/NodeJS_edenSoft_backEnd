@@ -5,9 +5,25 @@ const bcryptjs = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 
+//Buscar emails existentes
+
+router.get("/buscar-correo/:email", (req, res) => {
+  const { email } = req.params;
+  const query="select * from usuario where correo= ?"
+  mySqlConnection.query(
+    query,[email],(err,rows,fields)=>{
+      if(!err){
+        res.send(rows)
+      }else{
+        res.send(err)
+      }
+    }
+  )
+});
+
 //Creamos el objeto de transporte
 router.post("/send-mail", (req, res) => {
-  const { mensaje, toSend } = req.body;
+  const { toSend } = req.body;
   let transporter = nodemailer.createTransport({
     service: "outlook",
     auth: {
