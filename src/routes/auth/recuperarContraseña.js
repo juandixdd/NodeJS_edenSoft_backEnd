@@ -36,6 +36,7 @@ router.post("/send-mail", (req, res) => {
     },
     "secretkey",
     (err, token) => {
+      generatedToken = token;
       if (!err) {
         let subject = "Restaura Tu Contrasena Bueñueleria El Eden";
         let html = `<!DOCTYPE html>
@@ -105,7 +106,7 @@ router.post("/send-mail", (req, res) => {
                   <p style="margin-bottom: 50px;"><i>Atentamente:</i><br>Equipo Eden.Soft</p>
   
                   <!-- Botón -->
-                  <a class="claseBoton">Recuperar contraseña</a>
+                  <a class="claseBoton" href="http://localhost:4200/main/restaurar-clave/${token}">Recuperar contraseña</a>
               </div>
               <!-- Contenido principal -->
   
