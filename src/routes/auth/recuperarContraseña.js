@@ -9,21 +9,20 @@ const nodemailer = require("nodemailer");
 
 router.get("/buscar-correo/:email", (req, res) => {
   const { email } = req.params;
-  const query="select * from usuario where correo= ?"
-  mySqlConnection.query(
-    query,[email],(err,rows,fields)=>{
-      if(!err){
-        res.send(rows)
-      }else{
-        res.send(err)
-      }
+  const query = "select * from usuario where correo= ?";
+  mySqlConnection.query(query, [email], (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    } else {
+      res.send(err);
     }
-  )
+  });
 });
 
 //Creamos el objeto de transporte
 router.post("/send-mail", (req, res) => {
   const { toSend } = req.body;
+  let generatedToken;
   let transporter = nodemailer.createTransport({
     service: "outlook",
     auth: {
@@ -31,9 +30,15 @@ router.post("/send-mail", (req, res) => {
       pass: "danielpena.123",
     },
   });
-
-  let subject = "Restaura Tu Contrasena Bueñueleria El Eden";
-  let html = `<!DOCTYPE html>
+  jwt.sign(
+    {
+      toSend: toSend,
+    },
+    "secretkey",
+    (err, token) => {
+      if (!err) {
+        let subject = "Restaura Tu Contrasena Bueñueleria El Eden";
+        let html = `<!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="UTF-8">
@@ -132,28 +137,37 @@ router.post("/send-mail", (req, res) => {
   
   `;
 
-  let mailOptions = {
-    from: "jdps1006@hotmail.com",
-    to: toSend,
-    subject: subject,
-    html: html,
-  };
+        let mailOptions = {
+          from: "jdps1006@hotmail.com",
+          to: toSend,
+          subject: subject,
+          html: html,
+        };
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-      res.send({
-        status: 403,
-        message: "No se envió el email",
-      });
-    } else {
-      console.log("Email enviado: " + info.response);
-      res.send({
-        status: 200,
-        message: "Email enviado con exito",
-      });
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+            res.send({
+              status: 403,
+              message: "No se envió el email",
+            });
+          } else {
+            console.log("Email enviado: " + info.response);
+            res.send({
+              status: 200,
+              message: "Email enviado con exito",
+              token: token,
+            });
+          }
+        });
+      } else {
+        res.send({
+          status: 403,
+          message: "no se genero el token",
+        });
+      }
     }
-  });
+  );
 });
 
 module.exports = router;
