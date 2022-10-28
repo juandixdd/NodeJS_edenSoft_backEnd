@@ -52,11 +52,11 @@ router.post("/categoria", (req, res) => {
 
 //?Editar un categoria =====================================================================================
 router.put("/categoria/:id", (req, res) => {
-  const { nombre, estado } = req.body;
+  const { nombre } = req.body;
   const { id } = req.params;
   mySqlConnection.query(
-    "UPDATE categorias SET nombre = ?, estado = ? WHERE id = ?",
-    [nombre, estado, id],
+    "UPDATE categorias SET nombre = ? WHERE id = ?",
+    [nombre, id],
     (err, rows, fields) => {
       if (!err) {
         res.json({ status: "Categoria actualizada" });
