@@ -65,6 +65,31 @@ router.post("/send-mail", (req, res) => {
     "secretkey",
     (err, token) => {
       generatedToken = token;
+      const updateQuery = "UPDATE usuario SET token=? WHERE id_cliente_documento=?"
+      const getQuery= "select * from usuario where correo = ?"
+      try {
+        mySqlConnection.query(getQuery,[toSend],(err,rows,fields)=>{
+          if (!err) {
+            if(rows.length != 0){
+              let userId = rows[0].id_cliente_documento
+              console.log(rows[0]);
+              mySqlConnection.query(updateQuery, [generatedToken, userId], (err,rows, fields)=>{
+                if(!err){
+                  console.log("Se actualizó el token");
+                }else{
+                  console.log("No se actualizó el token", err);
+                }
+              })
+            }
+          } else {
+            res.send(err);
+          }
+        })
+      } catch (error) {
+        console.log(error);
+      }
+      
+
       if (!err) {
         let subject = "Restaura Tu Contrasena Bueñueleria El Eden";
         let html = `<!DOCTYPE html>
