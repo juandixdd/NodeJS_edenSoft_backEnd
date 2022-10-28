@@ -65,7 +65,7 @@ router.post("/send-mail", (req, res) => {
     "secretkey",
     (err, token) => {
       generatedToken = token;
-      const updateQuery = "UPDATE usuario SET token=? WHERE id_cliente_documento=?"
+      const updateQuery = "UPDATE usuario SET forgot_token=? WHERE id_cliente_documento=?"
       const getQuery= "select * from usuario where correo = ?"
       try {
         mySqlConnection.query(getQuery,[toSend],(err,rows,fields)=>{
