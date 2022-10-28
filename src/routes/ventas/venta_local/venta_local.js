@@ -5,7 +5,7 @@ const mySqlConnection = require("../../../conexion");
 //? Get data
 router.get("/venta-local", (req, res) => {
   mySqlConnection.query(
-    "select *, concat(if(estado = 0, 'Inactivo', 'Activo'), ', ', if(pagado = 0, 'Sin pagar', 'Pago')) as 'estado_data' from venta_local order by fecha_registro desc",
+    "select * from venta_local order by fecha_registro desc",
     (err, rows, fields) => {
       if (!err) {
         res.send(rows);
@@ -70,13 +70,13 @@ router.post("/venta-local", (req, res) => {
 //? editData
 router.put("/venta-local/:id_venta", (req, res) => {
   const { id_venta } = req.params;
-  const { pagado } = req.body;
+  const { estado } = req.body;
   mySqlConnection.query(
-    "UPDATE venta_local SET pagado = ? WHERE id_venta = ?",
-    [pagado, id_venta],
+    "UPDATE venta_local SET estado = ? WHERE id_venta = ?",
+    [estado, id_venta],
     (err, rows, fields) => {
       if (!err) {
-        res.json({ status: "venta actualizada" });
+        res.json({ status: 200, message: "Venta actualizada" });
       } else {
         console.log(err);
       }
