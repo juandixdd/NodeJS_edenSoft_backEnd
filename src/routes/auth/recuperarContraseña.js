@@ -5,7 +5,31 @@ const bcryptjs = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 
+router.post("/verificar-token", (req, res) => {
+  const { token } = req.body;
+  const query = "select * FROM usuario WHERE forgot_token=?"
+  mySqlConnection.query(query, [token], (err, rows, fields) => {
+    if (!err) {
+      if(rows.length!=0){
+        res.json({
+          status: 200,
+          data: rows
+        })
+      }else{
+        res.json({
+          status: 403,
+          message:"No se logro encontrar el token"
+        })
+      }
 
+    } else {
+      res.json({
+        status: 403,
+        err: err
+      })
+    }
+  })
+});
 
 //editar contrasena
 
@@ -14,19 +38,19 @@ router.put("/editar-clave/:id_cliente_documento", (req, res) => {
   const { contrasena } = req.body
   const hashedPassword = bcryptjs.hashSync(contrasena, 10);
   const query = "UPDATE usuario SET contrasena=? WHERE id_cliente_documento=?"
- console.log(hashedPassword,query);
- 
-  mySqlConnection.query(query, [hashedPassword,id_cliente_documento],(err,rows,fields)=>{
-    if(!err){
+  console.log(hashedPassword, query);
+
+  mySqlConnection.query(query, [hashedPassword, id_cliente_documento], (err, rows, fields) => {
+    if (!err) {
       res.json({
-        status:200,
-        message:"Se ha cambiado la contrasena"
+        status: 200,
+        message: "Se ha cambiado la contrasena"
       })
-    }else{
+    } else {
       res.json({
-        status:403,
-        message:"No se ha cambiado la contrasena",
-        error:err
+        status: 403,
+        message: "No se ha cambiado la contrasena",
+        error: err
       })
     }
   })
@@ -66,17 +90,17 @@ router.post("/send-mail", (req, res) => {
     (err, token) => {
       generatedToken = token;
       const updateQuery = "UPDATE usuario SET forgot_token=? WHERE id_cliente_documento=?"
-      const getQuery= "select * from usuario where correo = ?"
+      const getQuery = "select * from usuario where correo = ?"
       try {
-        mySqlConnection.query(getQuery,[toSend],(err,rows,fields)=>{
+        mySqlConnection.query(getQuery, [toSend], (err, rows, fields) => {
           if (!err) {
-            if(rows.length != 0){
+            if (rows.length != 0) {
               let userId = rows[0].id_cliente_documento
               console.log(rows[0]);
-              mySqlConnection.query(updateQuery, [generatedToken, userId], (err,rows, fields)=>{
-                if(!err){
+              mySqlConnection.query(updateQuery, [generatedToken, userId], (err, rows, fields) => {
+                if (!err) {
                   console.log("Se actualizó el token");
-                }else{
+                } else {
                   console.log("No se actualizó el token", err);
                 }
               })
@@ -88,7 +112,7 @@ router.post("/send-mail", (req, res) => {
       } catch (error) {
         console.log(error);
       }
-      
+
 
       if (!err) {
         let subject = "Restaura Tu Contrasena Bueñueleria El Eden";
