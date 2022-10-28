@@ -5,6 +5,34 @@ const bcryptjs = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 
+
+
+//editar contrasena
+
+router.put("/editar-clave/:id_cliente_documento", (req, res) => {
+  const { id_cliente_documento } = req.params
+  const { contrasena } = req.body
+  const hashedPassword = bcryptjs.hashSync(contrasena, 10);
+  const query = "UPDATE usuario SET contrasena=? WHERE id_cliente_documento=?"
+ console.log(hashedPassword,query);
+ 
+  mySqlConnection.query(query, [hashedPassword,id_cliente_documento],(err,rows,fields)=>{
+    if(!err){
+      res.json({
+        status:200,
+        message:"Se ha cambiado la contrasena"
+      })
+    }else{
+      res.json({
+        status:403,
+        message:"No se ha cambiado la contrasena",
+        error:err
+      })
+    }
+  })
+
+});
+
 //Buscar emails existentes
 
 router.get("/buscar-correo/:email", (req, res) => {
@@ -170,5 +198,7 @@ router.post("/send-mail", (req, res) => {
     }
   );
 });
+
+
 
 module.exports = router;
