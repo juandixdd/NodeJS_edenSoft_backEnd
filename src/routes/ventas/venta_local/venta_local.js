@@ -51,8 +51,8 @@ router.post("/venta-local", (req, res) => {
   const { id_cliente_documento, fecha_registro, precio_total, estado, pagado } =
     req.body;
   mySqlConnection.query(
-    "INSERT INTO venta_local (id_cliente_documento,fecha_registro,precio_total,estado, pagado) VALUES (?,?,?,?,?)",
-    [id_cliente_documento, fecha_registro, precio_total, estado, pagado],
+    "INSERT INTO venta_local (id_cliente_documento,fecha_registro,precio_total,estado) VALUES (?,?,?,?)",
+    [id_cliente_documento, fecha_registro, precio_total, estado],
     (err, rows, fields) => {
       if (!err) {
         res.json({
