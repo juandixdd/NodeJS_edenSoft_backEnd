@@ -134,7 +134,7 @@ router.post("/send-mail", (req, res) => {
           .claseBoton{
               width: 30%;
                   background-color: #1187ab;
-                  color: black; 
+                  color: white; 
                   padding: 16px 32px;
                   text-align: center;
                   text-decoration: none;
@@ -168,13 +168,13 @@ router.post("/send-mail", (req, res) => {
       <div style="width: 100%; background-color: #e3e3e3;">
           <div style="padding: 20px 10px 20px 10px;">
               <!-- Imagen inicial -->
-              <div style="background-color: #0e0e0e; padding: 10px 0px 10px 0px; width: 100%; text-align: center;">
-                  <img src="https://i.pinimg.com/originals/c8/dc/5d/c8dc5d395e2a742e42892bbdaad53f22.jpg" alt="" style="width: 200px; height: 60px;">
+              <div style="background-color: #1187ab; padding: 10px 0px 10px 0px; width: 100%; text-align: center;">
+                  <img src="https://i.postimg.cc/P5DYCVH1/bunuelin-removebg.png" alt="" style="width: 200px; height: auto;">
               </div>
               <!-- Imagen inicial -->
   
               <!-- Contenido principal -->
-              <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
+              <div style="background-color: #f1f1f1; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                   <h1>¿Olvidase tu contraseña de Eden.Soft? 😱</h1>
                   <p>!No te preocupes¡ este es un correo de verificación, para recuperar tu contraseña presiona el botón.
                   </p>
