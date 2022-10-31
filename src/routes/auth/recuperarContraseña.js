@@ -37,7 +37,7 @@ router.put("/editar-clave/:id_cliente_documento", (req, res) => {
   const { id_cliente_documento } = req.params
   const { contrasena } = req.body
   const hashedPassword = bcryptjs.hashSync(contrasena, 10);
-  const query = "UPDATE usuario SET contrasena=? WHERE id_cliente_documento=?"
+  const query = "UPDATE usuario SET contrasena=?, forgot_token= null WHERE id_cliente_documento=?"
   console.log(hashedPassword, query);
 
   mySqlConnection.query(query, [hashedPassword, id_cliente_documento], (err, rows, fields) => {
