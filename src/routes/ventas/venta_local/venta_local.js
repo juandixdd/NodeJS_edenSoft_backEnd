@@ -35,11 +35,49 @@ router.get("/venta-local/:id", (req, res) => {
 //? Get all venta local Data
 router.get("/venta-local-all-data/:id", (req, res) => {
   const { id } = req.params;
-  let query =
+
+  let getAbonoQuery = "select * from abono where id_venta_local = ?";
+  let queryWithoutAbono =
     "select dv.*,p.nombre as 'product_name', p.precio as 'product_price',vl.*,ci.*from detalle_venta dv join productos p on p.id = dv.id_producto  join venta_local vl on vl.id_venta = dv.id_venta join clientes_informativos ci on ci.id_cliente_documento = vl.id_cliente_documento where vl.id_venta = ?";
-  mySqlConnection.query(query, [id], (err, rows, fields) => {
+  let queryWithAbono = `
+                        select
+                          dv.*,
+                          p.nombre as 'product_name',
+                          p.precio as 'product_price',
+                          vl.*,
+                          ci.*,
+                          a.valor as 'cantidad_abono'
+                        from
+                          detalle_venta dv
+                        join productos p on
+                          p.id = dv.id_producto
+                        join venta_local vl on
+                          vl.id_venta = dv.id_venta
+                        join clientes_informativos ci on
+                          ci.id_cliente_documento = vl.id_cliente_documento
+                        join abono a on a.id_venta_local = dv.id_venta
+                        where
+                          vl.id_venta = ?`;
+
+  mySqlConnection.query(getAbonoQuery, [id], (err, rows, fields) => {
     if (!err) {
-      res.send(rows);
+      if (rows.length != 0) {
+        mySqlConnection.query(queryWithAbono, [id], (err, rows, fields) => {
+          if (!err) {
+            res.send(rows);
+          } else {
+            console.log(err);
+          }
+        });
+      } else {
+        mySqlConnection.query(queryWithoutAbono, [id], (err, rows, fields) => {
+          if (!err) {
+            res.send(rows);
+          } else {
+            console.log(err);
+          }
+        });
+      }
     } else {
       console.log(err);
     }
@@ -77,6 +115,23 @@ router.put("/venta-local/:id_venta", (req, res) => {
     (err, rows, fields) => {
       if (!err) {
         res.json({ status: 200, message: "Venta actualizada" });
+      } else {
+        console.log(err);
+      }
+    }
+  );
+});
+
+//? editData
+router.put("/venta-local/abono/:id_venta", (req, res) => {
+  const { id_venta } = req.params;
+  const { estado } = req.body;
+  mySqlConnection.query(
+    "UPDATE abono SET estado = ? WHERE id_venta_local = ?",
+    [estado, id_venta],
+    (err, rows, fields) => {
+      if (!err) {
+        res.json({ status: 200, message: "Abono actualizado" });
       } else {
         console.log(err);
       }

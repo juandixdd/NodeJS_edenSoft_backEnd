@@ -2,9 +2,9 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 28-10-2022 a las 20:28:23
--- Versión del servidor: 10.4.21-MariaDB
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 31-10-2022 a las 17:09:55
+-- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -31,18 +31,22 @@ CREATE TABLE `abono` (
   `id_abono` int(11) NOT NULL,
   `id_venta_local` int(11) DEFAULT NULL,
   `id_pedido_local` int(11) DEFAULT NULL,
-  `valor` float NOT NULL
+  `valor` float NOT NULL,
+  `estado` int(11) NOT NULL DEFAULT 1 COMMENT '0:inactivo, 1:activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `abono`
 --
 
-INSERT INTO `abono` (`id_abono`, `id_venta_local`, `id_pedido_local`, `valor`) VALUES
-(1, 19, NULL, 25000),
-(2, 19, NULL, 25000),
-(3, 25, NULL, 65625),
-(4, 26, NULL, 31250);
+INSERT INTO `abono` (`id_abono`, `id_venta_local`, `id_pedido_local`, `valor`, `estado`) VALUES
+(1, 19, NULL, 25000, 1),
+(2, 19, NULL, 25000, 1),
+(3, 25, NULL, 65625, 1),
+(4, 26, NULL, 31250, 1),
+(5, 28, NULL, 46875, 1),
+(6, 30, NULL, 25000, 1),
+(7, 31, NULL, 31250, 1);
 
 -- --------------------------------------------------------
 
@@ -93,13 +97,16 @@ INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido
 (999, 'Josesito', 'Vegano', 310002022),
 (7789, 'test', 'test', 3321225),
 (123123, 'Ricardo', '3333221', 123123),
+(534534, '1321', '4534523', 234234),
 (546345, '12312343', '356354', 53445),
-(1234543, 'jefersoncito', 'ffrrf', 22321123),
+(1231323, '123123', '2412312', 23234),
+(3453423, '123783', '23423', 23423),
 (5234234, '123', '123', 123),
 (7869987, '13123123', '1231', 123123),
 (8675342, '13212', '234234', 2353465),
 (10366954, 'juan Atonio', 'Correa', 4566658),
 (12412312, '123123', '12323123', 123123),
+(32345246, 'juandi', 'arteaga', 123143),
 (45654898, 'test', 'test', 3321225),
 (63456345, '12312', '23423', 23423),
 (65356768, '123123', '2343', 3431),
@@ -107,7 +114,7 @@ INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido
 (123222111, 'qweqw', 'qweqwe', 332122),
 (125146841, 'Ediccson', 'Quiroz', 45613216),
 (344323423, 'cualqucsdc', 'dasdasd', 3444323),
-(1037632160, 'Daniel', 'Salazar', 300648),
+(1235423534, 'hola', 'hola', 213124123),
 (2147483647, 'Clara', 'Salazar', 555);
 
 -- --------------------------------------------------------
@@ -190,7 +197,11 @@ INSERT INTO `detalle_venta` (`id_detalle_venta`, `id_producto`, `id_venta`, `can
 (30, 17, 24, 123, 2500),
 (31, 17, 25, 35, 2500),
 (32, 17, 26, 25, 2500),
-(33, 16, 27, 4534, 1000);
+(33, 16, 27, 4534, 1000),
+(34, 17, 28, 25, 2500),
+(35, 16, 29, 30, 1000),
+(36, 17, 30, 20, 2500),
+(37, 17, 31, 25, 2500);
 
 -- --------------------------------------------------------
 
@@ -362,8 +373,8 @@ INSERT INTO `usuario` (`id_usuario`, `correo`, `contrasena`, `id_cliente_documen
 (13, 'ediccson@gmail.com', '$2b$10$7HGM0EpGvE1HpTbPCN5mQOG2FSugMvWvWkYL0dn44fQRtHfC8izHO', 125146841, 3, NULL),
 (14, 'test3@gmail.com', '$2b$10$fGuxjamHvUhJiSYV26dPbeoS0LyEu1xQV9XOF/Ata.eaN7Re6aBIm', 344323423, 1, NULL),
 (15, 'rojas@rojas.com', '$2b$10$zTwsKLqnLEnKMS/QLMOJXulSFh.oQqkckDbxCFDL6G9PmQ0hYgJRu', 123215556, 3, NULL),
-(16, 'clara_salazar1@gmail.com', '$2b$10$I5FTgF8AIMdTAPs1TzzPg.VDi7UuclT3OFTtOwXZ2hkCtqsRApCNy', 1234543, 3, NULL),
-(17, 'jdps106@hotmail.com', '$2b$10$bviyqKYAfEwlvM3/Xt/s/.EMk4pzSh4jHcm0WVgKAjvKUHDB88yHe', 1037632160, 3, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b1NlbmQiOiJqZHBzMTA2QGhvdG1haWwuY29tIiwiaWF0IjoxNjY2OTcyNzgyfQ.QGomWnRL8_nKJlFt7_ZsWmqCOczz7PrmzEZ_FGvfpVs');
+(16, 'hola@hola.com', '$2b$10$LPkKeOUcoGl6F1um0SAbm.5L2D1NgqyJfX84.9qrylFyFa/Nth22y', 1235423534, 3, NULL),
+(17, 'jdarteaga20@misena.edu.co', '$2b$10$QWl8OuhLApd0M.bzqFNLreChUpIJ4ps0B0ZioWzLsKL/skzv9Keh.', 32345246, 3, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b1NlbmQiOiJqZGFydGVhZ2EyMEBtaXNlbmEuZWR1LmNvIiwiaWF0IjoxNjY2OTY2NzExfQ.MmF1BnmzVCXA1D4trGLt2vXOrZeQSHp_rrDOBZwRIKY');
 
 -- --------------------------------------------------------
 
@@ -376,33 +387,36 @@ CREATE TABLE `venta_local` (
   `id_cliente_documento` int(11) NOT NULL,
   `fecha_registro` date NOT NULL,
   `precio_total` float NOT NULL,
-  `estado` int(11) NOT NULL,
-  `pagado` int(11) NOT NULL DEFAULT 1
+  `estado` int(11) NOT NULL COMMENT '0: inactivo,\r\n1: activo,\r\n2: abonado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `venta_local`
 --
 
-INSERT INTO `venta_local` (`id_venta`, `id_cliente_documento`, `fecha_registro`, `precio_total`, `estado`, `pagado`) VALUES
-(10, 1313, '2022-09-28', 600000, 1, 1),
-(11, 2147483647, '2022-09-28', 1300000, 1, 1),
-(12, 888, '2022-09-28', 480000, 1, 1),
-(13, 8888888, '2022-09-28', 660000, 1, 1),
-(14, 777, '2022-09-28', 900000, 1, 1),
-(15, 1112221, '2022-09-28', 154000, 1, 1),
-(16, 123123, '2022-10-04', 2000, 0, 1),
-(17, 223, '2022-10-10', 121000, 0, 1),
-(18, 111, '2022-10-13', 77000, 0, 1),
-(19, 111, '2022-10-13', 157000, 0, 1),
-(20, 5234234, '2022-10-18', 20000, 1, 1),
-(21, 12412312, '2022-10-18', 25000, 1, 1),
-(22, 7869987, '2022-10-18', 87500, 1, 1),
-(23, 546345, '2022-10-18', 119000, 1, 1),
-(24, 65356768, '2022-10-18', 307500, 1, 1),
-(25, 8675342, '2022-10-18', 87500, 1, 1),
-(26, 111, '2022-10-18', 62500, 1, 1),
-(27, 63456345, '2022-10-18', 4534000, 1, 1);
+INSERT INTO `venta_local` (`id_venta`, `id_cliente_documento`, `fecha_registro`, `precio_total`, `estado`) VALUES
+(10, 1313, '2022-09-28', 600000, 1),
+(11, 2147483647, '2022-09-28', 1300000, 1),
+(12, 888, '2022-09-28', 480000, 1),
+(13, 8888888, '2022-09-28', 660000, 1),
+(14, 777, '2022-09-28', 900000, 1),
+(15, 1112221, '2022-09-28', 154000, 1),
+(16, 123123, '2022-10-04', 2000, 0),
+(17, 223, '2022-10-10', 121000, 0),
+(18, 111, '2022-10-13', 77000, 0),
+(19, 111, '2022-10-13', 157000, 0),
+(20, 5234234, '2022-10-18', 20000, 1),
+(21, 12412312, '2022-10-18', 25000, 1),
+(22, 7869987, '2022-10-18', 87500, 1),
+(23, 546345, '2022-10-18', 119000, 1),
+(24, 65356768, '2022-10-18', 307500, 1),
+(25, 8675342, '2022-10-18', 87500, 1),
+(26, 111, '2022-10-18', 62500, 0),
+(27, 63456345, '2022-10-18', 4534000, 2),
+(28, 111, '2022-10-31', 62500, 2),
+(29, 534534, '2022-10-31', 30000, 1),
+(30, 3453423, '2022-10-31', 50000, 2),
+(31, 1231323, '2022-10-31', 62500, 1);
 
 --
 -- Índices para tablas volcadas
@@ -488,7 +502,7 @@ ALTER TABLE `venta_local`
 -- AUTO_INCREMENT de la tabla `abono`
 --
 ALTER TABLE `abono`
-  MODIFY `id_abono` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_abono` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -512,7 +526,7 @@ ALTER TABLE `detalle_pedido`
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
@@ -554,7 +568,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `venta_local`
 --
 ALTER TABLE `venta_local`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
