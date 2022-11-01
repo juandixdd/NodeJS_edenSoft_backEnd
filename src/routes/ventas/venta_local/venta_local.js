@@ -46,7 +46,8 @@ router.get("/venta-local-all-data/:id", (req, res) => {
                           p.precio as 'product_price',
                           vl.*,
                           ci.*,
-                          a.valor as 'cantidad_abono'
+                          a.valor as 'cantidad_abono',
+                          a.estado as 'estado_abono'
                         from
                           detalle_venta dv
                         join productos p on
