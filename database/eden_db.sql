@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2022 a las 17:09:55
+-- Tiempo de generación: 10-11-2022 a las 15:45:03
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -80,42 +80,46 @@ CREATE TABLE `clientes_informativos` (
   `id_cliente_documento` int(11) NOT NULL,
   `nombre` varchar(300) NOT NULL,
   `apellido` varchar(300) NOT NULL,
-  `telefono` int(11) NOT NULL
+  `telefono` int(11) NOT NULL,
+  `estado` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `clientes_informativos`
 --
 
-INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido`, `telefono`) VALUES
-(111, 'Daniel', 'el lindo', 8885),
-(222, 'Juanito', 'Alimaña', 3123),
-(223, 'Daniel', 'guzman', 45321884),
-(333, 'Pedro', 'Navaja', 333),
-(444, 'Otro', 'Usuario', 444),
-(888, 'updated', 'user', 111),
-(999, 'Josesito', 'Vegano', 310002022),
-(7789, 'test', 'test', 3321225),
-(123123, 'Ricardo', '3333221', 123123),
-(534534, '1321', '4534523', 234234),
-(546345, '12312343', '356354', 53445),
-(1231323, '123123', '2412312', 23234),
-(3453423, '123783', '23423', 23423),
-(5234234, '123', '123', 123),
-(7869987, '13123123', '1231', 123123),
-(8675342, '13212', '234234', 2353465),
-(10366954, 'juan Atonio', 'Correa', 4566658),
-(12412312, '123123', '12323123', 123123),
-(32345246, 'juandi', 'arteaga', 123143),
-(45654898, 'test', 'test', 3321225),
-(63456345, '12312', '23423', 23423),
-(65356768, '123123', '2343', 3431),
-(123215556, 'Daniela ', 'Rojas', 2147483647),
-(123222111, 'qweqw', 'qweqwe', 332122),
-(125146841, 'Ediccson', 'Quiroz', 45613216),
-(344323423, 'cualqucsdc', 'dasdasd', 3444323),
-(1235423534, 'hola', 'hola', 213124123),
-(2147483647, 'Clara', 'Salazar', 555);
+INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido`, `telefono`, `estado`) VALUES
+(111, 'Daniel', 'el mas lindo', 8885, 1),
+(222, 'Juanito', 'Alimaña', 3123, 1),
+(223, 'Daniel', 'guzman', 45321884, 1),
+(333, 'Pedro', 'Navaja', 333, 0),
+(444, 'Otro', 'Usuario', 444, 0),
+(888, 'updated', 'user', 111, 1),
+(999, 'Josesito', 'Vegano', 310002022, 1),
+(7789, 'Jose', 'Pelaes', 1231232, 1),
+(123123, 'Rosario', 'Tijeras', 3334455, 0),
+(534534, '1321', '4534523', 234234, 1),
+(546345, '12312343', '356354', 53445, 1),
+(1231323, '123123', '2412312', 23234, 1),
+(3453423, '123783', '23423', 23423, 1),
+(5234234, '123', '123', 123, 1),
+(7869987, '13123123', '1231', 123123, 1),
+(8675342, '13212', '234234', 2353465, 1),
+(10366954, 'juan Atonio', 'Correa', 4566658, 1),
+(12412312, '123123', '12323123', 123123, 1),
+(32345246, 'juandi', 'arteaga', 123143, 1),
+(45654898, 'test', 'test', 3321225, 1),
+(63456345, '12312', '23423', 23423, 1),
+(65356768, '123123', '2343', 3431, 1),
+(98756789, '907987jhh', 'ohkbliyv8o8', 2147483647, 1),
+(123215556, 'Daniela ', 'Rojas', 2147483647, 1),
+(123222111, 'qweqw', 'qweqwe', 332122, 1),
+(125146841, 'Ediccson', 'Quiroz', 45613216, 1),
+(344323423, 'cualqucsdc', 'dasdasd', 3444323, 1),
+(1002006298, 'manual', 'de usuario', 2147483647, 1),
+(1231232321, 'asdas', 'asdasd', 39494331, 1),
+(1235423534, 'hola', 'hola', 213124123, 1),
+(2147483647, 'Clara', 'Salazar', 555, 1);
 
 -- --------------------------------------------------------
 
@@ -230,7 +234,7 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente_documento`, `tipo`, `fecha_regis
 (54, 125146841, 'cotizacion', '2022-10-10', 36500, 1, '2022-09-17'),
 (55, 125146841, 'cotizacion', '2022-10-10', 33000, 1, '2022-09-17'),
 (56, 125146841, 'pedido', '2022-10-10', 33000, 0, '2022-10-31'),
-(57, 125146841, 'pedido', '2022-10-10', 33000, 0, '2022-10-31'),
+(57, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
 (58, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
 (59, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
 (60, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
@@ -303,12 +307,13 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `nombre`, `estado`) VALUES
-(1, 'admin', 1),
-(3, 'cliente', 1),
+(1, 'admin', 0),
+(3, 'cliente', 0),
 (4, 'secretaria', 1),
 (5, 'dvzdv', 1),
 (6, 'otroRol', 1),
-(7, 'Admin2', 1);
+(7, 'Admin2', 0),
+(8, 'gvhbjnmk,', 1);
 
 -- --------------------------------------------------------
 
@@ -374,7 +379,10 @@ INSERT INTO `usuario` (`id_usuario`, `correo`, `contrasena`, `id_cliente_documen
 (14, 'test3@gmail.com', '$2b$10$fGuxjamHvUhJiSYV26dPbeoS0LyEu1xQV9XOF/Ata.eaN7Re6aBIm', 344323423, 1, NULL),
 (15, 'rojas@rojas.com', '$2b$10$zTwsKLqnLEnKMS/QLMOJXulSFh.oQqkckDbxCFDL6G9PmQ0hYgJRu', 123215556, 3, NULL),
 (16, 'hola@hola.com', '$2b$10$LPkKeOUcoGl6F1um0SAbm.5L2D1NgqyJfX84.9qrylFyFa/Nth22y', 1235423534, 3, NULL),
-(17, 'jdarteaga20@misena.edu.co', '$2b$10$QWl8OuhLApd0M.bzqFNLreChUpIJ4ps0B0ZioWzLsKL/skzv9Keh.', 32345246, 3, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b1NlbmQiOiJqZGFydGVhZ2EyMEBtaXNlbmEuZWR1LmNvIiwiaWF0IjoxNjY2OTY2NzExfQ.MmF1BnmzVCXA1D4trGLt2vXOrZeQSHp_rrDOBZwRIKY');
+(17, 'jdarteaga20@misena.edu.co', '$2b$10$QWl8OuhLApd0M.bzqFNLreChUpIJ4ps0B0ZioWzLsKL/skzv9Keh.', 32345246, 3, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b1NlbmQiOiJqZGFydGVhZ2EyMEBtaXNlbmEuZWR1LmNvIiwiaWF0IjoxNjY3OTk5NjE3fQ.H27SXZSHANqUbRz8t_EaxWzP30-ufk-UN1aPYafMh6o'),
+(18, 'manual@gmail.com', '$2b$10$Qp0tahKezcgTs/jhPNmpWuziW1SbAVC24GjYcc882vtx50DNrmMAu', 1002006298, 4, NULL),
+(19, 'sdasd@ssda.com', '$2b$10$U/coNQ3Kx8rbKksO5eKCj.Yw9l3LjGc4xsmYQ/bx9gbQxHoFqJ5Gm', 1231232321, 3, NULL),
+(20, 'jsjsj@hmgmg.com', '$2b$10$9lVuo8/CQFr4WqEh2EK7pu77vwIt/jRjs19qjnJVTlzGeZUOSCVmm', 98756789, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -550,7 +558,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `rol_permisos`
@@ -562,7 +570,7 @@ ALTER TABLE `rol_permisos`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `venta_local`

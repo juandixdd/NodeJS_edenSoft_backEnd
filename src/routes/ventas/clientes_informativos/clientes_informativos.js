@@ -163,5 +163,21 @@ router.get("/ventas-usuarios/:id", (req, res) => {
   );
 });
 
+//Get Usuarios con pedidos
+router.get("/pedidos-usuarios/:id", (req, res) => {
+  const { id } = req.params;
+  mySqlConnection.query(
+    "SELECT * FROM pedidos WHERE id_cliente_documento=?;",
+    [id],
+    (err, rows, fields) => {
+      if (!err) {
+        res.send(rows);
+      } else {
+        console.log(err);
+      }
+    }
+  );
+});
+
 
 module.exports = router;
