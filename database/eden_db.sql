@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-11-2022 a las 15:45:03
+-- Tiempo de generación: 10-11-2022 a las 15:55:19
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -159,6 +159,20 @@ INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `detalle_pedido_local`
+--
+
+CREATE TABLE `detalle_pedido_local` (
+  `id_detalle_pedido_local` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `id_pedido_local` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio_unitario` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `detalle_venta`
 --
 
@@ -241,6 +255,21 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente_documento`, `tipo`, `fecha_regis
 (61, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
 (62, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
 (63, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedido_local`
+--
+
+CREATE TABLE `pedido_local` (
+  `id_pedido_local` int(11) NOT NULL,
+  `id_cliente_documento` int(11) NOT NULL,
+  `fecha_registro` date NOT NULL,
+  `fecha_entrega` date NOT NULL,
+  `precio_total` float NOT NULL COMMENT '0: inactivo,',
+  `estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -455,6 +484,12 @@ ALTER TABLE `detalle_pedido`
   ADD PRIMARY KEY (`id_detalle_pedido`);
 
 --
+-- Indices de la tabla `detalle_pedido_local`
+--
+ALTER TABLE `detalle_pedido_local`
+  ADD PRIMARY KEY (`id_detalle_pedido_local`);
+
+--
 -- Indices de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
@@ -465,6 +500,12 @@ ALTER TABLE `detalle_venta`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id_pedido`);
+
+--
+-- Indices de la tabla `pedido_local`
+--
+ALTER TABLE `pedido_local`
+  ADD PRIMARY KEY (`id_pedido_local`);
 
 --
 -- Indices de la tabla `permisos`
@@ -531,6 +572,12 @@ ALTER TABLE `detalle_pedido`
   MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
+-- AUTO_INCREMENT de la tabla `detalle_pedido_local`
+--
+ALTER TABLE `detalle_pedido_local`
+  MODIFY `id_detalle_pedido_local` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
@@ -541,6 +588,12 @@ ALTER TABLE `detalle_venta`
 --
 ALTER TABLE `pedidos`
   MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
+--
+-- AUTO_INCREMENT de la tabla `pedido_local`
+--
+ALTER TABLE `pedido_local`
+  MODIFY `id_pedido_local` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`

@@ -5,7 +5,7 @@ const mySqlConnection = require("../../../conexion");
 //? Get data
 router.get("/venta-local", (req, res) => {
   mySqlConnection.query(
-    "select * from venta_local order by fecha_registro desc",
+    "select vl.*, ELT(month(vl.fecha_registro), 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre') as 'mes_registro' from venta_local vl order by fecha_registro desc",
     (err, rows, fields) => {
       if (!err) {
         res.send(rows);
