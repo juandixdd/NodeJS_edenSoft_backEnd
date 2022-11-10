@@ -146,4 +146,22 @@ router.put("/anula-usuario/:id", (req, res) => {
 
 /////-------------------> VALIDACIONES DE PEDIDOS Y VENTAS <-------------------\\\\\\\
 
+
+// get usuarios con ventas
+router.get("/ventas-usuarios/:id", (req, res) => {
+  const { id } = req.params;
+  mySqlConnection.query(
+    "SELECT * FROM venta_local WHERE id_cliente_documento=?;",
+    [id],
+    (err, rows, fields) => {
+      if (!err) {
+        res.send(rows);
+      } else {
+        console.log(err);
+      }
+    }
+  );
+});
+
+
 module.exports = router;
