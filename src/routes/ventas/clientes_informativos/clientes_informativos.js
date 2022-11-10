@@ -124,4 +124,26 @@ router.put("/clientes-informativos/:id_cliente_documento", (req, res) => {
   );
 });
 
+//Anular Usuario
+router.put("/anula-usuario/:id", (req, res) => {
+  const {estado } = req.body;
+  const { id } = req.params;
+  mySqlConnection.query(
+    "UPDATE clientes_informativos SET estado = ? WHERE id_cliente_documento = ?",
+    [estado, id],
+    (err, rows, fields) => {
+      if (!err) {
+        res.json({ 
+          status:200, 
+          message:"usuario actualizado" 
+        });
+      } else {
+        console.log(err);
+      }
+    }
+  );
+});
+
+/////-------------------> VALIDACIONES DE PEDIDOS Y VENTAS <-------------------\\\\\\\
+
 module.exports = router;
