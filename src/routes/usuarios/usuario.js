@@ -30,18 +30,29 @@ router.get("/usuario/:id", (req, res) => {
   });
 });
 
-//? editProfile
+//? Get by email
+router.get("/usuario/email/:correo", (req, res) => {
+  const { correo } = req.params;
+  query = "select * from usuario where correo = ?";
+  mySqlConnection.query(query, [correo], (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    } else {
+      console.log(err);
+    }
+  });
+});
 
+//? editProfile
 router.put("/editProfile/:id_cliente_documento", (req, res) => {
-  const { nombre,apellido,telefono } = req.body;
+  const { nombre, apellido, telefono } = req.body;
   const { id_cliente_documento } = req.params;
   mySqlConnection.query(
     "UPDATE clientes_informativos SET nombre = ?, apellido=?, telefono=? WHERE id_cliente_documento = ?",
     [nombre, apellido, telefono, id_cliente_documento],
     (err, rows, fields) => {
       if (!err) {
-        res.json({ status: 200, message:"Se actualizo tu perfil" });
-
+        res.json({ status: 200, message: "Se actualizo tu perfil" });
       } else {
         console.log(err);
       }
