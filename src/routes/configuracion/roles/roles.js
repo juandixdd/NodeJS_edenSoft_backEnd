@@ -88,4 +88,21 @@ router.delete("/roles/:id", (req, res) => {
   );
 });
 
+
+//?-----------> Confirmacion de usuarios con ese rol<-----------\\
+
+router.get("/usuarios-rol/:id", (req, res) => {
+  const { id } = req.params;
+  query = "SELECT * from usuario where id_rol=?";
+  mySqlConnection.query(query, [id], (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    } else {
+      console.log(err);
+    }
+  });
+});
+
+
+
 module.exports = router;
