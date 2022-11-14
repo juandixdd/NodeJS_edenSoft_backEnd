@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-11-2022 a las 15:55:19
+-- Tiempo de generación: 15-11-2022 a las 00:14:53
 -- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.29
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -67,8 +67,9 @@ CREATE TABLE `categorias` (
 INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
 (3, 'Bebidas', 1),
 (4, 'Pan', 1),
-(5, 'Arepas', 0),
-(6, 'Parva', 0);
+(5, 'Arepas', 1),
+(6, 'Parva', 1),
+(7, 'fritos', 1);
 
 -- --------------------------------------------------------
 
@@ -154,7 +155,8 @@ INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `
 (69, 16, 60, 33, 1000),
 (70, 16, 61, 33, 1000),
 (71, 16, 62, 33, 1000),
-(72, 16, 63, 33, 1000);
+(72, 16, 63, 33, 1000),
+(73, 16, 64, 1, 1000);
 
 -- --------------------------------------------------------
 
@@ -169,6 +171,15 @@ CREATE TABLE `detalle_pedido_local` (
   `cantidad` int(11) NOT NULL,
   `precio_unitario` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `detalle_pedido_local`
+--
+
+INSERT INTO `detalle_pedido_local` (`id_detalle_pedido_local`, `id_producto`, `id_pedido_local`, `cantidad`, `precio_unitario`) VALUES
+(1, 15, 1, 10, 3500),
+(2, 16, 1, 2, 1000),
+(3, 16, 2, 1, 1000);
 
 -- --------------------------------------------------------
 
@@ -242,7 +253,7 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `id_cliente_documento`, `tipo`, `fecha_registro`, `precio_total`, `estado`, `fecha_entrega`) VALUES
-(51, 123123, 'cotizacion', '2022-10-05', 55000, 1, '2022-09-17'),
+(51, 123123, 'cotizacion', '2022-10-05', 55000, 0, '2022-09-17'),
 (52, 123123, 'cotizacion', '2022-10-05', 55000, 1, '2022-09-17'),
 (53, 123123, 'cotizacion', '2022-10-05', 55000, 1, '2022-09-17'),
 (54, 125146841, 'cotizacion', '2022-10-10', 36500, 1, '2022-09-17'),
@@ -254,7 +265,8 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente_documento`, `tipo`, `fecha_regis
 (60, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
 (61, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
 (62, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
-(63, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31');
+(63, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
+(64, 123123, 'pedido', '2022-11-14', 1000, 1, '2022-11-15');
 
 -- --------------------------------------------------------
 
@@ -270,6 +282,14 @@ CREATE TABLE `pedido_local` (
   `precio_total` float NOT NULL COMMENT '0: inactivo,',
   `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `pedido_local`
+--
+
+INSERT INTO `pedido_local` (`id_pedido_local`, `id_cliente_documento`, `fecha_registro`, `fecha_entrega`, `precio_total`, `estado`) VALUES
+(1, 111, '2022-11-14', '2022-11-15', 37000, 1),
+(2, 111, '2022-11-14', '2022-11-16', 1000, 1);
 
 -- --------------------------------------------------------
 
@@ -316,8 +336,15 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id`, `nombre`, `precio`, `categoria`, `imagen`, `estado`) VALUES
 (15, 'Arepa de huevo', 3500, 5, 'https://cdn-icons-png.flaticon.com/512/6724/6724574.png', 1),
-(16, 'Buñuelos', 1000, 6, 'https://cdn-icons-png.flaticon.com/512/6313/6313568.png', 1),
-(17, 'pandequeso', 2500, 4, 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBYVFRgWFRUYGBgaGBoaGBgYFRoYGBgYGRgZGRgYGBgcIS4lHB4rIRgYJjgmKy8xNTU1GiQ7QDszPy40NTEBDAwMEA8QHxISHzQrJCs0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NP/AABEIAKgBLAMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAEAAIDBQYBBwj/xAA5EAABAwIEAwYFAgUEAwAAAAABAAIRAwQSITFBBVFhBiJxgZGhEzKxwdFC8BRScuHxFSOCkgckU//EABkBAAMBAQEAAAAAAAAAAAAAAAECAwAEBf/EACQRAAMAAgMBAAIDAAMAAAAAAAABAgMREiExQQRREyJhFDKx/9oADAMBAAIRAxEAPwDQApSosS78REXRKCuyoca78RYJNK6CoPiJCots2giUi+FB8VA3t3AQqklsaYdPSH39/hEBUFauXHVR3FxJUHxF5+XI6Z7f4+BY5/0lCdjAVfcX4Z1PIaoXE58uLiMpawakaKan6yt5lPRcurNGpUJvm7ZnkM0+z4SS2X90ahrRLz/Udlc23Cg0ZMDfKTnzKVtEazsz/wAZ7hLWGOo/C4GVSAYMknIRMRlOa1AsBunfwjZ0C26/RF52/pnaLHAjGS3niBMx/KAi6NNzjkCBvI1HMFWz7SQROvt4IQUCxoOKYkZ9TIk7BJXIacu/owUZyGsTG/j1XadLPNS134XM2BAMk7qzFrj/AKufNGa77HvNXHoEo0+SKdTMJ1NkZHIjVEtcANEzORUQWPD2OYH1cUmYbpEEjQao1/CaTmyGH1IStmtcW5xh0H1VvIDeSMrkCqa+mNvuBgZscZnRwn3Gip7ik5hwvaRyJ0Pgd1triq1xgablAXFqHNLfmB1afsdih2i2PO0ZUFEW9', 1);
+(16, 'Buñuelos', 1000, 3, 'https://cdn-icons-png.flaticon.com/512/6313/6313568.png', 1),
+(17, 'pandequeso', 2500, 5, 'https://cdn-icons-png.flaticon.com/512/5787/5787330.png', 1),
+(18, 'almojábana ', 800, 4, 'https://cdn-icons-png.flaticon.com/512/4852/4852736.png', 1),
+(19, 'Empanada', 1500, 4, 'https://cdn-icons-png.flaticon.com/512/4727/4727260.png', 1),
+(20, 'coca cola', 2000, 3, 'https://cdn-icons-png.flaticon.com/512/1149/1149810.png', 1),
+(21, 'botella de agua', 2000, 3, 'https://cdn-icons-png.flaticon.com/512/824/824239.png', 1),
+(22, 'chocolotina', 1400, 6, 'https://cdn-icons-png.flaticon.com/512/8605/8605684.png', 1),
+(23, 'cafe', 1200, 3, 'https://as2.ftcdn.net/v2/jpg/00/43/99/81/1000_F_43998133_4Pf0crjj0nPE7i7E1xC2ztzAU71aHsYB.jpg', 1),
+(25, 'cafe', 1200, 3, 'https://cdn-icons-png.flaticon.com/512/342/342654.png', 1);
 
 -- --------------------------------------------------------
 
@@ -557,7 +584,7 @@ ALTER TABLE `abono`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes_informativos`
@@ -569,13 +596,13 @@ ALTER TABLE `clientes_informativos`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido_local`
 --
 ALTER TABLE `detalle_pedido_local`
-  MODIFY `id_detalle_pedido_local` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detalle_pedido_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
@@ -587,13 +614,13 @@ ALTER TABLE `detalle_venta`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido_local`
 --
 ALTER TABLE `pedido_local`
-  MODIFY `id_pedido_local` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pedido_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -605,7 +632,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
