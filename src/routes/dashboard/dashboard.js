@@ -29,7 +29,7 @@ router.get("/top-productos-pedidos", (req, res) => {
   });
 });
 
-//? Get pedidos_lcoales top
+//? Get pedidos_lcoales top global
 router.get("/top-productos-pedidos-locales", (req, res) => {
   const query = `
   select
@@ -52,6 +52,54 @@ router.get("/top-productos-pedidos-locales", (req, res) => {
       console.log(err);
     }
   });
+});
+
+//? Top productos en tabla PEDIDOS
+router.post("/top3-pedidos", (req, res) => {
+  const { mes,año } = req.body;
+  mySqlConnection.query(
+    "select  dp.id_producto, sum(dp.cantidad) as cantidad_venta, p2.nombre, month (p.fecha_registro) as mes, year (p.fecha_registro) as año From pedidos p join detalle_pedido dp on dp.id_pedido = p.id_pedido join productos p2 on p2.id =dp.id_producto where fecha_registro is not null and month (fecha_registro)=? and year (fecha_registro)=? and p.tipo ='pedido' group by dp.id_producto ",
+    [mes,año],
+    (err, rows, fields) => {
+      if (!err) {
+        res.send(rows);
+      } else {
+        console.log(err);
+      }
+    }
+  );
+});
+
+//? Top productos en tabla PEDIDOS_LOCALES
+router.post("/top3-pedidos-locales", (req, res) => {
+  const { mes,año } = req.body;
+  mySqlConnection.query(
+    "select dp.id_producto, sum(dp.cantidad) as cantidad_venta, p2.nombre, month (p.fecha_registro) as mes, year (p.fecha_registro) as año From pedido_local p join detalle_pedido_local dp on dp.id_pedido_local = p.id_pedido_local join productos p2 on p2.id =dp.id_producto where fecha_registro is not null and month (fecha_registro)=? and year (fecha_registro)=? and p.estado = 1  group by dp.id_producto ",
+    [mes,año],
+    (err, rows, fields) => {
+      if (!err) {
+        res.send(rows);
+      } else {
+        console.log(err);
+      }
+    }
+  );
+});
+
+//? Top productos en tabla VENTAS_LOCALES
+router.post("/top3-ventas-locales", (req, res) => {
+  const { mes,año } = req.body;
+  mySqlConnection.query(
+    "select dv.id_producto, sum(dv.cantidad) as cantidad_venta, p2.nombre, month (vl.fecha_registro) as mes, year (vl.fecha_registro) as año From venta_local vl join detalle_venta dv on dv.id_venta  = vl.id_venta join productos p2 on p2.id =dv.id_producto where fecha_registro is not null and month (fecha_registro)=10 and year (fecha_registro)=2022 and vl.estado = 1 group by dv.id_producto ",
+    [mes,año],
+    (err, rows, fields) => {
+      if (!err) {
+        res.send(rows);
+      } else {
+        console.log(err);
+      }
+    }
+  );
 });
 
 module.exports = router;
