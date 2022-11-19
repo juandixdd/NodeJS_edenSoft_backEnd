@@ -165,4 +165,23 @@ router.put("/cotizaciones/anular/:id", (req, res) => {
     });
 });
 
+//? hacer pedido una cotizacion =====================================================================================
+router.put("/cotizacion/hacer_pedido/:id", (req, res) => {
+  const { tipo, fecha_entrega } = req.body;
+  const { id } = req.params;
+  (query =
+    "UPDATE pedidos SET tipo = ?, fecha_entrega = ? WHERE id_pedido = ?"),
+    mySqlConnection.query(
+      query,
+      [tipo, fecha_entrega, id],
+      (err, rows, fields) => {
+        if (!err) {
+          res.json({ status: 200, message: "Se hizo el pedido exitosamente" });
+        } else {
+          console.log(err);
+        }
+      }
+    );
+});
+
 module.exports = router;
