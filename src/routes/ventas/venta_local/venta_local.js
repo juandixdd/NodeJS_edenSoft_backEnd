@@ -42,7 +42,7 @@ router.get("/venta-local-all-data/:id", (req, res) => {
   let queryWithAbono = `
                         select
                           dv.*,
-                          p.nombre as 'product_name',
+                          p.nombre as 'product_name',|
                           p.precio as 'product_price',
                           vl.*,
                           ci.*,
