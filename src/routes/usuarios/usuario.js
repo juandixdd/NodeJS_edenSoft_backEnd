@@ -77,4 +77,33 @@ router.put("/usuario/:id_cliente_documento", (req, res) => {
   );
 });
 
+//? Get permisos by usuario id
+router.get("/usuario/permisos/:id", (req, res) => {
+  const { id } = req.params;
+  query = `
+select
+	u.id_usuario,
+	u.correo,
+	u.id_cliente_documento,
+	u.id_rol,
+	r.nombre as 'rol',
+	p.modulo as 'modulo',
+	p.id as 'modulo_id'
+from
+	usuario u
+join roles r on r.id = u.id_rol
+join rol_permisos rp on rp.id_rol = r.id
+join permisos p on p.id = rp.id_permiso 
+where
+	u.id_cliente_documento = ?
+  `;
+  mySqlConnection.query(query, [id], (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    } else {
+      console.log(err);
+    }
+  });
+});
+
 module.exports = router;
