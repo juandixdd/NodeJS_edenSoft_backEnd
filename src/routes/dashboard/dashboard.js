@@ -113,7 +113,7 @@ router.post("/top3-ventas-locales", (req, res) => {
 router.post("/totales-pedidos", (req, res) => {
   const { inicio,fin } = req.body;
   mySqlConnection.query(
-    "select sum(dp.cantidad) as ventas_totales, sum(p.precio_total) as valor_venta, day(fecha_registro) as dia, month(fecha_registro) as mes from pedidos p join detalle_pedido dp on dp.id_pedido = p.id_pedido where fecha_registro between ? and ? and p.tipo ='pedido' group by day(fecha_registro)",
+    "select sum(p.precio_total) as valor_venta,concat( day(fecha_registro),'/',month(fecha_registro))  as dia from pedidos p join detalle_pedido dp on dp.id_pedido = p.id_pedido where fecha_registro between ? and ? and p.tipo ='pedido' and p.estado =1 group by fecha_registro",
     [inicio,fin],
     (err, rows, fields) => {
       if (!err) {
