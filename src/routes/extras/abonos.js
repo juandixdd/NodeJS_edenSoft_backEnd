@@ -16,21 +16,36 @@ router.get("/abonos", (req, res) => {
 //? Create data
 router.post("/abonos", (req, res) => {
   const { id_venta_local, id_pedido_local, valor } = req.body;
-  mySqlConnection.query(
-    "INSERT INTO abono (id_venta_local,id_pedido_local,valor) VALUES (?,?,?)",
-    [id_venta_local, id_pedido_local, valor],
-    (err, rows, fields) => {
-      if (!err) {
+  const selectQuery = "select * from abono where id_venta_local = ?";
+  mySqlConnection.query(selectQuery, [id_venta_local], (err, rows, fields) => {
+    if (!err) {
+      if (rows.length == 0) {
+        mySqlConnection.query(
+          "INSERT INTO abono (id_venta_local,id_pedido_local,valor) VALUES (?,?,?)",
+          [id_venta_local, id_pedido_local, valor],
+          (err, rows, fields) => {
+            if (!err) {
+              res.json({
+                status: 200,
+                message: "Abono creado con éxito",
+                data: rows,
+              });
+            } else {
+              console.log(err);
+            }
+          }
+        );
+      } else {
         res.json({
-          status: 200,
-          message: "Abono creado con éxito",
+          status: 400,
+          message: "Ya existe el abono",
           data: rows,
         });
-      } else {
-        console.log(err);
       }
+    } else {
+      console.log(err);
     }
-  );
+  });
 });
 
 module.exports = router;
