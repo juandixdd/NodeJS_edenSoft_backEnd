@@ -113,7 +113,7 @@ router.post("/top3-ventas-locales", (req, res) => {
 router.post("/totales-pedidos", (req, res) => {
   const { inicio,fin } = req.body;
   mySqlConnection.query(
-    "select sum(p.precio_total) as valor_venta,concat( day(fecha_registro),'/',month(fecha_registro))  as dia from pedidos p join detalle_pedido dp on dp.id_pedido = p.id_pedido where fecha_registro between ? and ? and p.tipo ='pedido' and p.estado =1 group by fecha_registro",
+    "select sum(p.precio_total) as valor_ventas,concat(month(fecha_registro),'/',day(fecha_registro))  as fecha from pedidos p join detalle_pedido dp on dp.id_pedido = p.id_pedido where fecha_registro between ? and ? and p.tipo ='pedido' and p.estado =1 group by fecha_registro",
     [inicio,fin],
     (err, rows, fields) => {
       if (!err) {
@@ -129,7 +129,7 @@ router.post("/totales-pedidos", (req, res) => {
 router.post("/totales-pedidos-locales", (req, res) => {
   const { inicio,fin } = req.body;
   mySqlConnection.query(
-    "select sum(distinct pl.precio_total) as valor_ventas, concat(day(fecha_registro),"/",month(fecha_registro)) as fecha from pedido_local pl join detalle_pedido_local dpl on dpl.id_pedido_local = pl.id_pedido_local where fecha_registro between ? and ? and pl.estado =1 group by fecha_registro ",
+    "select sum(pl.precio_total) as valor_ventas, concat(month(fecha_registro),'/',day(fecha_registro)) as fecha from pedido_local pl join detalle_pedido_local dpl on dpl.id_pedido_local = pl.id_pedido_local where fecha_registro between ? and ? and pl.estado =1 group by fecha_registro",
     [inicio,fin],
     (err, rows, fields) => {
       if (!err) {
@@ -145,7 +145,7 @@ router.post("/totales-pedidos-locales", (req, res) => {
 router.post("/totales-ventas", (req, res) => {
   const { inicio,fin } = req.body;
   mySqlConnection.query(
-    "select sum(vl.precio_total) as valor_ventas, concat(day(fecha_registro),"/", month(fecha_registro)) as fecha from venta_local vl join detalle_venta dv on vl.id_venta = dv.id_venta where fecha_registro between '2022-10-1' and '2022-11-20' and vl.estado = 1 group by fecha_registro",
+    "select sum(vl.precio_total) as valor_ventas, concat(month(fecha_registro),'/',day(fecha_registro)) as fecha from venta_local vl join detalle_venta dv on vl.id_venta = dv.id_venta where fecha_registro between ? and ? and vl.estado = 1 group by fecha_registro",
     [inicio,fin],
     (err, rows, fields) => {
       if (!err) {
