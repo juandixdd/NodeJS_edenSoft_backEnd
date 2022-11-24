@@ -78,6 +78,7 @@ router.post("/clientes-informativos", (req, res) => {
   }
 });
 
+//? Create cliente informativo
 router.post("/clientes-informativos", (req, res) => {
   //* Se define función para creación del cliente
   function createCliente() {
