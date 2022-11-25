@@ -5,7 +5,7 @@ const mySqlConnection = require("../../../conexion");
 //? Traer todos los roles =====================================================================================
 router.get("/roles", (req, res) => {
   const query =
-    "select r.id, r.nombre as 'rol',if(r.estado=0,'inactivo','activo') as nombre_estado, r.estado, group_concat(p.nombre separator ', ') as 'permiso' from roles r join rol_permisos rp on r.id = rp.id_rol join permisos p on p.id = rp.id_permiso group by rol";
+    "select r.id, r.nombre as 'rol',if(r.estado=0,'inactivo','activo') as nombre_estado, r.estado, group_concat(p.modulo separator ', ') as 'permiso' from roles r join rol_permisos rp on r.id = rp.id_rol join permisos p on p.id = rp.id_permiso group by rol";
   mySqlConnection.query(query, (err, rows, fields) => {
     if (!err) {
       res.send(rows);
@@ -18,7 +18,7 @@ router.get("/roles", (req, res) => {
 //? Traer a un rol por id =====================================================================================
 router.get("/roles/:id", (req, res) => {
   const { id } = req.params;
-  query = "select r.id, r.nombre as 'rol', r.estado, group_concat(p.nombre separator ', ')  as 'permiso' from roles r  join rol_permisos rp on r.id = rp.id_rol  join permisos p on p.id = rp.id_permiso where r.id =? group by rol ";
+  query = "select r.id, r.nombre as 'rol', r.estado, group_concat(p.modulo separator ', ')  as 'permiso' from roles r  join rol_permisos rp on r.id = rp.id_rol  join permisos p on p.id = rp.id_permiso where r.id =? group by rol ";
   mySqlConnection.query(query, [id], (err, rows, fields) => {
     if (!err) {
       res.send(rows);
