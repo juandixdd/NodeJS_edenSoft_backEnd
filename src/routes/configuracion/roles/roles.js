@@ -18,7 +18,8 @@ router.get("/roles", (req, res) => {
 //? Traer a un rol por id =====================================================================================
 router.get("/roles/:id", (req, res) => {
   const { id } = req.params;
-  query = "select r.id, r.nombre as 'rol', r.estado, group_concat(p.modulo separator ', ')  as 'permiso' from roles r  join rol_permisos rp on r.id = rp.id_rol  join permisos p on p.id = rp.id_permiso where r.id =? group by rol ";
+  query =
+    "select r.id, r.nombre as 'rol', r.estado, group_concat(p.modulo separator ', ')  as 'permiso' from roles r  join rol_permisos rp on r.id = rp.id_rol  join permisos p on p.id = rp.id_permiso where r.id =? group by rol ";
   mySqlConnection.query(query, [id], (err, rows, fields) => {
     if (!err) {
       res.send(rows);
@@ -40,7 +41,7 @@ router.post("/roles", (req, res) => {
           res.json({
             status: "rol creado",
             statusCode: 200,
-            idRol: rows.insertId
+            idRol: rows.insertId,
           });
         } else {
           console.log(err);
@@ -54,16 +55,16 @@ router.post("/roles", (req, res) => {
 
 //?anular un rol =====================================================================================
 router.put("/anula-rol/:id", (req, res) => {
-  const {estado } = req.body;
+  const { estado } = req.body;
   const { id } = req.params;
   mySqlConnection.query(
     "UPDATE roles SET estado = ? WHERE id = ?",
     [estado, id],
     (err, rows, fields) => {
       if (!err) {
-        res.json({ 
-          status:200, 
-          message:"rol actualizado" 
+        res.json({
+          status: 200,
+          message: "rol actualizado",
         });
       } else {
         console.log(err);
@@ -88,7 +89,6 @@ router.delete("/roles/:id", (req, res) => {
   );
 });
 
-
 //?-----------> Confirmacion de usuarios con ese rol<-----------\\
 
 router.get("/usuarios-rol/:id", (req, res) => {
@@ -103,6 +103,27 @@ router.get("/usuarios-rol/:id", (req, res) => {
   });
 });
 
-
+//? Traer todos los datos de un rol por user id =====================================================================================
+router.get("/roles/permisos/:rolId", (req, res) => {
+  const { rolId } = req.params;
+  query = `
+    select
+      p.*
+    from
+      usuario u
+    join roles r on r.id = u.id_rol 
+    join rol_permisos rp on rp.id_rol = r.id 
+    join permisos p on p.id = rp.id_permiso 
+    where
+      u.id_rol = ?
+  `;
+  mySqlConnection.query(query, [rolId], (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    } else {
+      console.log(err);
+    }
+  });
+});
 
 module.exports = router;
