@@ -22,6 +22,7 @@ router.post("/auth/login", async (req, res) => {
             status: "Login exitoso",
             statusCode: 200,
             userId: userRegistered[0].id_cliente_documento,
+            estado:userRegistered[0].estado,
             token: token,
           });
         }
@@ -36,7 +37,7 @@ router.post("/auth/login", async (req, res) => {
 
   const { correo, contrasena } = req.body;
   mySqlConnection.query(
-    "SELECT * FROM usuario WHERE correo = ?",
+    "SELECT s.*, ci.estado  FROM usuario s join clientes_informativos ci on s.id_cliente_documento = ci.id_cliente_documento  WHERE correo = ?",
     [correo],
     (err, rows, fields) => {
       if (!err) {

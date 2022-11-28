@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-11-2022 a las 15:04:48
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.29
+-- Tiempo de generación: 28-11-2022 a las 15:05:51
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -97,6 +97,7 @@ INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido
 (333, 'Pedro', 'Navaja', 333, 0),
 (999, 'Josesito', 'Vegano', 310002022, 1),
 (7789, 'Jose', 'Pelaes', 1231232, 1),
+(23211, 'andrea', 'molina', 3212312, 1),
 (123123, 'Rosario', 'Tijeras', 3334455, 0),
 (1231231, 'Nuevo', 'Cliente editado', 2147483647, 1),
 (32412313, 'qweqwe', 'qweeqwe', 23123123, 1),
@@ -105,7 +106,6 @@ INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido
 (123215556, 'Daniela ', 'Rojas', 2147483647, 1),
 (125146841, 'Ediccson', 'Quiroz', 45613216, 1),
 (324123423, '123123', '123123123', 111, 1),
-(1037632160, 'JEFERSSON DANIEL', 'PEA SALAZAR', 33322211, 1),
 (1232344567, 'JUAN DIEGO', 'ARTEAGA PEREZ', 2147483647, 1),
 (1235423534, 'hola', 'hola', 213124123, 1),
 (2147483647, 'Clara', 'Salazar', 555, 1);
@@ -167,12 +167,7 @@ CREATE TABLE `detalle_pedido_local` (
 --
 
 INSERT INTO `detalle_pedido_local` (`id_detalle_pedido_local`, `id_producto`, `id_pedido_local`, `cantidad`, `precio_unitario`) VALUES
-(1, 16, 1, 25, 1000),
-(2, 15, 2, 11, 3500),
-(3, 16, 2, 22, 1000),
-(4, 15, 3, 22, 3500),
-(5, 17, 4, 31, 2500),
-(6, 15, 5, 22, 3500);
+(1, 16, 1, 25, 1000);
 
 -- --------------------------------------------------------
 
@@ -254,16 +249,16 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente_documento`, `tipo`, `fecha_regis
 (54, 125146841, 'cotizacion', '2022-10-10', 36500, 1, '2022-09-17'),
 (55, 125146841, 'cotizacion', '2022-10-10', 33000, 1, '2022-09-17'),
 (56, 125146841, 'pedido', '2022-10-10', 33000, 0, '2022-10-31'),
-(57, 125146841, 'pedido', '2022-10-11', 33000, 1, '2022-10-31'),
-(58, 125146841, 'pedido', '2022-10-12', 33000, 1, '2022-10-31'),
+(57, 125146841, 'pedido', '2022-10-10', 33000, 1, '2022-10-31'),
+(58, 125146841, 'pedido', '2022-10-11', 33000, 1, '2022-10-31'),
 (59, 125146841, 'pedido', '2022-10-12', 33000, 1, '2022-10-31'),
 (60, 125146841, 'pedido', '2022-10-13', 33000, 1, '2022-10-31'),
-(61, 125146841, 'pedido', '2022-10-13', 33000, 1, '2022-10-31'),
+(61, 125146841, 'pedido', '2022-10-14', 33000, 1, '2022-10-31'),
 (62, 125146841, 'pedido', '2022-10-14', 33000, 1, '2022-10-31'),
-(63, 125146841, 'pedido', '2022-10-15', 33000, 1, '2022-10-31'),
-(64, 97896745, 'cotizacion', '2022-11-11', 122500, 0, '2022-09-17'),
-(65, 97896745, 'cotizacion', '2022-11-11', 122500, 1, '2022-09-17'),
-(66, 97896745, 'pedido', '2022-11-12', 122500, 1, '2022-11-16');
+(63, 125146841, 'pedido', '2022-10-16', 33000, 1, '2022-10-31'),
+(64, 97896745, 'cotizacion', '2022-11-16', 122500, 0, '2022-09-17'),
+(65, 97896745, 'cotizacion', '2022-11-20', 122500, 1, '2022-09-17'),
+(66, 97896745, 'pedido', '2022-11-21', 122500, 0, '2022-11-16');
 
 -- --------------------------------------------------------
 
@@ -285,11 +280,7 @@ CREATE TABLE `pedido_local` (
 --
 
 INSERT INTO `pedido_local` (`id_pedido_local`, `id_cliente_documento`, `fecha_registro`, `fecha_entrega`, `precio_total`, `estado`) VALUES
-(1, 111, '2022-11-10', '2022-11-21', 25000, 1),
-(2, 111, '2022-11-11', '2022-11-30', 60500, 1),
-(3, 111, '2022-11-12', '2022-11-26', 77000, 1),
-(4, 111, '2022-11-13', '2022-11-26', 77500, 1),
-(5, 111, '2022-11-13', '2022-11-25', 77000, 1);
+(1, 111, '2022-11-10', '2022-11-21', 25000, 1);
 
 -- --------------------------------------------------------
 
@@ -423,7 +414,7 @@ INSERT INTO `usuario` (`id_usuario`, `correo`, `contrasena`, `id_cliente_documen
 (5, 'pedriiit@navaja.com', '$2b$10$ycG5DntLTXYNsSopohzyge9.jIQqqrJYPwjw.p4r2w4NmKz6tdMEa', 111, 1, NULL),
 (6, 'pedro@navaja.com', '$2b$10$3LiAUIg0A7Y9y4yVmtHTcuUUUgvpJvYZcszsiWc.HHzVvunxS5Kzi', 333, 3, NULL),
 (7, 'usuario@user.com', '$2b$10$/S.XO3cB75QoUeU8uHsRsehpbEdPG4.Nlo74J8.FshTBNCbe347We', 444, 2, NULL),
-(8, 'email@email.com', '$2b$10$y9aD4WpGdfy7A7Kjy3rt6./0DBOLi7F2gPGJF/wkYlRRTVlxVey3.', 123123, 3, NULL),
+(8, 'email@email.com', '$2b$10$y9aD4WpGdfy7A7Kjy3rt6./0DBOLi7F2gPGJF/wkYlRRTVlxVey3.', 123123, 4, NULL),
 (9, '999@999.com', '$2b$10$3OKjsjMgksBKsey/3VVxJuBwPoimt5Bp.iCMifuXQqShvL90a29MS', 999, 3, NULL),
 (10, 'nuevo@nuevo.com', '$2b$10$3Iwz.VBMHcFMBtkTZRMt6.YQm8DZbZC2mA8huI/84io8mmtz3tmRy', 888, 3, NULL),
 (11, 'clara_salazar@gmail.com', '$2b$10$PznNyMCGB1TqndO.AdGql.meVyWDlx4SxzlrhbbXkXd89qSc5.8Ga', 123222111, 3, NULL),
@@ -438,7 +429,7 @@ INSERT INTO `usuario` (`id_usuario`, `correo`, `contrasena`, `id_cliente_documen
 (21, 'holas@holas.com', '$2b$10$krV.mjp77cVxJ5FTulgnnOyf8KRAiqT9Pk29Rwcse/fDs7fa80q1.', 324123423, 3, NULL),
 (24, 'juandixarteagaperez210@gmail.com', '$2b$10$azeaHJ5ZnUJ3C0/YaSEMz.7ugEp0jr9tF3vk2DbzIf7BBZ2uq57da', 97896745, 4, NULL),
 (25, 'jdarteaga20@misena.edu.co', '$2b$10$9yaK39s1IMepbIYlMsbquu/33Bzacwvi7ALK2tFYdZBbaeb7pXPW.', 1232344567, 3, NULL),
-(26, 'jefersson.pea@misena.edu.co', '$2b$10$pEoe1ejlMsnaylBSF5wm8uFMoX83WVH7UUCqgDU0UMrANbXBumR02', 1037632160, 3, NULL);
+(26, 'andreammllnaa@gmail.com', '$2b$10$3E56XYMecuxai2VVncuNn.KqOJL0s72ZoPLzNdHnn7KU4Sc/8nxsC', 23211, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -604,7 +595,7 @@ ALTER TABLE `detalle_pedido`
 -- AUTO_INCREMENT de la tabla `detalle_pedido_local`
 --
 ALTER TABLE `detalle_pedido_local`
-  MODIFY `id_detalle_pedido_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_detalle_pedido_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
@@ -622,7 +613,7 @@ ALTER TABLE `pedidos`
 -- AUTO_INCREMENT de la tabla `pedido_local`
 --
 ALTER TABLE `pedido_local`
-  MODIFY `id_pedido_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pedido_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
