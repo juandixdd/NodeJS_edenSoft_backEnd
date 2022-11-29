@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2022 a las 15:05:51
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 8.0.12
+-- Tiempo de generación: 29-11-2022 a las 18:53:44
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -99,7 +99,14 @@ INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido
 (7789, 'Jose', 'Pelaes', 1231232, 1),
 (23211, 'andrea', 'molina', 3212312, 1),
 (123123, 'Rosario', 'Tijeras', 3334455, 0),
+(134123, 'JUAN DIEGO', 'ARTEAGA PEREZ', 23141234, 1),
+(323423, 'JUAN DIEGO', 'ARTEAGA PEREZ', 23234234, 1),
+(564456, 'JUAN DIEGO', 'ARTEAGA PEREZ', 34212, 1),
+(566556, 'JUAN DIEGO', 'ARTEAGA PEREZ', 123123, 1),
 (1231231, 'Nuevo', 'Cliente editado', 2147483647, 1),
+(2342343, 'JUAN DIEGO', 'ARTEAGA PEREZ', 112312, 1),
+(3423423, 'JUAN DIEGO', 'ARTEAGA PEREZ', 234234, 1),
+(4534234, 'JUAN DIEGO', 'ARTEAGA PEREZ', 123123123, 1),
 (32412313, 'qweqwe', 'qweeqwe', 23123123, 1),
 (45345234, 'qweqwe', 'qweqw', 12312312, 1),
 (97896745, 'Juan Diego', 'Arteaga', 1231234324, 1),
@@ -354,7 +361,8 @@ INSERT INTO `roles` (`id`, `nombre`, `estado`) VALUES
 (1, 'admin', 0),
 (2, 'secretaria', 1),
 (3, 'cliente', 0),
-(4, 'super-admin', 0);
+(4, 'super-admin', 0),
+(10, 'Cliente', 1);
 
 -- --------------------------------------------------------
 
@@ -389,7 +397,8 @@ INSERT INTO `rol_permisos` (`id`, `id_rol`, `id_permiso`) VALUES
 (28, 4, 8),
 (29, 4, 9),
 (30, 4, 10),
-(31, 4, 11);
+(31, 4, 11),
+(32, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -403,33 +412,34 @@ CREATE TABLE `usuario` (
   `contrasena` varchar(100) NOT NULL,
   `id_cliente_documento` int(11) NOT NULL,
   `id_rol` int(11) NOT NULL DEFAULT 3,
-  `forgot_token` varchar(500) DEFAULT NULL
+  `forgot_token` varchar(500) DEFAULT NULL,
+  `img` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `correo`, `contrasena`, `id_cliente_documento`, `id_rol`, `forgot_token`) VALUES
-(5, 'pedriiit@navaja.com', '$2b$10$ycG5DntLTXYNsSopohzyge9.jIQqqrJYPwjw.p4r2w4NmKz6tdMEa', 111, 1, NULL),
-(6, 'pedro@navaja.com', '$2b$10$3LiAUIg0A7Y9y4yVmtHTcuUUUgvpJvYZcszsiWc.HHzVvunxS5Kzi', 333, 3, NULL),
-(7, 'usuario@user.com', '$2b$10$/S.XO3cB75QoUeU8uHsRsehpbEdPG4.Nlo74J8.FshTBNCbe347We', 444, 2, NULL),
-(8, 'email@email.com', '$2b$10$y9aD4WpGdfy7A7Kjy3rt6./0DBOLi7F2gPGJF/wkYlRRTVlxVey3.', 123123, 4, NULL),
-(9, '999@999.com', '$2b$10$3OKjsjMgksBKsey/3VVxJuBwPoimt5Bp.iCMifuXQqShvL90a29MS', 999, 3, NULL),
-(10, 'nuevo@nuevo.com', '$2b$10$3Iwz.VBMHcFMBtkTZRMt6.YQm8DZbZC2mA8huI/84io8mmtz3tmRy', 888, 3, NULL),
-(11, 'clara_salazar@gmail.com', '$2b$10$PznNyMCGB1TqndO.AdGql.meVyWDlx4SxzlrhbbXkXd89qSc5.8Ga', 123222111, 3, NULL),
-(12, 'juancito@gmail.com', '$2b$10$V8ysX17vRun2vz4FU4g79e3QleRxxQa9ALyzcDds4vLU1pgXsGwDa', 10366954, 1, NULL),
-(13, 'ediccson@gmail.com', '$2b$10$7HGM0EpGvE1HpTbPCN5mQOG2FSugMvWvWkYL0dn44fQRtHfC8izHO', 125146841, 3, NULL),
-(14, 'test3@gmail.com', '$2b$10$fGuxjamHvUhJiSYV26dPbeoS0LyEu1xQV9XOF/Ata.eaN7Re6aBIm', 344323423, 1, NULL),
-(15, 'rojas@rojas.com', '$2b$10$zTwsKLqnLEnKMS/QLMOJXulSFh.oQqkckDbxCFDL6G9PmQ0hYgJRu', 123215556, 3, NULL),
-(16, 'hola@hola.com', '$2b$10$LPkKeOUcoGl6F1um0SAbm.5L2D1NgqyJfX84.9qrylFyFa/Nth22y', 1235423534, 3, NULL),
-(18, 'manual@gmail.com', '$2b$10$Qp0tahKezcgTs/jhPNmpWuziW1SbAVC24GjYcc882vtx50DNrmMAu', 1002006298, 2, NULL),
-(19, 'sdasd@ssda.com', '$2b$10$U/coNQ3Kx8rbKksO5eKCj.Yw9l3LjGc4xsmYQ/bx9gbQxHoFqJ5Gm', 1231232321, 3, NULL),
-(20, 'jsjsj@hmgmg.com', '$2b$10$9lVuo8/CQFr4WqEh2EK7pu77vwIt/jRjs19qjnJVTlzGeZUOSCVmm', 98756789, 3, NULL),
-(21, 'holas@holas.com', '$2b$10$krV.mjp77cVxJ5FTulgnnOyf8KRAiqT9Pk29Rwcse/fDs7fa80q1.', 324123423, 3, NULL),
-(24, 'juandixarteagaperez210@gmail.com', '$2b$10$azeaHJ5ZnUJ3C0/YaSEMz.7ugEp0jr9tF3vk2DbzIf7BBZ2uq57da', 97896745, 4, NULL),
-(25, 'jdarteaga20@misena.edu.co', '$2b$10$9yaK39s1IMepbIYlMsbquu/33Bzacwvi7ALK2tFYdZBbaeb7pXPW.', 1232344567, 3, NULL),
-(26, 'andreammllnaa@gmail.com', '$2b$10$3E56XYMecuxai2VVncuNn.KqOJL0s72ZoPLzNdHnn7KU4Sc/8nxsC', 23211, 3, NULL);
+INSERT INTO `usuario` (`id_usuario`, `correo`, `contrasena`, `id_cliente_documento`, `id_rol`, `forgot_token`, `img`) VALUES
+(5, 'pedriiit@navaja.com', '$2b$10$ycG5DntLTXYNsSopohzyge9.jIQqqrJYPwjw.p4r2w4NmKz6tdMEa', 111, 1, NULL, NULL),
+(6, 'pedro@navaja.com', '$2b$10$3LiAUIg0A7Y9y4yVmtHTcuUUUgvpJvYZcszsiWc.HHzVvunxS5Kzi', 333, 3, NULL, NULL),
+(7, 'usuario@user.com', '$2b$10$/S.XO3cB75QoUeU8uHsRsehpbEdPG4.Nlo74J8.FshTBNCbe347We', 444, 2, NULL, NULL),
+(8, 'email@email.com', '$2b$10$y9aD4WpGdfy7A7Kjy3rt6./0DBOLi7F2gPGJF/wkYlRRTVlxVey3.', 123123, 4, NULL, NULL),
+(9, '999@999.com', '$2b$10$3OKjsjMgksBKsey/3VVxJuBwPoimt5Bp.iCMifuXQqShvL90a29MS', 999, 3, NULL, NULL),
+(10, 'nuevo@nuevo.com', '$2b$10$3Iwz.VBMHcFMBtkTZRMt6.YQm8DZbZC2mA8huI/84io8mmtz3tmRy', 888, 3, NULL, NULL),
+(11, 'clara_salazar@gmail.com', '$2b$10$PznNyMCGB1TqndO.AdGql.meVyWDlx4SxzlrhbbXkXd89qSc5.8Ga', 123222111, 3, NULL, NULL),
+(12, 'juancito@gmail.com', '$2b$10$V8ysX17vRun2vz4FU4g79e3QleRxxQa9ALyzcDds4vLU1pgXsGwDa', 10366954, 1, NULL, NULL),
+(13, 'ediccson@gmail.com', '$2b$10$7HGM0EpGvE1HpTbPCN5mQOG2FSugMvWvWkYL0dn44fQRtHfC8izHO', 125146841, 3, NULL, NULL),
+(14, 'test3@gmail.com', '$2b$10$fGuxjamHvUhJiSYV26dPbeoS0LyEu1xQV9XOF/Ata.eaN7Re6aBIm', 344323423, 1, NULL, NULL),
+(15, 'rojas@rojas.com', '$2b$10$zTwsKLqnLEnKMS/QLMOJXulSFh.oQqkckDbxCFDL6G9PmQ0hYgJRu', 123215556, 3, NULL, NULL),
+(16, 'hola@hola.com', '$2b$10$LPkKeOUcoGl6F1um0SAbm.5L2D1NgqyJfX84.9qrylFyFa/Nth22y', 1235423534, 3, NULL, NULL),
+(18, 'manual@gmail.com', '$2b$10$Qp0tahKezcgTs/jhPNmpWuziW1SbAVC24GjYcc882vtx50DNrmMAu', 1002006298, 2, NULL, NULL),
+(19, 'sdasd@ssda.com', '$2b$10$U/coNQ3Kx8rbKksO5eKCj.Yw9l3LjGc4xsmYQ/bx9gbQxHoFqJ5Gm', 1231232321, 3, NULL, NULL),
+(20, 'jsjsj@hmgmg.com', '$2b$10$9lVuo8/CQFr4WqEh2EK7pu77vwIt/jRjs19qjnJVTlzGeZUOSCVmm', 98756789, 3, NULL, NULL),
+(21, 'holas@holas.com', '$2b$10$krV.mjp77cVxJ5FTulgnnOyf8KRAiqT9Pk29Rwcse/fDs7fa80q1.', 324123423, 3, NULL, NULL),
+(24, 'juandixarteagaperez210@gmail.com', '$2b$10$azeaHJ5ZnUJ3C0/YaSEMz.7ugEp0jr9tF3vk2DbzIf7BBZ2uq57da', 97896745, 4, NULL, 'https://wonder-day.com/wp-content/uploads/2022/03/wonder-day-avatar-memes-cats-70.jpg'),
+(26, 'andreammllnaa@gmail.com', '$2b$10$3E56XYMecuxai2VVncuNn.KqOJL0s72ZoPLzNdHnn7KU4Sc/8nxsC', 23211, 3, NULL, NULL),
+(33, 'jdarteaga20@misena.edu.co', '$2b$10$yJ6MuDTG8bsKV.Rl9SKXQemE3MwSI0ThjAZ5lXfvXy8DW0HP4enMS', 323423, 10, NULL, 'https://planb.mx/wp-content/uploads/2022/04/FB_IMG_1642304708844-1.jpg');
 
 -- --------------------------------------------------------
 
@@ -631,19 +641,19 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `rol_permisos`
 --
 ALTER TABLE `rol_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `venta_local`

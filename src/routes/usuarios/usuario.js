@@ -43,7 +43,7 @@ router.get("/usuario/email/:correo", (req, res) => {
   });
 });
 
-//? editProfile
+//? Clieente informativo
 router.put("/editProfile/:id_cliente_documento", (req, res) => {
   const { nombre, apellido, telefono } = req.body;
   const { id_cliente_documento } = req.params;
@@ -72,6 +72,23 @@ router.put("/usuario/:id_cliente_documento", (req, res) => {
         res.json({ status: "Usuario actualizado" });
       } else {
         console.log(err);
+      }
+    }
+  );
+});
+
+//? editImg
+router.put("/usuario/img/:id_cliente_documento", (req, res) => {
+  const { img } = req.body;
+  const { id_cliente_documento } = req.params;
+  mySqlConnection.query(
+    "UPDATE usuario SET img = ? WHERE id_cliente_documento = ?",
+    [img, id_cliente_documento],
+    (err, rows, fields) => {
+      if (!err) {
+        res.json({ status: 200, message: "Imagen actualizada" });
+      } else {
+        res.json({ status: 400, message: err });
       }
     }
   );
