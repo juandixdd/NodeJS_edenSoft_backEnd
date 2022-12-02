@@ -145,6 +145,24 @@ router.put("/anula-usuario/:id", (req, res) => {
   );
 });
 
+//? Cambiar estado de un cliente =====================================================================================
+router.put("/clientes-informativos/cambiarEstado/:id_cliente_documento", (req, res) => {
+  const { estado } = req.body;
+  const { id_cliente_documento } = req.params;
+  let query = "UPDATE clientes_informativos SET estado = ? WHERE id_cliente_documento = ?";
+  mySqlConnection.query(query, [estado, id_cliente_documento], (err, rows, fields) => {
+    if (!err) {
+      res.json({
+        status: 200,
+        message: "Cambio el estado del cliente",
+        rows:rows
+      });
+    } else {
+      console.log(err);
+    }
+  });
+});
+
 /////-------------------> VALIDACIONES DE PEDIDOS Y VENTAS <-------------------\\\\\\\
 
 
@@ -180,22 +198,6 @@ router.get("/pedidos-usuarios/:id", (req, res) => {
   );
 });
 
-//? Cambiar estado de un producto =====================================================================================
-router.put("/clientes-informativos/cambiarEstado/:id_cliente_documento", (req, res) => {
-  const { estado } = req.body;
-  const { id_cliente_documento } = req.params;
-  let query = "UPDATE clientes_informativos SET estado = ? WHERE id_cliente_documento = ?";
-  mySqlConnection.query(query, [estado, id_cliente_documento], (err, rows, fields) => {
-    if (!err) {
-      res.json({
-        status: 200,
-        message: "Cambio el estado del cliente",
-        rows:rows
-      });
-    } else {
-      console.log(err);
-    }
-  });
-});
+
 
 module.exports = router;

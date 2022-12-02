@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const mySqlConnection = require("../../../conexion");
 
-//? Traer todos los productos =====================================================================================
+
+//? Traer todos los productos catalogo y admin =====================================================================================
 router.get("/productos", (req, res) => {
   const query =
     "select p.*, c.nombre as 'nombre_categoria' from productos p join categorias c on c.id = p.categoria ";
