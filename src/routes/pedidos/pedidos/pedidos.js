@@ -22,7 +22,7 @@ router.get("/pedidos", (req, res) => {
 router.get("/pedidos/cliente/:cedula", (req, res) => {
   const {cedula} = req.params
   const query =
-    "select p.*, ci.* from pedidos p join clientes_informativos ci on ci.id_cliente_documento = p.id_cliente_documento where tipo = 'pedido' and p.id_cliente_documento= ? order by fecha_registro desc";
+    "select p.*, ci.* from pedidos p join clientes_informativos ci on ci.id_cliente_documento = p.id_cliente_documento where tipo = 'pedido' and p.id_cliente_documento= ? order by fecha_entrega asc";
   mySqlConnection.query(query, [cedula], (err, rows, fields) => {
     if (!err) {
       res.send(rows);
@@ -84,6 +84,23 @@ router.post("/pedidos", (req, res) => {
   }
 
   createPedido();
+});
+//? anular un pedido =====================================================================================
+router.put("/pedidos/anular/:id", (req, res) => {
+  const { id } = req.params;
+  const { estado } = req.body;
+  (query = "UPDATE pedidos SET estado = ? WHERE id_pedido = ?"),
+    mySqlConnection.query(query, [estado, id], (err, rows, fields) => {
+      if (!err) {
+        res.json({
+          status:200, 
+          message: "Cambio el estado del pedido",
+          rows:rows
+        });
+      } else {
+        console.log(err);
+      }
+    });
 });
 
 // ************************** Pedidos **************************

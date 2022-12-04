@@ -34,7 +34,7 @@ router.get("/pedido-local-all/:id", (req, res) => {
   const { id } = req.params;
   let getAbonoQuery = "select * from abono where id_pedido_local = ?";
   let queryWithoutAbono =
-    "select dpl.*,p.nombre as 'product_name', p.precio as 'product_price',pl.*,ci.*from detalle_pedio_local dpl join productos p on p.id = dpl.id_producto  join pedido_local pl on pl.id_pedio_local = dpl.id_pedido_local join clientes_informativos ci on ci.id_cliente_documento = pl.id_cliente_documento where pl.id_pedido_local = ?";
+    "select dpl.*, p.nombre as 'product_name', p.precio as 'product_price',pl.*,ci.* from detalle_pedio_local dpl join productos p on p.id = dpl.id_producto  join pedido_local pl on pl.id_pedio_local = dpl.id_pedido_local join clientes_informativos ci on ci.id_cliente_documento = pl.id_cliente_documento where pl.id_pedido_local = ?";
   let queryWithAbono =
     "select dpl.*,p.nombre as 'product_name', p.precio as 'product_price',pl.*,ci.*, a.valor as 'cantidad_abono', a.estado as 'estado_abono' from detalle_pedido_local dpl join productos p on p.id = dpl.id_producto join pedido_local pl on pl.id_pedido_local = dpl.id_pedido_local join clientes_informativos ci on ci.id_cliente_documento = pl.id_cliente_documento join abono a on a.id_pedido_local = dpl.id_pedido_local where pl.id_pedido_local  = ?";
   mySqlConnection.query(getAbonoQuery, [id], (err, rows, fields) => {

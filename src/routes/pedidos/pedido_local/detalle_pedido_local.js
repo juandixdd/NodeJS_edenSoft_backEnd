@@ -17,7 +17,7 @@ router.get("/detalle-pedido-local", (req, res) => {
 router.get("/detalle-pedido-local/:id", (req, res) => {
   const { id } = req.params;
   mySqlConnection.query(
-    "SELECT * FROM detalle_pedido_local WHERE id_detalle_pedido_local = ?",
+    "SELECT * FROM detalle_pedido_local WHERE id_pedido_local = ?",
     [id],
     (err, rows, fields) => {
       if (!err) {
