@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-12-2022 a las 16:22:43
+-- Tiempo de generación: 05-12-2022 a las 21:57:55
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -86,13 +86,11 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
-(3, 'Bebidas12', 1),
+(3, 'Bebidas', 1),
 (4, 'Pan', 1),
 (5, 'Arepas', 1),
-(6, 'Parva', 1),
-(9, 'fritos', 1),
-(10, 'Pan pas', 1),
-(15, 'das', 1);
+(6, 'jugos', 1),
+(9, 'fritos', 1);
 
 -- --------------------------------------------------------
 
@@ -439,9 +437,16 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `precio`, `categoria`, `imagen`, `estado`) VALUES
-(15, 'arepa', 2000, 6, 'https://cdn-icons-png.flaticon.com/512/6724/6724574.png', 0),
-(16, 'arepa', 1000, 5, 'https://cdn-icons-png.flaticon.com/512/6313/6313568.png', 1),
-(17, 'pandequeso', 2500, 6, 'https://cdn-icons-png.flaticon.com/512/2001/2001350.png', 1);
+(15, 'Empanadas', 2500, 9, 'https://as2.ftcdn.net/v2/jpg/02/62/52/15/1000_F_262521504_PSik8F5PvTiCoxWUs1ZvNwA3J9hpFwyV.jpg', 1),
+(16, 'Arepa de huevo', 3500, 9, 'https://as2.ftcdn.net/v2/jpg/05/00/49/57/1000_F_500495742_kJ5PH2L1oIOw98tGNuoAbBNjBAWWnj8V.jpg', 1),
+(17, 'Almojábana', 600, 4, 'https://as2.ftcdn.net/v2/jpg/02/41/60/19/1000_F_241601901_DuIdyS9k5mr9cGmICZWIGbOYPrW6rxju.jpg', 1),
+(23, 'Buñuelos', 800, 9, 'https://as1.ftcdn.net/v2/jpg/04/67/89/48/1000_F_467894834_OH6j7DhkSbP8U4cEPEcv9lBwIxRFle44.jpg', 1),
+(24, 'Palitos de queso', 1500, 4, 'https://as2.ftcdn.net/v2/jpg/04/14/81/33/1000_F_414813378_0Ftni63CVaMvgBKWeIguEx78L2AkXToO.jpg', 1),
+(25, 'Panzerotti', 2600, 9, 'https://as1.ftcdn.net/v2/jpg/02/11/01/10/1000_F_211011040_yfRkmobBkJmdN90fjwPjmqSk1i7BnEZb.jpg', 1),
+(26, 'Coca Cola personal', 2500, 3, 'https://as2.ftcdn.net/v2/jpg/03/89/21/45/1000_F_389214586_3eeM4YOvXfV20q1zlNo1seeiLC5pNRSG.jpg', 1),
+(27, 'Pepsi personal', 1800, 3, 'https://as2.ftcdn.net/v2/jpg/05/21/10/85/1000_F_521108525_McaO5nS2LaiQPmUyxhFAeGfB4lZZe9kO.jpg', 1),
+(28, 'Jugo de naranja', 3000, 6, 'https://as2.ftcdn.net/v2/jpg/01/87/21/31/1000_F_187213110_p07ufUC42zVlcaijXRuFFYB4MKsWLgq1.jpg', 1),
+(29, 'Jugo de mora', 3000, 6, 'https://as1.ftcdn.net/v2/jpg/02/08/56/02/1000_F_208560285_o6MlsTquJ6jwAyaAX87USpItXm4AhoLL.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -743,7 +748,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
