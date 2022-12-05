@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-12-2022 a las 15:37:36
+-- Tiempo de generación: 05-12-2022 a las 16:22:43
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -113,7 +113,7 @@ CREATE TABLE `clientes_informativos` (
 --
 
 INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido`, `telefono`, `estado`) VALUES
-(111, 'Daniel', 'el mas lindo', 8885, 1),
+(111, 'Cliente', 'Informativo', 8885, 1),
 (222, 'Juanito', 'Alimaña', 3123, 1),
 (223, 'Daniel', 'guzman', 45321884, 0),
 (333, 'Pedro', 'Navaja', 333, 1),
@@ -462,7 +462,6 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `nombre`, `estado`) VALUES
 (1, 'admin', 0),
 (2, 'secretaria', 1),
-(3, 'cliente', 0),
 (4, 'super-admin', 1),
 (10, 'Cliente', 1);
 
@@ -500,7 +499,9 @@ INSERT INTO `rol_permisos` (`id`, `id_rol`, `id_permiso`) VALUES
 (29, 4, 9),
 (30, 4, 10),
 (31, 4, 11),
-(34, 4, 1);
+(34, 4, 1),
+(36, 13, 1),
+(37, 13, 2);
 
 -- --------------------------------------------------------
 
@@ -523,10 +524,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `correo`, `contrasena`, `id_cliente_documento`, `id_rol`, `forgot_token`, `img`) VALUES
-(5, 'pedriiit@navaja.com', '$2b$10$ycG5DntLTXYNsSopohzyge9.jIQqqrJYPwjw.p4r2w4NmKz6tdMEa', 111, 1, NULL, NULL),
+(5, 'cliente@informativo.com', '$2b$10$ycG5DntLTXYNsSopohzyge9.jIQqqrJYPwjw.p4r2w4NmKz6tdMEa', 111, 4, NULL, NULL),
 (6, 'pedro@navaja.com', '$2b$10$3LiAUIg0A7Y9y4yVmtHTcuUUUgvpJvYZcszsiWc.HHzVvunxS5Kzi', 333, 3, NULL, NULL),
 (7, 'usuario@user.com', '$2b$10$/S.XO3cB75QoUeU8uHsRsehpbEdPG4.Nlo74J8.FshTBNCbe347We', 444, 2, NULL, NULL),
-(8, 'email@email.com', '$2b$10$y9aD4WpGdfy7A7Kjy3rt6./0DBOLi7F2gPGJF/wkYlRRTVlxVey3.', 123123, 4, NULL, NULL),
 (9, '999@999.com', '$2b$10$3OKjsjMgksBKsey/3VVxJuBwPoimt5Bp.iCMifuXQqShvL90a29MS', 999, 3, NULL, NULL),
 (10, 'nuevo@nuevo.com', '$2b$10$3Iwz.VBMHcFMBtkTZRMt6.YQm8DZbZC2mA8huI/84io8mmtz3tmRy', 888, 3, NULL, NULL),
 (11, 'clara_salazar@gmail.com', '$2b$10$PznNyMCGB1TqndO.AdGql.meVyWDlx4SxzlrhbbXkXd89qSc5.8Ga', 123222111, 3, NULL, NULL),
@@ -749,13 +749,13 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `rol_permisos`
 --
 ALTER TABLE `rol_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
