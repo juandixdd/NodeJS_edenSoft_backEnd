@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2022 a las 18:53:44
+-- Tiempo de generación: 05-12-2022 a las 15:37:36
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -48,7 +48,26 @@ INSERT INTO `abono` (`id_abono`, `id_venta_local`, `id_pedido_local`, `valor`, `
 (6, 30, NULL, 25000, 1),
 (7, 31, NULL, 31250, 1),
 (8, 32, NULL, 31250, 1),
-(9, 33, NULL, 62500, 0);
+(9, 33, NULL, 62500, 0),
+(10, NULL, 5, 13125, 1),
+(11, NULL, 6, 3750, 1),
+(12, NULL, 7, 1000, 1),
+(13, NULL, 8, 9375, 1),
+(14, NULL, 8, 9375, 1),
+(15, NULL, 9, 5250, 1),
+(16, NULL, 9, 5250, 1),
+(17, NULL, 10, 3500, 1),
+(18, NULL, 10, 3500, 1),
+(19, 34, NULL, 5250, 1),
+(20, 35, NULL, 1000, 1),
+(21, 36, NULL, 3500, 1),
+(22, NULL, 11, 3500, 1),
+(23, NULL, 11, 3500, 1),
+(24, NULL, 14, 2500, 1),
+(25, NULL, 15, 7500, 1),
+(26, NULL, 15, 7500, 1),
+(27, NULL, 15, 7500, 1),
+(28, NULL, 16, 6750, 1);
 
 -- --------------------------------------------------------
 
@@ -67,10 +86,13 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
-(3, 'Bebidas', 1),
+(3, 'Bebidas12', 1),
 (4, 'Pan', 1),
-(5, 'Arepas', 0),
-(6, 'Parva', 0);
+(5, 'Arepas', 1),
+(6, 'Parva', 1),
+(9, 'fritos', 1),
+(10, 'Pan pas', 1),
+(15, 'das', 1);
 
 -- --------------------------------------------------------
 
@@ -93,26 +115,30 @@ CREATE TABLE `clientes_informativos` (
 INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido`, `telefono`, `estado`) VALUES
 (111, 'Daniel', 'el mas lindo', 8885, 1),
 (222, 'Juanito', 'Alimaña', 3123, 1),
-(223, 'Daniel', 'guzman', 45321884, 1),
-(333, 'Pedro', 'Navaja', 333, 0),
+(223, 'Daniel', 'guzman', 45321884, 0),
+(333, 'Pedro', 'Navaja', 333, 1),
 (999, 'Josesito', 'Vegano', 310002022, 1),
 (7789, 'Jose', 'Pelaes', 1231232, 1),
 (23211, 'andrea', 'molina', 3212312, 1),
-(123123, 'Rosario', 'Tijeras', 3334455, 0),
+(103666, 'carlos', 'gonzalez', 4780711, 0),
+(123123, 'Rosario', 'Tijeras', 3334455, 1),
 (134123, 'JUAN DIEGO', 'ARTEAGA PEREZ', 23141234, 1),
 (323423, 'JUAN DIEGO', 'ARTEAGA PEREZ', 23234234, 1),
 (564456, 'JUAN DIEGO', 'ARTEAGA PEREZ', 34212, 1),
 (566556, 'JUAN DIEGO', 'ARTEAGA PEREZ', 123123, 1),
 (1231231, 'Nuevo', 'Cliente editado', 2147483647, 1),
+(1234567, 'daniela', 'rojas', 305841268, 1),
 (2342343, 'JUAN DIEGO', 'ARTEAGA PEREZ', 112312, 1),
 (3423423, 'JUAN DIEGO', 'ARTEAGA PEREZ', 234234, 1),
 (4534234, 'JUAN DIEGO', 'ARTEAGA PEREZ', 123123123, 1),
 (32412313, 'qweqwe', 'qweeqwe', 23123123, 1),
 (45345234, 'qweqwe', 'qweqw', 12312312, 1),
 (97896745, 'Juan Diego', 'Arteaga', 1231234324, 1),
+(123147159, 'danielito', 'perez', 56524645, 1),
 (123215556, 'Daniela ', 'Rojas', 2147483647, 1),
+(123458963, 'CARLOS MAURICIO', 'GONZALEZ GRACIANO', 963258741, 1),
 (125146841, 'Ediccson', 'Quiroz', 45613216, 1),
-(324123423, '123123', '123123123', 111, 1),
+(324123423, 'pepito', '123123123', 111, 0),
 (1232344567, 'JUAN DIEGO', 'ARTEAGA PEREZ', 2147483647, 1),
 (1235423534, 'hola', 'hola', 213124123, 1),
 (2147483647, 'Clara', 'Salazar', 555, 1);
@@ -153,7 +179,27 @@ INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `
 (72, 16, 63, 33, 1000),
 (73, 15, 64, 35, 3500),
 (74, 15, 65, 35, 3500),
-(75, 15, 66, 35, 3500);
+(75, 15, 66, 35, 3500),
+(76, 16, 67, 1, 1000),
+(77, 16, 68, 20, 1000),
+(78, 16, 69, 5, 1000),
+(79, 17, 69, 10, 2500),
+(80, 16, 70, 10, 1000),
+(81, 17, 70, 10, 2500),
+(82, 17, 71, 1, 2500),
+(83, 19, 71, 1, 2000),
+(84, 17, 72, 1, 2500),
+(85, 19, 72, 1, 2000),
+(86, 17, 73, 1, 2500),
+(87, 19, 73, 1, 2000),
+(88, 17, 74, 1, 2500),
+(89, 19, 74, 1, 2000),
+(90, 17, 75, 1, 2500),
+(91, 19, 75, 1, 2000),
+(92, 17, 76, 1, 2500),
+(93, 19, 76, 1, 2000),
+(94, 16, 77, 20, 1000),
+(95, 16, 78, 3, 1000);
 
 -- --------------------------------------------------------
 
@@ -174,7 +220,30 @@ CREATE TABLE `detalle_pedido_local` (
 --
 
 INSERT INTO `detalle_pedido_local` (`id_detalle_pedido_local`, `id_producto`, `id_pedido_local`, `cantidad`, `precio_unitario`) VALUES
-(1, 16, 1, 25, 1000);
+(1, 16, 1, 25, 1000),
+(2, 15, 2, 2, 3500),
+(3, 15, 3, 2, 3500),
+(4, 15, 4, 2, 3500),
+(5, 15, 5, 5, 3500),
+(6, 17, 6, 2, 2500),
+(7, 16, 7, 2, 1000),
+(8, 15, 8, 3, 3500),
+(9, 16, 8, 2, 1000),
+(10, 16, 9, 2, 1000),
+(11, 17, 9, 2, 2500),
+(12, 16, 10, 2, 1000),
+(13, 17, 10, 2, 2500),
+(14, 16, 11, 2, 1000),
+(15, 17, 11, 2, 2500),
+(16, 16, 12, 2, 1000),
+(17, 15, 12, 3, 3500),
+(18, 16, 13, 1, 1000),
+(19, 17, 14, 2, 2500),
+(20, 16, 15, 1, 1000),
+(21, 17, 15, 2, 2500),
+(22, 19, 15, 2, 2000),
+(23, 17, 16, 2, 2500),
+(24, 19, 16, 2, 2000);
 
 -- --------------------------------------------------------
 
@@ -227,7 +296,13 @@ INSERT INTO `detalle_venta` (`id_detalle_venta`, `id_producto`, `id_venta`, `can
 (36, 17, 30, 20, 2500),
 (37, 17, 31, 25, 2500),
 (38, 17, 32, 25, 2500),
-(39, 17, 33, 50, 2500);
+(39, 17, 33, 50, 2500),
+(40, 16, 34, 2, 1000),
+(41, 17, 34, 2, 2500),
+(42, 16, 35, 2, 1000),
+(43, 15, 36, 1, 3500),
+(44, 16, 36, 1, 1000),
+(45, 17, 36, 1, 2500);
 
 -- --------------------------------------------------------
 
@@ -261,11 +336,23 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente_documento`, `tipo`, `fecha_regis
 (59, 125146841, 'pedido', '2022-10-12', 33000, 1, '2022-10-31'),
 (60, 125146841, 'pedido', '2022-10-13', 33000, 1, '2022-10-31'),
 (61, 125146841, 'pedido', '2022-10-14', 33000, 1, '2022-10-31'),
-(62, 125146841, 'pedido', '2022-10-14', 33000, 1, '2022-10-31'),
-(63, 125146841, 'pedido', '2022-10-16', 33000, 1, '2022-10-31'),
+(62, 125146841, 'pedido', '2022-10-14', 33000, 0, '2022-10-31'),
+(63, 125146841, 'pedido', '2022-10-16', 33000, 0, '2022-10-31'),
 (64, 97896745, 'cotizacion', '2022-11-16', 122500, 0, '2022-09-17'),
 (65, 97896745, 'cotizacion', '2022-11-20', 122500, 1, '2022-09-17'),
-(66, 97896745, 'pedido', '2022-11-21', 122500, 0, '2022-11-16');
+(66, 97896745, 'pedido', '2022-11-21', 122500, 0, '2022-11-16'),
+(67, 103666, 'pedido', '2022-12-01', 1000, 1, '2022-12-02'),
+(68, 103666, 'pedido', '2022-12-01', 1000, 0, '2022-12-02'),
+(69, 103666, 'pedido', '2022-12-01', 30000, 1, '2022-12-02'),
+(70, 103666, 'pedido', '2022-12-01', 30000, 1, '2022-12-03'),
+(71, 103666, 'pedido', '2022-12-04', 4500, 0, '2022-12-06'),
+(72, 103666, 'pedido', '2022-12-04', 4500, 0, '2022-12-15'),
+(73, 103666, 'cotizacion', '2022-12-04', 4500, 0, '2022-09-17'),
+(74, 103666, 'cotizacion', '2022-12-04', 4500, 0, '2022-09-17'),
+(75, 103666, 'pedido', '2022-12-04', 4500, 1, '2022-12-05'),
+(76, 103666, 'pedido', '2022-12-05', 4500, 0, '2022-12-05'),
+(77, 103666, 'pedido', '2022-12-05', 20000, 0, '2022-12-05'),
+(78, 103666, 'cotizacion', '2022-12-05', 3000, 1, '2022-09-17');
 
 -- --------------------------------------------------------
 
@@ -287,7 +374,22 @@ CREATE TABLE `pedido_local` (
 --
 
 INSERT INTO `pedido_local` (`id_pedido_local`, `id_cliente_documento`, `fecha_registro`, `fecha_entrega`, `precio_total`, `estado`) VALUES
-(1, 111, '2022-11-10', '2022-11-21', 25000, 1);
+(1, 111, '2022-11-10', '2022-11-21', 25000, 0),
+(2, 111, '2022-11-29', '2022-09-29', 7000, 1),
+(3, 111, '2022-11-29', '2022-09-30', 7000, 1),
+(4, 111, '2022-11-29', '2022-12-01', 7000, 1),
+(5, 111, '2022-11-30', '2022-12-02', 17500, 0),
+(6, 111, '2022-12-03', '2022-12-04', 5000, 2),
+(7, 111, '2022-12-03', '2022-12-04', 2000, 2),
+(8, 111, '2022-12-03', '2022-12-04', 12500, 2),
+(9, 111, '2022-12-03', '2022-12-04', 7000, 2),
+(10, 111, '2022-12-03', '2022-12-04', 7000, 2),
+(11, 111, '2022-12-04', '2022-12-04', 7000, 2),
+(12, 111, '2022-12-04', '2022-12-04', 12500, 1),
+(13, 111, '2022-12-05', '2022-12-05', 1000, 1),
+(14, 111, '2022-12-05', '2022-12-05', 5000, 2),
+(15, 111, '2022-12-05', '2022-12-05', 10000, 2),
+(16, 111, '2022-12-05', '2022-12-05', 9000, 2);
 
 -- --------------------------------------------------------
 
@@ -337,9 +439,9 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `precio`, `categoria`, `imagen`, `estado`) VALUES
-(15, 'Arepa de huevo', 3500, 5, 'https://cdn-icons-png.flaticon.com/512/6724/6724574.png', 1),
-(16, 'Buñuelos', 1000, 6, 'https://cdn-icons-png.flaticon.com/512/6313/6313568.png', 1),
-(17, 'pandequeso', 2500, 4, 'https://cdn-icons-png.flaticon.com/512/2001/2001350.png', 1);
+(15, 'arepa', 2000, 6, 'https://cdn-icons-png.flaticon.com/512/6724/6724574.png', 0),
+(16, 'arepa', 1000, 5, 'https://cdn-icons-png.flaticon.com/512/6313/6313568.png', 1),
+(17, 'pandequeso', 2500, 6, 'https://cdn-icons-png.flaticon.com/512/2001/2001350.png', 1);
 
 -- --------------------------------------------------------
 
@@ -361,7 +463,7 @@ INSERT INTO `roles` (`id`, `nombre`, `estado`) VALUES
 (1, 'admin', 0),
 (2, 'secretaria', 1),
 (3, 'cliente', 0),
-(4, 'super-admin', 0),
+(4, 'super-admin', 1),
 (10, 'Cliente', 1);
 
 -- --------------------------------------------------------
@@ -398,7 +500,7 @@ INSERT INTO `rol_permisos` (`id`, `id_rol`, `id_permiso`) VALUES
 (29, 4, 9),
 (30, 4, 10),
 (31, 4, 11),
-(32, 10, 1);
+(34, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -436,10 +538,13 @@ INSERT INTO `usuario` (`id_usuario`, `correo`, `contrasena`, `id_cliente_documen
 (18, 'manual@gmail.com', '$2b$10$Qp0tahKezcgTs/jhPNmpWuziW1SbAVC24GjYcc882vtx50DNrmMAu', 1002006298, 2, NULL, NULL),
 (19, 'sdasd@ssda.com', '$2b$10$U/coNQ3Kx8rbKksO5eKCj.Yw9l3LjGc4xsmYQ/bx9gbQxHoFqJ5Gm', 1231232321, 3, NULL, NULL),
 (20, 'jsjsj@hmgmg.com', '$2b$10$9lVuo8/CQFr4WqEh2EK7pu77vwIt/jRjs19qjnJVTlzGeZUOSCVmm', 98756789, 3, NULL, NULL),
-(21, 'holas@holas.com', '$2b$10$krV.mjp77cVxJ5FTulgnnOyf8KRAiqT9Pk29Rwcse/fDs7fa80q1.', 324123423, 3, NULL, NULL),
+(21, 'holas@holas.com', '$2b$10$krV.mjp77cVxJ5FTulgnnOyf8KRAiqT9Pk29Rwcse/fDs7fa80q1.', 324123423, 1, NULL, NULL),
 (24, 'juandixarteagaperez210@gmail.com', '$2b$10$azeaHJ5ZnUJ3C0/YaSEMz.7ugEp0jr9tF3vk2DbzIf7BBZ2uq57da', 97896745, 4, NULL, 'https://wonder-day.com/wp-content/uploads/2022/03/wonder-day-avatar-memes-cats-70.jpg'),
 (26, 'andreammllnaa@gmail.com', '$2b$10$3E56XYMecuxai2VVncuNn.KqOJL0s72ZoPLzNdHnn7KU4Sc/8nxsC', 23211, 3, NULL, NULL),
-(33, 'jdarteaga20@misena.edu.co', '$2b$10$yJ6MuDTG8bsKV.Rl9SKXQemE3MwSI0ThjAZ5lXfvXy8DW0HP4enMS', 323423, 10, NULL, 'https://planb.mx/wp-content/uploads/2022/04/FB_IMG_1642304708844-1.jpg');
+(33, 'jdarteaga20@misena.edu.co', '$2b$10$yJ6MuDTG8bsKV.Rl9SKXQemE3MwSI0ThjAZ5lXfvXy8DW0HP4enMS', 323423, 10, NULL, 'https://planb.mx/wp-content/uploads/2022/04/FB_IMG_1642304708844-1.jpg'),
+(34, 'cmgg7755@gmail.com', '$2b$10$q8E80LeB7SBRxK4JM/pD/.8MSEVAZ6bbnybZZl4qlC0PYIyq2srgK', 103666, 4, NULL, 'https://play-lh.googleusercontent.com/inV5N0eACXXzr9oyPgjiAYApr6YrKvTH68wWTEd3g3gahQkpWac1G_F6ZIFMUfZO94Wg'),
+(35, 'carlos.gonzalez076@misena.edu.co', '$2b$10$rA0jygbXzZ5F8FMOpL84XuJSEFr0i/G5TMhRQpqAQePUX7/iLa.eK', 123458963, 4, NULL, 'https://play-lh.googleusercontent.com/inV5N0eACXXzr9oyPgjiAYApr6YrKvTH68wWTEd3g3gahQkpWac1G_F6ZIFMUfZO94Wg'),
+(36, 'fdrojas102@misena.edu.co', '$2b$10$6BDwiVVFfNVvithincjI2OnCg9xcFsySfDEl2N76e.lA0UA6uckGS', 123147159, 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -483,7 +588,10 @@ INSERT INTO `venta_local` (`id_venta`, `id_cliente_documento`, `fecha_registro`,
 (30, 3453423, '2022-10-31', 50000, 2),
 (31, 1231323, '2022-10-31', 62500, 1),
 (32, 45345234, '2022-11-14', 62500, 2),
-(33, 32412313, '2022-11-15', 125000, 1);
+(33, 32412313, '2022-11-15', 125000, 1),
+(34, 111, '2022-12-03', 7000, 2),
+(35, 111, '2022-12-03', 2000, 2),
+(36, 111, '2022-12-03', 7000, 2);
 
 --
 -- Índices para tablas volcadas
@@ -581,13 +689,13 @@ ALTER TABLE `venta_local`
 -- AUTO_INCREMENT de la tabla `abono`
 --
 ALTER TABLE `abono`
-  MODIFY `id_abono` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_abono` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes_informativos`
@@ -599,31 +707,31 @@ ALTER TABLE `clientes_informativos`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido_local`
 --
 ALTER TABLE `detalle_pedido_local`
-  MODIFY `id_detalle_pedido_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_detalle_pedido_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido_local`
 --
 ALTER TABLE `pedido_local`
-  MODIFY `id_pedido_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pedido_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -635,7 +743,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -647,19 +755,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `rol_permisos`
 --
 ALTER TABLE `rol_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `venta_local`
 --
 ALTER TABLE `venta_local`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
