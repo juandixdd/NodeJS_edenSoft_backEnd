@@ -4,7 +4,15 @@ const mySqlConnection = require("../../../conexion");
 
 //? Get data
 router.get("/pedido-local", (req, res) => {
-  mySqlConnection.query("SELECT pl.*,ci.* FROM pedido_local pl join clientes_informativos ci on ci.id_cliente_documento = pl.id_cliente_documento", (err, rows, fields) => {
+  mySqlConnection.query(`
+  select
+	pl.*,
+	ci.*,
+	pl.estado as 'estado_pedido'
+from
+	pedido_local pl
+join clientes_informativos ci on
+	ci.id_cliente_documento = pl.id_cliente_documento`, (err, rows, fields) => {
     if (!err) {
       res.send(rows);
     } else {
@@ -34,7 +42,24 @@ router.get("/pedido-local-all/:id", (req, res) => {
   const { id } = req.params;
   let getAbonoQuery = "select * from abono where id_pedido_local = ?";
   let queryWithoutAbono =
-    "select dpl.*, p.nombre as 'product_name', p.precio as 'product_price',pl.*,ci.* from detalle_pedio_local dpl join productos p on p.id = dpl.id_producto  join pedido_local pl on pl.id_pedio_local = dpl.id_pedido_local join clientes_informativos ci on ci.id_cliente_documento = pl.id_cliente_documento where pl.id_pedido_local = ?";
+  `select
+	dpl.*,
+	p.nombre as 'product_name',
+	p.precio as 'product_price',
+	pl.*,
+	ci.*, 
+	pl.estado as 'estado_pedido'
+from
+	detalle_pedido_local dpl
+join productos p on
+	p.id = dpl.id_producto
+join pedido_local pl on
+	pl.id_pedido_local = dpl.id_pedido_local
+join clientes_informativos ci on
+	ci.id_cliente_documento = pl.id_cliente_documento
+where
+	pl.id_pedido_local = ?`
+ 
   let queryWithAbono =
     "select dpl.*,p.nombre as 'product_name', p.precio as 'product_price',pl.*,ci.*, a.valor as 'cantidad_abono', a.estado as 'estado_abono' from detalle_pedido_local dpl join productos p on p.id = dpl.id_producto join pedido_local pl on pl.id_pedido_local = dpl.id_pedido_local join clientes_informativos ci on ci.id_cliente_documento = pl.id_cliente_documento join abono a on a.id_pedido_local = dpl.id_pedido_local where pl.id_pedido_local  = ?";
   mySqlConnection.query(getAbonoQuery, [id], (err, rows, fields) => {
