@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-12-2022 a las 21:57:55
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Tiempo de generación: 06-12-2022 a las 04:06:08
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -102,7 +102,7 @@ CREATE TABLE `clientes_informativos` (
   `id_cliente_documento` int(11) NOT NULL,
   `nombre` varchar(300) NOT NULL,
   `apellido` varchar(300) NOT NULL,
-  `telefono` int(11) NOT NULL,
+  `telefono` bigint(15) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -113,12 +113,12 @@ CREATE TABLE `clientes_informativos` (
 INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido`, `telefono`, `estado`) VALUES
 (111, 'Cliente', 'Informativo', 8885, 1),
 (222, 'Juanito', 'Alimaña', 3123, 1),
-(223, 'Daniel', 'guzman', 45321884, 0),
+(223, 'Daniel', 'guzman', 45321884, 1),
 (333, 'Pedro', 'Navaja', 333, 1),
 (999, 'Josesito', 'Vegano', 310002022, 1),
 (7789, 'Jose', 'Pelaes', 1231232, 1),
 (23211, 'andrea', 'molina', 3212312, 1),
-(103666, 'carlos', 'gonzalez', 4780711, 0),
+(103666, 'carlos', 'gonzalez', 4780711, 1),
 (123123, 'Rosario', 'Tijeras', 3334455, 1),
 (134123, 'JUAN DIEGO', 'ARTEAGA PEREZ', 23141234, 1),
 (323423, 'JUAN DIEGO', 'ARTEAGA PEREZ', 23234234, 1),
@@ -134,9 +134,10 @@ INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido
 (97896745, 'Juan Diego', 'Arteaga', 1231234324, 1),
 (123147159, 'danielito', 'perez', 56524645, 1),
 (123215556, 'Daniela ', 'Rojas', 2147483647, 1),
-(123458963, 'CARLOS MAURICIO', 'GONZALEZ GRACIANO', 963258741, 1),
+(123458963, 'CARLOS MAURICIO', 'GONZALEZ', 3127896534, 1),
 (125146841, 'Ediccson', 'Quiroz', 45613216, 1),
-(324123423, 'pepito', '123123123', 111, 0),
+(324123423, 'pepito', '123123123', 111, 1),
+(1037632160, 'JEFERSSON DANIEL', 'PEA SALAZAR', 3006483858, 1),
 (1232344567, 'JUAN DIEGO', 'ARTEAGA PEREZ', 2147483647, 1),
 (1235423534, 'hola', 'hola', 213124123, 1),
 (2147483647, 'Clara', 'Salazar', 555, 1);
@@ -197,7 +198,11 @@ INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `
 (92, 17, 76, 1, 2500),
 (93, 19, 76, 1, 2000),
 (94, 16, 77, 20, 1000),
-(95, 16, 78, 3, 1000);
+(95, 16, 78, 3, 1000),
+(96, 16, 79, 12, 1000),
+(97, 17, 79, 5, 2500),
+(98, 26, 79, 2, 2500),
+(99, 27, 79, 3, 1800);
 
 -- --------------------------------------------------------
 
@@ -350,7 +355,8 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente_documento`, `tipo`, `fecha_regis
 (75, 103666, 'pedido', '2022-12-04', 4500, 1, '2022-12-05'),
 (76, 103666, 'pedido', '2022-12-05', 4500, 0, '2022-12-05'),
 (77, 103666, 'pedido', '2022-12-05', 20000, 0, '2022-12-05'),
-(78, 103666, 'cotizacion', '2022-12-05', 3000, 1, '2022-09-17');
+(78, 103666, 'cotizacion', '2022-12-05', 3000, 1, '2022-09-17'),
+(79, 323423, 'pedido', '2022-12-06', 34900, 1, '2022-12-24');
 
 -- --------------------------------------------------------
 
@@ -465,10 +471,10 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `nombre`, `estado`) VALUES
-(1, 'admin', 0),
-(2, 'secretaria', 1),
+(1, 'admin', 1),
 (4, 'super-admin', 1),
-(10, 'Cliente', 1);
+(10, 'Cliente', 1),
+(14, 'Secretario', 1);
 
 -- --------------------------------------------------------
 
@@ -506,7 +512,11 @@ INSERT INTO `rol_permisos` (`id`, `id_rol`, `id_permiso`) VALUES
 (31, 4, 11),
 (34, 4, 1),
 (36, 13, 1),
-(37, 13, 2);
+(37, 13, 2),
+(38, 14, 1),
+(39, 14, 7),
+(40, 14, 8),
+(41, 14, 10);
 
 -- --------------------------------------------------------
 
@@ -530,26 +540,27 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id_usuario`, `correo`, `contrasena`, `id_cliente_documento`, `id_rol`, `forgot_token`, `img`) VALUES
 (5, 'cliente@informativo.com', '$2b$10$ycG5DntLTXYNsSopohzyge9.jIQqqrJYPwjw.p4r2w4NmKz6tdMEa', 111, 4, NULL, NULL),
-(6, 'pedro@navaja.com', '$2b$10$3LiAUIg0A7Y9y4yVmtHTcuUUUgvpJvYZcszsiWc.HHzVvunxS5Kzi', 333, 3, NULL, NULL),
+(6, 'pedro@navaja.com', '$2b$10$3LiAUIg0A7Y9y4yVmtHTcuUUUgvpJvYZcszsiWc.HHzVvunxS5Kzi', 333, 10, NULL, NULL),
 (7, 'usuario@user.com', '$2b$10$/S.XO3cB75QoUeU8uHsRsehpbEdPG4.Nlo74J8.FshTBNCbe347We', 444, 2, NULL, NULL),
-(9, '999@999.com', '$2b$10$3OKjsjMgksBKsey/3VVxJuBwPoimt5Bp.iCMifuXQqShvL90a29MS', 999, 3, NULL, NULL),
-(10, 'nuevo@nuevo.com', '$2b$10$3Iwz.VBMHcFMBtkTZRMt6.YQm8DZbZC2mA8huI/84io8mmtz3tmRy', 888, 3, NULL, NULL),
-(11, 'clara_salazar@gmail.com', '$2b$10$PznNyMCGB1TqndO.AdGql.meVyWDlx4SxzlrhbbXkXd89qSc5.8Ga', 123222111, 3, NULL, NULL),
+(9, '999@999.com', '$2b$10$3OKjsjMgksBKsey/3VVxJuBwPoimt5Bp.iCMifuXQqShvL90a29MS', 999, 10, NULL, NULL),
+(10, 'nuevo@nuevo.com', '$2b$10$3Iwz.VBMHcFMBtkTZRMt6.YQm8DZbZC2mA8huI/84io8mmtz3tmRy', 888, 10, NULL, NULL),
+(11, 'clara_salazar@gmail.com', '$2b$10$PznNyMCGB1TqndO.AdGql.meVyWDlx4SxzlrhbbXkXd89qSc5.8Ga', 123222111, 10, NULL, NULL),
 (12, 'juancito@gmail.com', '$2b$10$V8ysX17vRun2vz4FU4g79e3QleRxxQa9ALyzcDds4vLU1pgXsGwDa', 10366954, 1, NULL, NULL),
-(13, 'ediccson@gmail.com', '$2b$10$7HGM0EpGvE1HpTbPCN5mQOG2FSugMvWvWkYL0dn44fQRtHfC8izHO', 125146841, 3, NULL, NULL),
+(13, 'ediccson@gmail.com', '$2b$10$7HGM0EpGvE1HpTbPCN5mQOG2FSugMvWvWkYL0dn44fQRtHfC8izHO', 125146841, 10, NULL, NULL),
 (14, 'test3@gmail.com', '$2b$10$fGuxjamHvUhJiSYV26dPbeoS0LyEu1xQV9XOF/Ata.eaN7Re6aBIm', 344323423, 1, NULL, NULL),
-(15, 'rojas@rojas.com', '$2b$10$zTwsKLqnLEnKMS/QLMOJXulSFh.oQqkckDbxCFDL6G9PmQ0hYgJRu', 123215556, 3, NULL, NULL),
-(16, 'hola@hola.com', '$2b$10$LPkKeOUcoGl6F1um0SAbm.5L2D1NgqyJfX84.9qrylFyFa/Nth22y', 1235423534, 3, NULL, NULL),
+(15, 'rojas@rojas.com', '$2b$10$zTwsKLqnLEnKMS/QLMOJXulSFh.oQqkckDbxCFDL6G9PmQ0hYgJRu', 123215556, 10, NULL, NULL),
+(16, 'hola@hola.com', '$2b$10$LPkKeOUcoGl6F1um0SAbm.5L2D1NgqyJfX84.9qrylFyFa/Nth22y', 1235423534, 10, NULL, NULL),
 (18, 'manual@gmail.com', '$2b$10$Qp0tahKezcgTs/jhPNmpWuziW1SbAVC24GjYcc882vtx50DNrmMAu', 1002006298, 2, NULL, NULL),
-(19, 'sdasd@ssda.com', '$2b$10$U/coNQ3Kx8rbKksO5eKCj.Yw9l3LjGc4xsmYQ/bx9gbQxHoFqJ5Gm', 1231232321, 3, NULL, NULL),
-(20, 'jsjsj@hmgmg.com', '$2b$10$9lVuo8/CQFr4WqEh2EK7pu77vwIt/jRjs19qjnJVTlzGeZUOSCVmm', 98756789, 3, NULL, NULL),
+(19, 'sdasd@ssda.com', '$2b$10$U/coNQ3Kx8rbKksO5eKCj.Yw9l3LjGc4xsmYQ/bx9gbQxHoFqJ5Gm', 1231232321, 10, NULL, NULL),
+(20, 'jsjsj@hmgmg.com', '$2b$10$9lVuo8/CQFr4WqEh2EK7pu77vwIt/jRjs19qjnJVTlzGeZUOSCVmm', 98756789, 10, NULL, NULL),
 (21, 'holas@holas.com', '$2b$10$krV.mjp77cVxJ5FTulgnnOyf8KRAiqT9Pk29Rwcse/fDs7fa80q1.', 324123423, 1, NULL, NULL),
 (24, 'juandixarteagaperez210@gmail.com', '$2b$10$azeaHJ5ZnUJ3C0/YaSEMz.7ugEp0jr9tF3vk2DbzIf7BBZ2uq57da', 97896745, 4, NULL, 'https://wonder-day.com/wp-content/uploads/2022/03/wonder-day-avatar-memes-cats-70.jpg'),
-(26, 'andreammllnaa@gmail.com', '$2b$10$3E56XYMecuxai2VVncuNn.KqOJL0s72ZoPLzNdHnn7KU4Sc/8nxsC', 23211, 3, NULL, NULL),
+(26, 'andreammllnaa@gmail.com', '$2b$10$3E56XYMecuxai2VVncuNn.KqOJL0s72ZoPLzNdHnn7KU4Sc/8nxsC', 23211, 10, NULL, NULL),
 (33, 'jdarteaga20@misena.edu.co', '$2b$10$yJ6MuDTG8bsKV.Rl9SKXQemE3MwSI0ThjAZ5lXfvXy8DW0HP4enMS', 323423, 10, NULL, 'https://planb.mx/wp-content/uploads/2022/04/FB_IMG_1642304708844-1.jpg'),
 (34, 'cmgg7755@gmail.com', '$2b$10$q8E80LeB7SBRxK4JM/pD/.8MSEVAZ6bbnybZZl4qlC0PYIyq2srgK', 103666, 4, NULL, 'https://play-lh.googleusercontent.com/inV5N0eACXXzr9oyPgjiAYApr6YrKvTH68wWTEd3g3gahQkpWac1G_F6ZIFMUfZO94Wg'),
 (35, 'carlos.gonzalez076@misena.edu.co', '$2b$10$rA0jygbXzZ5F8FMOpL84XuJSEFr0i/G5TMhRQpqAQePUX7/iLa.eK', 123458963, 4, NULL, 'https://play-lh.googleusercontent.com/inV5N0eACXXzr9oyPgjiAYApr6YrKvTH68wWTEd3g3gahQkpWac1G_F6ZIFMUfZO94Wg'),
-(36, 'fdrojas102@misena.edu.co', '$2b$10$6BDwiVVFfNVvithincjI2OnCg9xcFsySfDEl2N76e.lA0UA6uckGS', 123147159, 4, NULL, NULL);
+(36, 'fdrojas102@misena.edu.co', '$2b$10$6BDwiVVFfNVvithincjI2OnCg9xcFsySfDEl2N76e.lA0UA6uckGS', 123147159, 4, NULL, NULL),
+(37, 'jefersson.pea@misena.edu.co', '$2b$10$cTwlC2fqrtRlEfWiTCii.edyeiiibXQ8YKet5Vr9Zb0AlYu18REQC', 1037632160, 4, NULL, 'https://lh3.googleusercontent.com/a/AEdFTp5zEFRw0xC9DsEoqzTrlhVCQKcHNGI5_CcQiWLM=s96-c');
 
 -- --------------------------------------------------------
 
@@ -712,7 +723,7 @@ ALTER TABLE `clientes_informativos`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido_local`
@@ -730,7 +741,7 @@ ALTER TABLE `detalle_venta`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido_local`
@@ -754,19 +765,19 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `rol_permisos`
 --
 ALTER TABLE `rol_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `venta_local`
