@@ -7,7 +7,7 @@ const mySqlConnection = require("../../../conexion");
 //? Traer todos los pedidos =====================================================================================
 router.get("/pedidos", (req, res) => {
   const query =
-    "select p.*, ci.* from pedidos p join clientes_informativos ci on ci.id_cliente_documento = p.id_cliente_documento where tipo = 'pedido' order by fecha_entrega asc";
+    "select p.*, ci.*, p.estado as 'estado_pedido' from pedidos p join clientes_informativos ci on ci.id_cliente_documento = p.id_cliente_documento where tipo = 'pedido' order by fecha_entrega asc";
   mySqlConnection.query(query, (err, rows, fields) => {
     if (!err) {
       res.send(rows);
