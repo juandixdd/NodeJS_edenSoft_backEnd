@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-12-2022 a las 14:54:17
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 8.0.12
+-- Tiempo de generación: 06-12-2022 a las 15:13:41
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -124,6 +124,7 @@ INSERT INTO `clientes_informativos` (`id_cliente_documento`, `nombre`, `apellido
 (323423, 'JUAN DIEGO', 'ARTEAGA PEREZ', 23234234, 1),
 (564456, 'JUAN DIEGO', 'ARTEAGA PEREZ', 34212, 1),
 (566556, 'JUAN DIEGO', 'ARTEAGA PEREZ', 123123, 1),
+(1000000, 'LIZETH LORENA', 'SANDOVAL RAMOS', 3146361513, 1),
 (1231231, 'Nuevo', 'Cliente editado', 2147483647, 1),
 (1234567, 'daniela', 'rojas', 305841268, 1),
 (2342343, 'JUAN DIEGO', 'ARTEAGA PEREZ', 112312, 1),
@@ -203,7 +204,9 @@ INSERT INTO `detalle_pedido` (`id_detalle_pedido`, `id_producto`, `id_pedido`, `
 (96, 16, 79, 12, 1000),
 (97, 17, 79, 5, 2500),
 (98, 26, 79, 2, 2500),
-(99, 27, 79, 3, 1800);
+(99, 27, 79, 3, 1800),
+(100, 25, 80, 10, 2600),
+(101, 26, 80, 50, 2500);
 
 -- --------------------------------------------------------
 
@@ -412,7 +415,8 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente_documento`, `tipo`, `fecha_regis
 (76, 103666, 'pedido', '2022-12-05', 4500, 0, '2022-12-05'),
 (77, 103666, 'pedido', '2022-12-05', 20000, 0, '2022-12-05'),
 (78, 103666, 'cotizacion', '2022-12-05', 3000, 1, '2022-09-17'),
-(79, 323423, 'pedido', '2022-12-06', 34900, 1, '2022-12-24');
+(79, 323423, 'pedido', '2022-12-06', 34900, 1, '2022-12-24'),
+(80, 1000000, 'cotizacion', '2022-12-06', 151000, 1, '2022-09-17');
 
 -- --------------------------------------------------------
 
@@ -640,7 +644,8 @@ INSERT INTO `usuario` (`id_usuario`, `correo`, `contrasena`, `id_cliente_documen
 (35, 'carlos.gonzalez076@misena.edu.co', '$2b$10$rA0jygbXzZ5F8FMOpL84XuJSEFr0i/G5TMhRQpqAQePUX7/iLa.eK', 123458963, 4, NULL, 'https://play-lh.googleusercontent.com/inV5N0eACXXzr9oyPgjiAYApr6YrKvTH68wWTEd3g3gahQkpWac1G_F6ZIFMUfZO94Wg'),
 (36, 'fdrojas102@misena.edu.co', '$2b$10$6BDwiVVFfNVvithincjI2OnCg9xcFsySfDEl2N76e.lA0UA6uckGS', 123147159, 4, NULL, NULL),
 (37, 'jefersson.pea@misena.edu.co', '$2b$10$cTwlC2fqrtRlEfWiTCii.edyeiiibXQ8YKet5Vr9Zb0AlYu18REQC', 1037632160, 4, NULL, 'https://lh3.googleusercontent.com/a/AEdFTp5zEFRw0xC9DsEoqzTrlhVCQKcHNGI5_CcQiWLM=s96-c'),
-(38, 'danisuarez@gmail.com', '$2b$10$pB91n9GezvRus/Lp9xeqlOQu2RtqkbtYxrNHbF/OcXNolUCZOR/Pq', 7892263, 4, NULL, NULL);
+(38, 'danisuarez@gmail.com', '$2b$10$pB91n9GezvRus/Lp9xeqlOQu2RtqkbtYxrNHbF/OcXNolUCZOR/Pq', 7892263, 4, NULL, NULL),
+(39, 'llsandoval7@misena.edu.co', '$2b$10$LmKG.QaKFTZlvnyR4sTmsO2z/p.5NQIx7t3H/EfaJIPHYmwokM3rm', 1000000, 4, NULL, 'https://lh3.googleusercontent.com/a/AEdFTp5f6_xtsZHM0NG6tZUsQjKARm2KkRaxd9b5T6Vw=s96-c');
 
 -- --------------------------------------------------------
 
@@ -803,7 +808,7 @@ ALTER TABLE `clientes_informativos`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id_detalle_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido_local`
@@ -821,7 +826,7 @@ ALTER TABLE `detalle_venta`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido_local`
@@ -857,7 +862,7 @@ ALTER TABLE `rol_permisos`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `venta_local`
