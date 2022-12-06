@@ -113,26 +113,6 @@ router.get("/productos/nombre/:nombre", (req, res) => {
 
 //?Editar un producto =====================================================================================
 router.put("/productos/:id", (req, res) => {
-  const {nombre} = req.body;
-  const {id} = req.body;
-  mySqlConnection.query( "Select * from productos where nombre = ?", [nombre, id],
-  (err, rows, fields) => {
-    if (!err) {
-      if (rows.length >= 1){
-        res.json({
-          status: "Ya hay un producto registrado con este nombre",
-          statusCode: 403,
-        });
-      }else {
-        //* Si no hay categorias registradas con el nombre, lo deja crear
-        EditProducto();
-      }
-    }else {
-      console.log(err);
-    }
-  })
-
-  const EditProducto = () => {
     const { nombre, precio, categoria, imagen } = req.body;
     const { id } = req.params;
     mySqlConnection.query(
@@ -146,9 +126,8 @@ router.put("/productos/:id", (req, res) => {
         }
       }
     );
-  }
+  });
   
-});
 
 //?Eliminar un Producto =====================================================================================
 router.delete("/productos/:id", (req, res) => {
